@@ -1,0 +1,58 @@
+.bubbleTail-left {
+	float: left;
+	width: 14px;
+	height: 16px;
+	border-width: 0;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-width: 10px;
+	border-bottom-color: currentColor;
+	border-radius: 0 0 0 32px;
+	color: #dddddd;
+}
+
+.bubble-contont-left {
+	float: left;
+	max-width: 65%;
+	padding: 8px;
+	min-height: 12px;
+	background-color: #DDDDDD;
+	border-radius: 8px;
+	word-wrap: break-word;
+}
+
+.bubbleTail-right {
+	float: right;
+	width: 14px;
+	height: 16px;
+	border-width: 0;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-width: 10px;
+	border-bottom-color: currentColor;
+	border-radius: 0 0 32px 0;
+	color:  #01AAED;
+}
+
+.bubble-contont-right {
+	float: right;
+	padding: 8px;
+	padding: 8px;
+	max-width: 65%;
+	background-color: #01AAED;
+	color: white;
+	border-radius: 8px;
+	word-wrap: break-word;
+}
+
+.bubble-contont{
+	margin: 10px;
+	background-color: white;
+	border: 1px #DEDEDE solid;
+	padding: 8px;
+	padding: 8px;
+	min-height: 12px;
+	margin-left: 10;
+	border-radius: 8px;
+	word-wrap: break-word;
+}

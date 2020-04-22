@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ROLE CREATE</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+		<link rel="stylesheet" href="../resource/css/font.css">
+		<link rel="stylesheet" href="../resource/css/xadmin.css">
+		<script src="../resource/lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../resource/lib/xadmin.js"></script>
+		<script type="text/javascript" src="../js/weaponData.js"></script>
+		<script type="text/javascript" src="../resource/lib/jquery.min.js"></script>
+		<!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background-color: #f2f2f2;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form class="layui-form" style="margin-top: 10px;">
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色ID</label>
+				<div class="layui-input-block">
+					<input disabled="disabled" type="text" name="roleId" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色姓名</label>
+				<div class="layui-input-block">
+					<input type="text" name="name" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">性别</label>
+				<div class="layui-input-block">
+					<input id="private" type="radio" name="sex" value="0" title="保密">
+					<input id="man" type="radio" name="sex" value="1" title="男">
+					<input id="women" type="radio" name="sex" value="2" title="女">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">年龄</label>
+				<div class="layui-input-block">
+					<input type="number" name="age" required lay-verify="number" placeholder="" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">职业</label>
+				<div class="layui-input-block">
+					<input type="text" name="occupation" required lay-verify="required" placeholder="请遵循COC7规则卡的人物职业" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">所属时代</label>
+				<div class="layui-input-block">
+					<input type="text" name="times" required lay-verify="required" placeholder="例如：现代" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">故乡</label>
+				<div class="layui-input-block">
+					<input type="text" name="hometown" required lay-verify="required" placeholder="指出生地" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">现住地</label>
+				<div class="layui-input-block">
+					<input type="text" name="residence" required lay-verify="required" placeholder="现在居住的地方" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色头像URL</label>
+				<div class="layui-input-block">
+					<a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('img');" class="layui-btn">上传图片</a>
+					<input name="img" class="layui-input"></input>
+					<img style="max-width: 150px;max-height: 150px;" name="img" src="" />
+					<div>*需要输入正确的url链接，不然无法通过检验。如果没有则留空。</div>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">属性</label>
+				<div class="layui-input-block">
+					<textarea name="attribute" class="layui-textarea" required lay-verify="required" onchange="onChangeAttributeTable(this)"></textarea>
+					<table id="attributeTable"></table>
+					<div id="attributeDiv"></div>
+
+					<div class="layui-form-mid layui-word-aux">按照COC7基础人物卡属性规则快速录入例如:力量70敏捷60会计5(不需要加上.st)</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">携带物品</label>
+				<div class="layui-input-block">
+					<textarea name="takeList" class="layui-textarea"></textarea>
+					<div class="layui-form-mid layui-word-aux">基本的文字描述，车卡完成转接给KP审核。基础物质系统不提供额外的计算系统。</div>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">资产</label>
+				<div class="layui-input-block">
+					<textarea name="assets" class="layui-textarea"></textarea>
+					<div class="layui-form-mid layui-word-aux">角色所拥有的基本资产描述，通常是钱等</div>
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">人物故事</label>
+				<div class="layui-input-block">
+					<textarea style="height: 200px;" name="roleStory" class="layui-textarea"></textarea>
+					<div class="layui-form-mid layui-word-aux">该内容包含 人物基本的信息，包含外貌，所爱之物等，以及详细的家庭背景和人物性格。以及人物的历程等等。开放长度为500。如果字数上限超过，那么请在备注处继续编写，或者用如果需要了解详情，可以找某人。</div>
+				</div>
+			</div>
+
+			
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">武器列表</label>
+				<div class="layui-input-block">
+					<textarea name="weaponList" class="layui-textarea"></textarea>
+					<div class="layui-form-mid layui-word-aux">通过文字描述用来记录角色所拥有的武器，武器的基本属性可以参考下表</div>
+				</div>
+			</div>
+
+			<button class="layui-btn" style="width: 100%;" lay-submit lay-filter="roleForm">提交</button>
+
+			<div class="layui-form-item">
+				<div style="background-color: lightgray" disabled="disabled" name="remarks" class="layui-textarea">
+
+				</div>
+			</div>
+
+		</form>
+		<input type="button" onclick="deleteRole();" class="layui-btn layui-btn-danger" style="width: 100%;" value="删除角色卡"></button>
+
+	</body>
+
+	<script>
+		var findRoleId;
+		var selectAttributeBox;
+		$(location).ready(function() {
+			findRoleId = window.location.search;
+			loadRoleEditInfo();
+		});
+
+		function deleteRole() {
+			layer.confirm('是否确定删除该房间？', {
+				btn: ['确定', '取消']
+			}, function() {
+				$.ajax({
+					type: "delete",
+					url: "http://localhost/role/delete?roleId=" + findRoleId.substring(8),
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					success: function(result) {
+						layer.msg(result.message);
+						setTimeout(function() {
+							xadmin.father_reload();
+							xadmin.close();
+						}, 1500);
+					}
+				});
+
+			}, function() {
+
+			});
+
+		}
+
+		//该方式让前端减少请求后端的数据接口
+		function loadRoleEditInfo() {
+			var roleId = findRoleId.substring(8);
+			var roleInfoList = parent.RoleInfoList;
+			var data = roleInfoList[roleId];
+			var sexValue = data.sex;
+			$("input[name='roleId']").val(data.id);
+			$("input[name='createTime']").val(data.createTime);
+			$("input[name='name']").val(data.name);
+			$("textarea[name='weaponList']").val(data.weaponList);
+			$("textarea[name='takeList']").val(data.takeList);
+			$("textarea[name='assets']").val(data.assets);
+			$("textarea[name='roleStory']").val(data.roleStory);
+			$("textarea[name='attribute']").val(data.attribute);
+			$("input[name='age']").val(data.age);
+			$("input[name='times']").val(data.times);
+			$("input[name='occupation']").val(data.occupation);
+			$("input[name='hometown']").val(data.hometown);
+			$("input[name='residence']").val(data.residence);
+			$("input[name='img']").val(data.img);
+			$("div[name='remarks']").append(data.remarks);
+
+			$("img[name='img']").attr("src",data.img);
+			attributeTableHandle(data.attribute);
+
+			$("input").each(function() {
+				$(this).attr("value", $(this).val());
+			})
+
+			if(sexValue == 0) {
+				$("#private").attr('checked', 'checked');
+			}
+			if(sexValue == 1) {
+				$("#man").attr('checked', 'checked');
+			}
+			if(sexValue == 2) {
+				$("#women").attr('checked', 'checked');
+			}
+		}
+
+		function attributeTableHandle(attributeStr) {
+			var regex = /([A-z]+-?[0-9]+)|([A-z]+[\u4e00-\u9fa5]+-?[0-9]+)|([\u4e00-\u9fa5]+-?[0-9]+)/g,
+				str = attributeStr;
+			var attribute = str.match(regex);
+			var skillControler = $("#attributeDiv");
+			skillControler.html("");
+			if(attribute != null) {
+				for(var i = 0; i < attribute.length; i++) {
+					htmlText = "<input name='attributeText' onchange='changeEvent(this)' class='layui-col-xs3 layui-col-sm3 layui-col-md2' value='" + attribute[i] + "'></input>";
+					skillControler.append(htmlText);
+				}
+			}
+		}
+		
+		function onChangeAttributeTable(control){
+			var attribute = $(control).val();
+			attributeTableHandle(attribute);
+		}
+
+		function changeEvent(control) {
+			var text = $(control).val();
+			var st = '';
+			$("input[name='attributeText']").each(function(index) {
+				st += $(this).val();
+			});
+			$("textarea[name='attribute']").val(st);
+		}
+
+		layui.use(['laydate', 'form'], function() {
+			var laydate = layui.laydate;
+			var form = layui.form;
+
+			form.on('submit(roleForm)', function(data) {
+				$.ajax({
+					type: "put",
+					url: "http://localhost/role/update",
+					dataType: "json",
+					contentType: "application/json;charset=UTF-8",
+					data: JSON.stringify(data.field),
+					xhrFields: {
+						withCredentials: true
+					},
+					crossDomain: true,
+					success: function(data) {
+						layer.msg(data.message);
+					}
+				});
+				return false;
+			});
+
+		});
+	</script>
+
+</html>

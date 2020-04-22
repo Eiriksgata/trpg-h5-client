@@ -1,0 +1,18 @@
+.unSelect {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/*.richtextInputBox {
+	border: #019587 1px solid;
+	width: auto;
+	padding: 5px;
+	min-height: 25px;
+}*/
+
+/*.richtextPicture {
+	width: 100px;
+	max-height: 150px;
+}*/
