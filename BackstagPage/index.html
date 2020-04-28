@@ -1,4 +1,4 @@
-<!doctype html>
+
 <html class="TabletopRole<-sm">
 	<head>
 		<meta charset="UTF-8">
@@ -7,16 +7,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<link rel="stylesheet" href="resource/css/font.css">
-		<link rel="stylesheet" href="resource/css/xadmin.css">
-		<link rel="stylesheet" href="resource/css/chatBubbleBox.css" />
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+
+		<link rel="stylesheet" href="../resource/css/xadmin/font.css">
+		<link rel="stylesheet" href="../resource/css/xadmin/xadmin.css">
+
+		<link rel="stylesheet" href="../resource/css/chatroom/chatBubbleBox.css" />
+
+        <script type="text/javascript" src="../resource/lib/layui/layui.js"></script>
+
 
 		<!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-		<script src="resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="resource/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="resource/lib/xadmin.js"></script>
-		<script type="text/javascript" src="resource/js/index.js"></script>
+		<script type="text/javascript" src="../resource/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../resource/lib/xadmin.js"></script>
+		<script type="text/javascript" src="../resource/js/index.js"></script>
 
 		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 		<!--[if lt IE 9]>
@@ -115,7 +119,7 @@
 									<cite>大厅</cite>
 								</a>-->
 								
-								<a onclick="xadmin.add_tab('房间大厅','chatRoom/joinRoomInfoPage.html','','',true)">
+								<a href="chatRoom/joinRoomInfoPage.html">
 									<i class="layui-icon">&#xe654;</i>
 									<cite>大厅</cite>
 								</a>

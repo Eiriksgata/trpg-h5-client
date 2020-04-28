@@ -7,47 +7,34 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,user-scalable=no, minimum-scale=1, initial-scale=1,target-densitydpi=low-dpi" />
-		<link rel="stylesheet" href="../resource/css/font.css">
-		<link rel="stylesheet" href="../resource/css/xadmin.css">
-		<link rel="stylesheet" href="../css/chatBubbleBox.css" />
-		<link rel="stylesheet" href="../css/base.css" />
-		<link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../css/richtextStyle.css" />
+		<link rel="stylesheet" href="../../resource/css/xadmin/font.css" />
+		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css" />
 
-		<link rel="stylesheet" href="../css/diceChatMessageBox.css" />
+		<link rel="stylesheet" href="../../resource/lib/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../resource/lib/swiper/swiper-3.2.7.min.css" />
+		<link rel="stylesheet" href="../../resource/css/music.css" />
 
-		<script src="../resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../resource/lib/xadmin.js"></script>
-		<script type="text/javascript" src="../resource/js/base.js"></script>
-		<script type="text/javascript" src="../resource/lib/jquery.min.js"></script>
+		<link rel="stylesheet" href="../../resource/css/chatroom/mobileStyle.css" />
+		<link rel="stylesheet" href="../../resource/lib/gridstack/gridstack.min.css" />
 
-		<script type="text/javascript" src="../js/chatroom/houseOwner.js"></script>
-		<script type="text/javascript" src="../js/chatroom/chatRoom.js"></script>
-		<script type="text/javascript" src="../js/chatroom/websocket.js"></script>
-		<script type="text/javascript" src="../js/chatroom/collection.js"></script>
-		<script type="text/javascript" src="../js/chatroom/chatRoomAutoFunction.js"></script>
-		<script type="text/javascript" src="../js/chatroom/richText.js"></script>
-		<script type="text/javascript" src="../js/chatroom/roomMusic.js"></script>
-		<script type="text/javascript" src="../js/chatroom/maps.js"></script>
-		<script type="text/javascript" src="../js/chatroom/chatMessageColor.js"></script>
-		<script type="text/javascript" src="../js/chatroom/emoticon.js"></script>
-		<script type="text/javascript" src="../js/chatroom/messageRecord.js"></script>
-		<script type="text/javascript" src="../js/chatroom/messageReminder.js"></script>
-		<script type="text/javascript" src="../js/chatroom/pictureshear.js"></script>
-		<script type="text/javascript" src="../js/chatroom/windowRemind.js"></script>
-		<script type="text/javascript" src="../js/chatroom/privateMessage.js"></script>
-		<script type="text/javascript" src="../js/chatroom/messageBoxHandle.js"></script>
-		<script type="text/javascript" src="../js/chatroom/roleCard.js"></script>
-		<script type="text/javascript" src="../js/chatroom/phoneSlide.js"></script>
-		<script type="text/javascript" src="../js/chatroom/memberList.js"></script>
-		<script type="text/javascript" src="../js/chatroom/instructionProcessing.js"></script>
-		<script type="text/javascript" src="../js/upload.js"></script>
+		<link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css" />
+		<link rel="stylesheet" href="../../resource/css/chatroom/richtextStyle.css" />
 
-		<script type="text/javascript" src="../js/chatroom/diceChatMessageBox.js"></script>
+		<script type="text/javascript" src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
+		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
+
+		<script type="text/javascript" src="../../resource/lib/swiper/swiper-3.4.0.jquery.min.js"></script>
+		<script type="text/javascript" src="../../resource/lib/knockout-min.js"></script>
+		<script type="text/javascript" src="../../resource/lib/lodash.min.js"></script>
+		<script type="text/javascript" src="../../resource/lib/gridstack/gridstack.min.js"></script>
+		<script src="http://libs.baidu.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
 		<!--[if lt IE 9]>
-          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
 
 		<style>
 			html,
@@ -62,286 +49,159 @@
 				resize: none
 			}
 			
-			.scroll {
-				overflow-y: scroll;
+			.grid-stack {
+				/*background: lightgoldenrodyellow;*/
+			}
+			
+			.grid-stack-item-content {
+				color: #2c3e50;
+				text-align: center;
+				/*background-color: #18bc9c;*/
 			}
 		</style>
 	</head>
-	
-	<div id="importCode"></div>
 
-	<body id="body">
+	<body>
+		<code id="importCode"></code>
+
 		<div class="x-nav">
 			<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
 				<i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
 			</a>
-			<a class="layui-btn" href="joinRoomInfoPage.html">返回房间列表</a>
-
-			<button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html')">快速修改角色卡信息</button>
-			<button class="layui-btn" onclick="openMaps()">地图</button>
-			<button class="layui-btn" onclick="switchMobliePhoneModel()">面板模式(适合手机端)</button>
-			<button class="layui-btn" onclick="showMusicPlay()">显示音乐播放器</button>
-
+			<div style="width: 80%;overflow-x: scroll;overflow-y: hidden;">
+				<div style="width: 1000px">
+					<a class="layui-btn" href="joinRoomInfoPage.html">返回房间列表</a>
+					<button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html')">快速修改角色卡信息</button>
+					<button class="layui-btn" id="mobileModelButton">手机模式</button>
+					<button class="layui-btn" id="diyModelButton">DIY模式(宽屏模式下才有用)</button>
+					<button class="layui-btn" onclick="showMusicPlay()">显示音乐播放器</button>
+				</div>
+			</div>
 		</div>
-		<div>
-			<div style="height:100%">
-				<div id="tabCard" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="display:none;margin: 0;">
-					<ul class="layui-tab-title">
-						<li class="layui-this">玩家列表</li>
-						<li>扮演角色</li>
 
-						<li onclick="selectChatWindow('game')">游戏聊天框<span name="gameNewMessageNumber" class="layui-badge layui-bg-orange">0</span></li>
-						<li onclick="selectChatWindow('private')">私聊<span name="privateNewMessageNumber" class="layui-badge layui-bg-black">0</span></li>
-						<li onclick="selectChatWindow('make')">广场<span name="makeNewMessageNumber" class="layui-badge layui-bg-blue">0</span></li>
+		<div class="grid-stack" id="view">
 
-						<li>收藏</li>
-						<li>工具</li>
-					</ul>
-					<div class="layui-tab-content" style="height: 100%">
-						<div id="tabCardPlayerList" class="layui-tab-item layui-show"></div>
-						<div id="tabCardRole" class="layui-tab-item"></div>
-						<div id="tabCardGame" class="layui-tab-item" style="margin: 0;"></div>
-						<div id="tabCardPrivate" class="layui-tab-item"></div>
-						<div id="tabCardMakecomplaints" class="layui-tab-item"></div>
-						<div id="tabCardCollection" class="layui-tab-item"></div>
-						<div id="tabCardTool" class="layui-tab-item">
-							<!--
-                            	描述：手机端工具（面板模式）
-                            -->
-							<button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html');">快速修改角色卡信息</button>
-							<button class="layui-btn" onclick="showMusicPlay();">显示音乐播放器</button>
-							<button class="layui-btn" onclick="openMessageRecord();">历史消息</button>
-							<button class="layui-btn" onclick="openChatBubbleSetPage();">气泡设置</button>
+			<!-- 电脑页面布局 -->
+			<!-- 房间人员信息和角色卡信息 -->
+			<div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+				<div id="memberAndRoleDiv">
+					<div class="layui-fluid" id='memberListBox' style='border: 3px #dddddd solid;overflow: scroll;max-width:380px;height: 100%;max-height: 400px; overflow-x: hidden ;'>
+						<div id="memberList"></div>
+					</div>
 
+					<div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;">
+						<div onclick="" class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								<img src="../../resource/images/null.jpg" id="myRoleImg" width="100" height="100" style="box-shadow: darkgrey 1px 1px 10px 1px ;" />
+							</div>
+							<div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								名称:
+							</div>
+							<div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								年龄:
+							</div>
+							<div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								性别:
+							</div>
+							<div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								时代:
+							</div>
+							<div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								职业:
+							</div>
+							<div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								故乡:
+							</div>
+							<div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+								现住:
+							</div>
+						</div>
+
+						<div id="skill" style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+						</div>
+
+						<div style='border-bottom: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<p>携带物品</p>
+							<div id="takeList" class="playerSkillTextareaStyle" readonly></div>
+							<p>武器列表</p>
+							<div id="weaponList" class="playerSkillTextareaStyle" readonly></div>
+							<p>资产</p>
+							<div style="text-align: left;" id="assets" class="playerSkillTextareaStyle" readonly></div>
+							<p>介绍</p>
+							<div style="text-align: left;" id="roleStory" class="playerSkillTextareaStyle" readonly></div>
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<!--
-                	描述：玩家列表
-                -->
-				<div class='layui-col-xs12 layui-col-sm6 layui-col-md4 layui-fluid'>
-					<div id="viewPlayerListHtml">
-						<div class="layui-fluid" id='memberListBox' style='border: 3px #dddddd solid;overflow: scroll;max-width:380px;height: 100%;max-height: 400px; overflow-x: hidden ;overflow-y: show;'>
-							<div id="view"></div>
-						</div>
-					</div>
+			<!-- 游戏聊天框 -->
+			<div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+				<div id="gameDiv">
 
-					<!--
-                		描述：角色卡数据
-                	-->
-					<div id="viewRoleHtml">
-
-						<div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;">
-
-							<div onclick="" class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-								<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									<img src="../images/roleImgNull.jpg" id="myRoleImg" width="100" height="100" style="box-shadow: darkgrey 1px 1px 10px 1px ;" />
-								</div>
-								<div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									名称:
-								</div>
-								<div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									年龄:
-								</div>
-								<div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									性别:
-								</div>
-								<div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									时代:
-								</div>
-								<div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									职业:
-								</div>
-								<div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									故乡:
-								</div>
-								<div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-									现住:
-								</div>
+					<div id="roomMusic">
+						<div class="audio-wrapper">
+							<audio id="roomPlayer">
+								<source src="../../resource/audio/BlueDucks_FourFlossFiveSix.mp3">
+							</audio>
+							<div class="audio-left">
+								<img id="audioPlayButton" src="../../resource/images/play.png" />
 							</div>
 
-							<div id="skill" style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;overflow-y: show;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-
-							</div>
-
-							<div style='border-bottom: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;overflow-y: show;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-								<p>携带物品</p>
-								<div id="takeList" class="playerSkillTextareaStyle" readonly></div>
-								<p>武器列表</p>
-								<div id="weaponList" class="playerSkillTextareaStyle" readonly></div>
-								<p>资产</p>
-								<div style="text-align: left;" id="assets" class="playerSkillTextareaStyle" readonly></div>
-								<p>介绍</p>
-								<div style="text-align: left;" id="roleStory" class="playerSkillTextareaStyle" readonly></div>
-							</div>
-
-							<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes" style="width: 100%;height: 1000px;margin: 0;" src="../role/roleUpdate.html?roleId=21"></iframe>
-							-->
-						</div>
-
-					</div>
-
-				</div>
-
-				<!--
-                	作者：2353686862@qq.com
-                	时间：2019-11-12
-                	描述：剧情聊天窗口
-                -->
-				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-fluid">
-
-					<div id="viewGameHtml">
-
-						<div>
-							<div id="roomMusic">
-								<audio onmouseover='roomMusicMenu(this)' onended="MusicPlay.playNewMusic();" id="roomMusicPlay" style="width: 100%;" controls autoplay src=""></audio>
-							</div>
-
-							<div style="border: 3px solid orange;box-shadow: darkgrey 1px 1px 10px 1px ;">
-								<div onclick="hide(this)" style="height: 35px; background-color: orange;font-size: 20px;" class="text-center">剧情区域</div>
-								<div id="gameChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;">
-
+							<div class="audio-right">
+								<p style="max-width: 536px;"></p>
+								<div class="progress-bar-bg" id="progressBarBg"><span id="progressDot"></span>
+									<div class="progress-bar" id="progressBar"></div>
 								</div>
-
-								<div id="gameTextarea" class="richtextInputBox" ref="paste" contenteditable="true"></div>
-								<button onclick="sendMessageButton(this,1)" name="gameMessageButton" class="layui-btn" style="width: 15%;height: 75px;">发送</button>
-
-								<div style="overflow-x: scroll;width: 100%;height: 50px;overflow-y: hidden;">
-									<div style="width: 1000px">
-
-										<div style="float: left;">
-											<select onchange="sendRoleSwitch(this);" style="display: none;" id="selectSendRole" class="layui-select">
-											</select>
-										</div>
-
-										<div style="float: left;">
-											<button id="rollHideButton" class="layui-btn layui-bg-black layui-fluid" style="">
-												<input name="min" style="width: 20px;height: 30px;text-align: center;color: black;"value="1"> D 
-												<input name="max" style="width: 30px;height: 30px;text-align: center;color: black;"value="100">
-											</button>
-										</div>
-										<div style="float: left;">
-											<button id="rollRandomButton" class="layui-btn layui-fluid" style="">
-												<input name="min" style="width: 20px;height: 30px;text-align: center;color: black;"value="1"> D 
-												<input name="max" style="width: 30px;height: 30px;text-align: center;color: black;"value="100">
-											</button>
-										</div>
-
-										<div style="float: left;">
-											<button onclick="openRichInputPage()" style="background-color: black" class="layui-btn">插入富文本</button>
-										</div>
-
-										<div style="float: left;">
-											<button onclick="openEmoticonPage();" class="layui-btn">表情</button>
-										</div>
-
-										<div style="float: left;">
-											<button class="layui-btn" style="background-color: black" onclick="xadmin.open('上传','../upload/resourceUpload.html','','');">上传</button>
-										</div>
-
-										<div style="float: left;">
-											<button class="layui-btn" onclick="openMaps()">地图</button>
-										</div>
-
-										<div style="float: left;">
-											<button onclick="openMessageRecord();" style="background-color: black" class="layui-btn">历史消息</button>
-										</div>
-
-										<div style="float: left;">
-											<button onclick="openChatBubbleSetPage();" class="layui-btn">气泡设置</button>
-										</div>
-
-									</div>
-								</div>
+								<div class="audio-time"><span class="audio-length-current" id="audioCurTime">00:00</span><span class="audio-length-total">00:00</span></div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="layui-col-xs12 layui-col-sm6 layui-col-md4 layui-fluid">
+					<div style="border: 3px solid orange;box-shadow: darkgrey 1px 1px 10px 1px ;">
+						<div onclick="hide(this)" style="height: 25px; background-color: orange;font-size: 18px;" class="text-center">剧情区域</div>
+						<div id="gameChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;"></div>
 
-					<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-						<ul class="layui-tab-title">
-							<li onclick="selectChatWindow('private')">私聊<span name="privateNewMessageNumber" class="layui-badge layui-bg-black">0</span></li>
-							<li onclick="selectChatWindow('make')">广场<span name="makeNewMessageNumber" class="layui-badge  layui-bg-blue">0</span></li>
+						<richTextInput id="gameTextarea" class="richtextInputBox" ref="paste" contentEditable="true">
 
-							<li>收藏</li>
-						</ul>
+						</richTextInput>
 
-						<div class="layui-tab-content">
-							<!--描述：私聊区窗口-->
-							<div class="layui-tab-item layui-show">
+						<button name="gameMessageButton" class="layui-btn" style="width: 15%;height: 40px;">发送</button>
 
-								<div id="viewPrivateHtml">
-									<div id="privateMessageHtml">
-										<div style="border: 3px solid black;box-shadow: darkgrey 1px 1px 10px 1px ;">
-											<div onclick="hide(this)" style="height: 35px; background-color: black;font-size: 20px; color: white;" class="text-center">私聊区域</div>
-											<div style="overflow-x: scroll;overflow-y:hidden;width: 100%;height: 100px;">
-												<div id="privateMessagePlayerListBox" style="width: 1000px"></div>
-											</div>
+						<div style="overflow-x: scroll;width: 100%;height: 50px;overflow-y: hidden;">
+							<div style="width: 1000px">
 
-											<div id="privateChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;">
-												<div name="privateTab"></div>
-												<div id="privateHistorical"></div>
-											</div>
-
-											<!--<div>
-											<div id="privateTextarea" class="richtextInputBox" ref="paste" contenteditable="true">需要选定一位用户</div>
-											<button disabled="ture" onclick="sendMessageButton(this,14)" name="privateMessageButton" class="layui-btn" style="width: 15%;height: 75px;">发送</button>
-										</div>-->
-											<div>
-												<div id="privateTextarea" class="richtextInputBox" ref="paste" contenteditable="true"></div>
-												<button name="privateMessageButton" onclick="sendMessageButton(this,14)" class="layui-btn" style="width: 15%;height: 75px;">发送</button>
-
-											</div>
-
-											<div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
-
-										</div>
-									</div>
+								<div style="float: left;">
+									<select onchange="sendRoleSwitch(this);" style="display: none;" id="selectSendRole" class="layui-select">
+									</select>
 								</div>
 
-							</div>
-
-							<div class="layui-tab-item">
-								<!--
-                                	作者：2353686862@qq.com
-                                	时间：2020-02-21
-                                	描述：广场区域
-                                -->
-								<div id="viewMakecomplaintsHtml">
-									<div name="chatBoxHeight">
-										<div style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
-											<div onclick="hide(this)" style="height: 35px; background-color: #d2d2d2;font-size: 20px;" class="text-center">广场区域</div>
-
-											<div id="makecomplaintsChatBox" style="overflow:scroll; width: 100%;height: 450px;overflow-x:hidden;">
-												<div name="makecomplaintsTab"></div>
-											</div>
-
-											<div id="makecomplaintsInputBox">
-												<div id="makecomplaintsTextarea" class="richtextInputBox" ref="paste" contenteditable="true"></div>
-												<button name="makecomplaintsMessageButton" onclick="sendMessageButton(this,2)" class="layui-btn" style="width: 15%;height: 75px;">发送</button>
-											</div>
-
-											<div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
-
-										</div>
-									</div>
+								<div style="float: left;">
+									<button onclick="openRichInputPage()" style="background-color: black" class="layui-btn">插入富文本
+                                </button>
 								</div>
-							</div>
 
-							<div class="layui-tab-item">
-								<!--描述：收藏功能-->
-								<div id="viewCollectionHtml" style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
-									<div>
-										<i title="添加" onclick="addBlankCollection();" class="layui-icon" style="font-size: 25px;">&#xe654;</i>
-										<i title="悬浮模式" onclick="collectionSuspensionMode();" class="layui-icon" style="font-size: 25px;">&#xe656;</i>
-									</div>
-									<div id="collectionListBox">
-
-									</div>
+								<div style="float: left;">
+									<button onclick="openEmoticonPage();" class="layui-btn">表情</button>
 								</div>
+
+								<div style="float: left;">
+									<button class="layui-btn" style="background-color: black" onclick="xadmin.open('上传','../upload/resourceUpload.html','','');">上传
+                                </button>
+								</div>
+
+								<div style="float: left;">
+									<button class="layui-btn" onclick="openMaps()">地图</button>
+								</div>
+
+								<div style="float: left;">
+									<button onclick="openMessageRecord();" style="background-color: black" class="layui-btn">历史消息
+                                </button>
+								</div>
+
+								<div style="float: left;">
+									<button onclick="openChatBubbleSetPage();" class="layui-btn">气泡设置</button>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -349,48 +209,100 @@
 				</div>
 			</div>
 
-		</div>
+			<!-- 私聊 收藏 广场 -->
+			<div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+				<div id="oderDiv" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+					<ul class="layui-tab-title">
+						<li onclick="selectChatWindow('private')">私聊<span name="privateNewMessageNumber" class="layui-badge layui-bg-black">0</span></li>
+						<li onclick="selectChatWindow('make')">广场<span name="makeNewMessageNumber" class="layui-badge  layui-bg-blue">0</span></li>
+						<li>讨论组</li>
+						<li>收藏</li>
+					</ul>
 
+					<div class="layui-tab-content">
+						<!--描述：私聊区窗口-->
+						<div class="layui-tab-item layui-show">
+							<div id="privateMessageDiv">
+								<div style="border: 3px solid black;box-shadow: darkgrey 1px 1px 10px 1px ;">
+									<div onclick="hide(this)" style="height: 20px; background-color: black;font-size: 14px; color: white;" class="text-center">私聊区域
+									</div>
+									<div style="overflow-x: scroll;overflow-y:hidden;width: 100%;height: 100px;">
+										<div id="privateMessagePlayerListBox" style="width: 1000px"></div>
+									</div>
+
+									<div id="privateChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;">
+										<div name="privateTab"></div>
+										<div id="privateHistorical"></div>
+									</div>
+									
+									<div>
+										<div id="privateTextarea" class="richtextInputBox" ref="paste" contenteditable="true"></div>
+										<button name="privateMessageButton" class="layui-btn" style="width: 15%;height: 40px;">发送</button>
+									</div>
+
+									<div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-tab-item">
+							<!-- 广场区域 -->
+							<div id="squareMessageDiv">
+								<div style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
+									<div onclick="hide(this)" style="height: 35px; background-color: #d2d2d2;font-size: 20px;" class="text-center">广场区域
+									</div>
+
+									<div id="makecomplaintsChatBox" style="overflow:scroll; width: 100%;height: 450px;overflow-x:hidden;">
+										<div name="makecomplaintsTab"></div>
+									</div>
+
+									<div id="makecomplaintsInputBox">
+										<div id="makecomplaintsTextarea" class="richtextInputBox" ref="paste" contenteditable="true"></div>
+										<button name="makecomplaintsMessageButton" onclick="sendMessageButton(this,2)" class="layui-btn" style="width: 15%;height: 40px;">发送</button>
+									</div>
+
+									<div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-tab-item">
+							<div id="discussionGroupDiv">
+								<div>
+									null
+								</div>
+							</div>
+
+						</div>
+
+						<div class="layui-tab-item">
+							<!--描述：收藏功能-->
+							<div id="collectiondiv" style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
+								<div>
+									<i title="添加" onclick="addBlankCollection();" class="layui-icon" style="font-size: 25px;">&#xe654;</i>
+									<i title="悬浮模式" onclick="collectionSuspensionMode();" class="layui-icon" style="font-size: 25px;">&#xe656;</i>
+								</div>
+								<div id="collectionListBox">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</body>
 
+	<script type="text/javascript" src="../../resource/js/chatroom/auto/chatRoomAutoFunction.js"></script>
+	<script type="text/javascript" src="../../resource/js/chatroom/controlevent/inputBox.js"></script>
+	<script type="text/javascript" src="../../resource/js/chatroom/stylemodel/diy.js"></script>
+	<script type="text/javascript" src="../../resource/js/chatroom/stylemodel/mobile.js"></script>
+	<script type="text/javascript" src="../../resource/js/chatroom/plug/music.js"></script>
+
 	<script>
-		var rollRandomFlag;
-		
-		$("#importCode").load("chatRoomImportCode.html");
-		//这个不是写在首页，写在子页面（子页面才能返回，写在首页点击返回就是退出）
-		//不用引入mui.js，都是h5方法
-		document.addEventListener('plusready', function() {
-			var webview = plus.webview.currentWebview();
-			plus.key.addEventListener('backbutton', function() {
-				webview.canBack(function(e) {
-					if(e.canBack) {
-						webview.back();
-					} else {
-						webview.close(); //hide,quit
-						//plus.runtime.quit();
-					}
-				})
-			});
-		});
-
-		$('body').on('click', 'input', function() {
-			rollRandomFlag = 0;
-		})
-
-		$('body').on('click', '#rollRandomButton', function() {
-			if(rollRandomFlag == 0) {} else {
-				rollRandom($("#rollRandomButton"), 0);
-			}
-			rollRandomFlag = 1;
-		})
-
-		$('body').on('click', '#rollHideButton', function() {
-			if(rollRandomFlag == 0) {} else {
-
-				rollRandom($("#rollHideButton"), 1);
-			}
-			rollRandomFlag = 1;
-		})
 	</script>
 
 </html>

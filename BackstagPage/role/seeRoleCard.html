@@ -7,13 +7,12 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-		<link rel="stylesheet" href="../resource/css/font.css">
-		<link rel="stylesheet" href="../resource/css/xadmin.css">
-		<script src="../resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../resource/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../resource/lib/xadmin.js"></script>
-		<link rel="stylesheet" href="../css/base.css" />
-		<link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../resource/css/xadmin/font.css">
+		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
+		<script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
+		<link rel="stylesheet" href="../../resource/css/base.css" />
 
 		<!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -39,7 +38,7 @@
 
 		<div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;text-align: center;">
 			<input onclick="this.select();document.execCommand('copy');layer.msg('链接已复制');" id="shareLink" class="layui-input" placeholder="Share Link" />
-			<img onclick="hide(this)" src="../images/roleImgNull.jpg" id="myRoleImg" width="150" height="150" style="box-shadow: darkgrey 1px 1px 10px 1px ;" />
+			<img onclick="hide(this)" src="../../resource/images/null.jpg" id="myRoleImg" width="150" height="150" style="box-shadow: darkgrey 1px 1px 10px 1px ;" />
 			<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;">
 				<div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
 					名称:
@@ -106,12 +105,12 @@
 		$(location).ready(function() {
 			getRoleCardData();
 			var windwslocation = window.location.toLocaleString();
-			if(windwslocation.substring(0,4) == "http"){
+			if(windwslocation.substring(0, 4) == "http") {
 				$('#shareLink').val(window.location);
-			}else{
-				$('#shareLink').val("http://134.175.43.199/TabletopClient/BackstagPage/seeRoleCard.html"+key);
+			} else {
+				$('#shareLink').val("http://134.175.43.199/TabletopClient/BackstagPage/seeRoleCard.html" + key);
 			}
-			
+
 		});
 
 		function hide(control) {
@@ -145,7 +144,7 @@
 						loadMyRoleCardData(result.data);
 					}
 					$("#shareLink").click();
-					layer.msg("链接已复制，粘贴发给KP."+result.message);
+					layer.msg("链接已复制，粘贴发给KP." + result.message);
 				}
 			});
 
