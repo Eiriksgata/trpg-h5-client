@@ -1,11 +1,11 @@
 $(location).ready(function() {
-	loginRequest();
+	//loginRequest();
 })
 
 function loginRequest() {
 	$.ajax({
 		type: "put",
-		url: requestHeah + "/auth/common",
+		url: REQUESTHEAD + "/auth/common",
 		data: JSON.stringify({
 			"user": "",
 			"password": ""
@@ -27,7 +27,7 @@ function loginRequest() {
 function loginSubmit() {
 	$.ajax({
 		type: "put",
-		url: requestHeah + "/auth/common",
+		url: REQUESTHEAD + "/auth/common",
 		data: JSON.stringify({
 			"user": $("#loginUser").val(),
 			"password": $("#loginPassword").val()

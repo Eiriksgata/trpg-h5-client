@@ -9,7 +9,7 @@
 		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
 		<link rel="stylesheet" href="../../resource/css/xadmin/font.css">
 		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
-		<script type="text/javascript" src="../../resource/lib/layui/layui.all.js" charset="utf-8"></script>
+		<script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
 		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
 		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
 		<script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
@@ -24,9 +24,9 @@
 
 		<div class="layui-container">
 			<div class="layui-card">
-				<div class="layui-card-header">创建房间信息</div>
+				<div class="layui-card-header">房间基础信息</div>
 				<div class="layui-card-body">
-					<form class="layui-form layui-form-pane" style="margin: 10px;">
+					<form class="layui-form" style="margin: 10px;">
 						<div class="layui-form-item">
 							<label for="username" class="layui-form-label">
                           <span class="x-red">*</span>房间名
@@ -90,10 +90,10 @@
 						</div>
 
 						<div class="layui-form-item">
-							<label title="是否显示在公开列表" class="layui-form-label">是否显示在公开列表</label>
+							<label class="layui-form-label">是否显示在公开列表</label>
 							<div class="layui-input-block">
-								<input type="radio" name="display" value="0" title="隐藏" checked>
-								<input type="radio" name="display" value="1" title="显示">
+								<input id="display" type="radio" name="display" value="0" title="隐藏">
+								<input id="show" type="radio" name="display" value="1" title="显示">
 							</div>
 						</div>
 
@@ -167,6 +167,7 @@
 					return false;
 				});
 			});
+			
 		</script>
 		<script>
 			var _hmt = _hmt || [];

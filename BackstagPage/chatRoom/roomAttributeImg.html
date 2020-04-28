@@ -19,13 +19,16 @@
 	</head>
 
 	<body>
-		<img src="" width="100%" />
+		<img src="../../resource/images/null.jpg" width="100%" />
 	</body>
 
 	<script>
 		var findMemberId = window.location.search;
 		var imgUrl = findMemberId.substring(5);
 		window.onload = function() {
+			if(imgUrl == null || imgUrl == undefined || imgUrl == ""){
+				return;
+			}
 			$("img").attr("src",imgUrl);
 		}
 	</script>
