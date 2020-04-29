@@ -8,21 +8,19 @@
 
 	});
 
-	var addMobileBox = function() {
-
-		var html = new Array(6);
-
+	let addMobileBox = function() {
+		let html = new Array(6);
 		html[0] = $("#memberAndRoleDiv").html()
-		html[1] = $("#gameDiv").html();
+		html[1] = $("#plotDiv").html();
 		html[2] = $("#privateMessageDiv").html();
 		html[3] = $("#discussionGroupDiv").html();
 		html[4] = $("#squareMessageDiv").html();
 		html[5] = $("#collectiondiv").html();
 
 		$("#view").html(mobileBoxHtml.innerHTML);
-		var control = $("#mobileContent");
+		let control = $("#mobileContent");
 
-		for(var i = 0; i < html.length; i++) {
+		for(let i = 0; i < html.length; i++) {
 			control.html(html[i]);
 			control = control.next();
 		}
@@ -30,7 +28,7 @@
 
 	};
 
-	var initSwiper = function() {
+	let initSwiper = function() {
 		
 		function setCurrentSlide(ele, index) {
 			$(".swiper1 .swiper-slide").removeClass("selected");
@@ -38,7 +36,7 @@
 			//swiper1.initialSlide=index;
 		}
 
-		var swiper1 = new Swiper('.swiper1', {
+		let swiper1 = new Swiper('.swiper1', {
 			//					设置slider容器能够同时显示的slides数量(carousel模式)。
 			//					可以设置为number或者 'auto'则自动根据slides的宽度来设定数量。
 			//					loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
@@ -48,11 +46,11 @@
 			freeMode: true, //默认为false，普通模式：slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动且不会贴合。
 			loop: false, //是否可循环
 			onTab: function(swiper) {
-				var n = swiper1.clickedIndex;
+				let n = swiper1.clickedIndex;
 			}
 		});
 		swiper1.slides.each(function(index, val) {
-			var ele = $(this);
+			let ele = $(this);
 			ele.on("click", function() {
 				setCurrentSlide(ele, index);
 				swiper2.slideTo(index, 500, false);
@@ -60,7 +58,7 @@
 			});
 		});
 
-		var swiper2 = new Swiper('.swiper2', {
+		let swiper2 = new Swiper('.swiper2', {
 			//freeModeSticky  设置为true 滑动会自动贴合  
 			direction: 'horizontal', //Slides的滑动方向，可设置水平(horizontal)或垂直(vertical)。
 			loop: false,
@@ -70,7 +68,7 @@
 			//					effect : 'flip',//3D翻转
 			autoHeight: true, //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化。
 			onSlideChangeEnd: function(swiper) { //回调函数，swiper从一个slide过渡到另一个slide结束时执行。
-				var n = swiper.activeIndex;
+				let n = swiper.activeIndex;
 				setCurrentSlide($(".swiper1 .swiper-slide").eq(n), n);
 				swiper1.slideTo(n, 500, false);
 			}

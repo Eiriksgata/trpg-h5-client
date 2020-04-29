@@ -1,10 +1,9 @@
 (function(w){
 
-
-    var addRichtextEvent = function(){
+    let addRichtextEvent = function(){
         $(".richtextInputBox").click(function(){
-            document.getElementById("gameTextarea").contentEditable = true;
-            document.getElementById("gameTextarea").focus();
+            document.getElementById("plotTextarea").contentEditable = true;
+            document.getElementById("plotTextarea").focus();
         });
     };
 

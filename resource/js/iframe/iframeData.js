@@ -9,7 +9,7 @@ window.allMemberInfoMap = {};
 window.socket = null;
 
 //当前用户的信息
-window.myUserInfo;
+window.myUserInfo = {};
 
 //房间信息
 window.allRoomInfoMap = {};
@@ -18,7 +18,7 @@ window.allRoomInfoMap = {};
 window.allJoinRoomInfoMap = {};
 
 //角色卡信息 ,以Id进行唯一识别对应
-window.allRoleInfoMap = {};
+window.allRoleCardInfoMap = {};
 
 //从链接后接收到的信息
 window.allChatMessageRecord = {};

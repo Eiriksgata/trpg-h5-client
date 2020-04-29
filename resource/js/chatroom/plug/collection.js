@@ -6,21 +6,21 @@ $(location).ready(function () {
 });
 
 function deleteCollection(control) {
-    var id = $(control).attr('value');
+    let id = $(control).attr('value');
     $(control).parent().remove();
     deleteCollectionSubmit(id);
 }
 
 function collectionEdit(control) {
-    var text = $(control).html();
-    var htmlStr = "<textarea id='collectionEditArea' class='layui-textarea'>" + text + "</textarea>";
+    let text = $(control).html();
+    let htmlStr = "<textarea id='collectionEditArea' class='layui-textarea'>" + text + "</textarea>";
 
     layer.confirm(htmlStr, {
         btn: ['确定', '取消'] //按钮
     }, function () {
-        var changeText = $("#collectionEditArea").val();
-        var collectionId = $(control).attr('value');
-        var data = {
+        let changeText = $("#collectionEditArea").val();
+        let collectionId = $(control).attr('value');
+        let data = {
             "id": collectionId,
             "memberId": -1,
             "roomId": findRoomId,
@@ -88,9 +88,9 @@ function deleteCollectionSubmit(id) {
 }
 
 function chatMessageCollection(control) {
-    var messageText = $(control).next('message').html();
+    let messageText = $(control).next('message').html();
 
-    var data = {
+    let data = {
         "id": -1,
         "memberId": -1,
         "roomId": findRoomId,
@@ -101,8 +101,8 @@ function chatMessageCollection(control) {
 }
 
 function addBlankCollection() {
-    var messageText = '点击文字进行编辑';
-    var data = {
+    let messageText = '点击文字进行编辑';
+    let data = {
         "id": -1,
         "memberId": -1,
         "roomId": findRoomId,
@@ -114,7 +114,7 @@ function addBlankCollection() {
 function addCollectionLaytpl(data) {
 
     layui.use('laytpl', function (laytpl) {
-        var getTpl = collectionListHtml.innerHTML;
+        let getTpl = collectionListHtml.innerHTML;
         laytpl(getTpl).render(data, function (html) {
             $("#collectionListBox").append(html);
         });
@@ -134,10 +134,10 @@ function loadRoomCollection() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             if (result.code == 0) {
-                var data;
+                let data;
                 //清空收藏消息，重新载入
                 $("#collectionListBox").html("");
-                for (var i = 0; i < result.data.length; i++) {
+                for (let i = 0; i < result.data.length; i++) {
                     data = {
                         "text": result.data[i].text,
                         "collectionId": result.data[i].id
@@ -155,7 +155,7 @@ function loadRoomCollection() {
 
 //页面层
 function collectionSuspensionMode() {
-    var html = $("#viewCollectionHtml").html();
+    let html = $("#viewCollectionHtml").html();
     $("#viewCollectionHtml").parent().css("display", "none");
     $("#viewCollectionHtml").html('');
     layer.open({

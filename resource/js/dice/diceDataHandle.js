@@ -1,6 +1,6 @@
 
 (function(w){
-	var DiceFunction = {};
+	let DiceFunction = {};
 	
 	DiceFunction.addDiceMessage = function(data){
 		

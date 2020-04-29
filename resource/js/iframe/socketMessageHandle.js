@@ -1,6 +1,6 @@
 (function(w) {
 
-	var messageHandler = function(socketData) {
+	let messageHandler = function(socketData) {
 		//进行自定义消息创建判定,并且转换为特殊的文本格式
 		if(socketData.message != null || socketData.message != undefined) {
 			socketData.message = MessageAnalysis.richTextConvert(socketData.message);
@@ -16,7 +16,7 @@
 
 	}
 
-	var dataInit = function() {
+	let dataInit = function() {
 		InitLoad.getMyUserInfo();
 		InitLoad.getMyJoinRoomInfo();
 		InitLoad.getMyRelationship();

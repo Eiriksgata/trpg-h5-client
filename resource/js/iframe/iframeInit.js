@@ -4,12 +4,12 @@
 		openSocket();
 	});
 
-	var openSocket = function() {
+	let openSocket = function() {
 		if(typeof(WebSocket) == "undefined") {
 			layer.msg("您的浏览器不支持WebSocket");
 		} else {
 			//实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-			var socketUrl = REQUESTHEAD + "/linkSocket";
+			let socketUrl = REQUESTHEAD + "/linkSocket";
 			socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
 			socket = new WebSocket(socketUrl);
 			//打开事件
@@ -20,7 +20,7 @@
 
 			//获得消息事件
 			socket.onmessage = function(msg) {
-				var result = JSON.parse(msg.data);
+				let result = JSON.parse(msg.data);
 				if(result.code == 0) {
 					messageHandler(result.data);
 				}

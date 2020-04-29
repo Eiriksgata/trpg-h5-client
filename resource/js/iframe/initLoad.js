@@ -1,5 +1,5 @@
 (function(w) {
-	var InitLoad = {};
+	let InitLoad = {};
 
 	InitLoad.getMyUserInfo = function() {
 		$("#loadTipsMessageBox").html("载入用户信息");
@@ -12,7 +12,7 @@
 			crossDomain: true,
 			async: false,
 			success: function(result) {
-				if(result.code != 0) {
+				if(result.code !== 0) {
 					layer.msg(result.message);
 					return;
 				}
@@ -21,7 +21,7 @@
 				console.log(JSON.stringify(result));
 			}
 		});
-	}
+	};
 
 	InitLoad.getMyJoinRoomInfo = function() {
 		$("#loadTipsMessageBox").html("载入已加入的房间信息");
@@ -34,18 +34,18 @@
 			crossDomain: true,
 			async: false,
 			success: function(result) {
-				if(result.code != 0) {
+				if(result.code !== 0) {
 					layer.msg(result.message);
 					return;
 				}
-				var data = result.data;
-				for(var i = 0; i < data.length; i++) {
+				let data = result.data;
+				for(let i = 0; i < data.length; i++) {
 					window.allRoomInfoMap[data[i].roomId] = data[i];
 				}
 				console.log(JSON.stringify(allRoomInfoMap));
 			}
 		});
-	}
+	};
 
 	InitLoad.getMyRelationship = function() {
 		$("#loadTipsMessageBox").html("载入关联");
@@ -58,16 +58,31 @@
 			crossDomain: true,
 			async: false,
 			success: function(result) {
-				if(result.code != 0) {
+				if(result.code !== 0) {
 					layer.msg(result.message);
 					return;
 				}
-				var data = result.data;
-				window.allRelaiton = data;
+				let data = result.data;
+                window.allRelaiton = relationDataHandle(data);
 				console.log(JSON.stringify(allRelaiton));
 			}
 		});
+	};
+
+
+
+	function relationDataHandle(data){
+		let result = {};
+		data.map(function(room){
+			room.map(function(relation){
+                let value = {};
+                value[relation.userId] = relation;
+                result[relation.roomId]= value;
+			})
+		});
+		return result;
 	}
 
+
 	w.InitLoad = InitLoad;
-})(window)
+})(window);
