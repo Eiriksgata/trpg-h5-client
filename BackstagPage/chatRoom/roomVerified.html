@@ -1,90 +1,121 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>房间验证</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+<head>
+    <meta charset="UTF-8">
+    <title>房间验证</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../resource/css/xadmin/font.css"/>
+    <link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css"/>
 
-		<link rel="stylesheet" href="../../resource/css/xadmin/font.css">
-		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
-		<script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
-		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
-		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-		<!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-	</head>
+    <link rel="stylesheet" href="../../resource/lib/layui/css/layui.css"/>
+    <link rel="stylesheet" href="../../resource/lib/swiper/swiper-3.2.7.min.css"/>
+    <link rel="stylesheet" href="../../resource/css/music.css"/>
 
-	<body style="height: 100%;">
-		<div id="passwordInputBox" class="layui-row" style="display:  none;">
-			<div class="layui-container" style="padding-top: 100px; height: 100%;max-width: 250px;">
-				<form class="layui-form">
-					<span class="x-red">*</span>密码
-					<input name="password" type="password" class="layui-input" />
-				</form>
-				<button id="checkButton" class="layui-btn" style="width: 100%;">确认</button>
-			</div>
-		</div>
-		<iframe id="loadPageIframe" allowtransparency="no" frameborder="0" border="0" marginheight="0" marginwidth="0" style="width: 100%;height: 99.5%;" src="../loadPage.html"></iframe>
-		<div id="loadTipsMessageBox" style="position: absolute;left: 10%;top: 80%;text-align: center;width: 80%;color: white;font-size: 23px;">房间验证中</div>
-	</body>
+    <link rel="stylesheet" href="../../resource/css/chatroom/mobileStyle.css"/>
+    <link rel="stylesheet" href="../../resource/lib/gridstack/gridstack.min.css"/>
 
-	<script>
-		(function() {
-			var findRoomId = window.location.search.substring(8);
-			$().ready(function() {
-				var result = verificationRequest(findRoomId, "");
+    <link rel="stylesheet" href="../../resource/css/chatroom/richtextStyle.css"/>
 
-			});
+    <script type="text/javascript" src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
+    <script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
 
-			var verificationRequest = function(roomId, password) {
-				$.ajax({
-					type: "put",
-					url: "http://localhost/joinRoom",
-					data: JSON.stringify({
-						"password": password,
-						"roomId": roomId
-					}),
-					dataType: "json",
-					xhrFields: {
-						withCredentials: true
-					},
-					async: false,
-					crossDomain: true,
-					contentType: "application/json;charset=UTF-8",
-					success: function(result) {
+    <script type="text/javascript" src="../../resource/lib/swiper/swiper-3.4.0.jquery.min.js"></script>
+    <script type="text/javascript" src="../../resource/lib/knockout-min.js"></script>
+    <script type="text/javascript" src="../../resource/lib/lodash.min.js"></script>
+    <script type="text/javascript" src="../../resource/lib/gridstack/gridstack.min.js"></script>
 
-						if(result.code == 0) {
-							layer.msg(result.message);
-							//计时关闭自身
-							setTimeout(function() {
-								window.location = "chatRoom.html?roomId=" + findRoomId;
-							}, 1500);
 
-						} else {
-							layer.msg(result.message);
-							$("#loadPageIframe").remove();
-							$("#loadTipsMessageBox").remove();
-							$("#passwordInputBox").css("display", "");
-						}
+</head>
 
-						return result;
-					}
-				});
-			}
+<body style="height: 100%;">
+<div id="passwordInputBox" class="layui-row" style="display:  none;">
 
-			$("#checkButton").click(function() {
-				var password = $("input[name='password']").val();
-				verificationRequest(findRoomId, password);
-			});
 
-		})();
-	</script>
+
+    <div class="layui-container" style="padding-top: 100px; height: 100%;max-width: 250px;">
+
+        <form class="layui-form">
+            <span class="x-red">*</span>密码
+            <input name="password" type="password" class="layui-input"/>
+        </form>
+        <blockquote id="resultMessage" class="layui-elem-quote"></blockquote>
+        <button id="checkButton" class="layui-btn" style="width: 100%;">确认</button>
+    </div>
+</div>
+<iframe id="loadPageIframe" allowtransparency="no" frameborder="0" border="0" marginheight="0" marginwidth="0"
+        style="width: 100%;height: 99.5%;" src="../loadPage.html"></iframe>
+<div id="loadTipsMessageBox"
+     style="position: absolute;left: 10%;top: 80%;text-align: center;width: 80%;color: white;font-size: 23px;">房间验证中(顺便加载网络资源数据)
+</div>
+</body>
+
+<link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"/>
+
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script>
+
+    (function () {
+        let findRoomId = window.location.search.substring(8);
+        $().ready(function () {
+            let result = verificationRequest(findRoomId, "");
+
+        });
+        
+
+        let verificationRequest = function (roomId, password) {
+            $.ajax({
+                type: "put",
+                url: "http://localhost/joinRoom",
+                data: JSON.stringify({
+                    "password": password,
+                    "roomId": roomId
+                }),
+                dataType: "json",
+                xhrFields: {
+                    withCredentials: true
+                },
+                async: false,
+                crossDomain: true,
+                contentType: "application/json;charset=UTF-8",
+                success: function (result) {
+
+                    if (result.code === 0) {
+                        $("#loadTipsMessageBox").html(result.message);
+
+                        //计时关闭自身
+                        setTimeout(function () {
+                            window.location = "chatRoom.html?roomId=" + findRoomId;
+                        }, 1500);
+
+                    } else {
+
+                        $("#loadPageIframe").remove();
+                        $("#loadTipsMessageBox").remove();
+                        $("#passwordInputBox").css("display", "");
+                        $("#resultMessage").html(result.message);
+                    }
+
+                    return result;
+                }
+            });
+        };
+
+        $("#checkButton").click(function () {
+            let password = $("input[name='password']").val();
+            verificationRequest(findRoomId, password);
+        });
+
+    })();
+</script>
 
 </html>

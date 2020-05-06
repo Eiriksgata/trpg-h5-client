@@ -1,50 +1,70 @@
 <!doctype html>
-<html  class="x-admin-sm">
+<html class="x-admin-sm">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>系统登录</title>
-		<meta name="renderer" content="webkit|ie-comp|ie-stand">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		
-		<link rel="stylesheet" href="resource/css/xadmin/font.css" />
-		<link rel="stylesheet" href="resource/css/xadmin/login.css" />
-		<link rel="stylesheet" href="resource/css/xadmin/xadmin.css" />
-		
-		<script type="text/javascript" src="resource/js/iframe/constant.js" ></script>
-		<script type="text/javascript" src="resource/lib/jquery.min.js" ></script>
-		<script type="text/javascript" src="resource/lib/layui/layui.js" ></script>
-		<script type="text/javascript" src="resource/js/account.js" ></script>
-		<!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>系统登录</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="resource/css/xadmin/font.css"/>
+    <link rel="stylesheet" href="resource/css/xadmin/login.css"/>
+    <link rel="stylesheet" href="resource/css/xadmin/xadmin.css"/>
+
+
+    <script type="text/javascript" src="resource/js/iframe/constant.js"></script>
+    <script type="text/javascript" src="resource/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="resource/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="resource/js/account.js"></script>
+    <script type="text/javascript" src="resource/lib/ase.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    	<style>
-    		html,body{
-    			width: 100%;
-    			height: 100%;
-    		}
-    	</style>
-	</head>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
 
-	<body class="login-bg layui-bg-gray">
+<body class="login-bg layui-bg-gray">
 
-		<div class="login layui-anim layui-anim-up">
-			<div class="message">Role-Playing Login</div>
-			<div id="darkbannerwrap"></div>
-			
-			<input id="loginUser" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
-			<hr class="hr15">
-			<input id="loginPassword" name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
-			<hr class="hr15">
-			<input onclick="loginSubmit()" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-			<hr class="hr15">
-			<input onclick="toRegistPage()" value="邮箱注册" style="width:100%;" type="submit">
-			<hr class="hr20">
-		</div>
+<div class="login layui-anim layui-anim-up">
+    <div class="message">Role-Playing Login</div>
+    <div id="darkbannerwrap"></div>
 
-	</body>
+    <form method="post" class="layui-form">
+        <input name="user" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
+        <hr class="hr15">
+        <input name="password" lay-verify="required" placeholder="密码" type="password"
+               class="layui-input">
+        <hr class="hr15">
+        <input value="登录" lay-submit lay-filter="login" type="submit">
+        <hr class="hr15">
+        <button id="emailQuickRegisterBtn" class="layui-btn">邮箱快速登录</button>
+        <button id="qqRegisterBtn" class="layui-btn">QQ登录(未开通</button>
+        <button id="emailRegisterBtn" class="layui-btn">邮箱注册</button>
+        <hr class="hr15">
+        <button id="oder" class="layui-btn">Other(待更新</button>
 
+        <hr class="hr20">
+    </form>
+</div>
+
+</body>
+
+<script type="text/javascript" src="resource/js/utils/baseUtils.js"></script>
+<script type="text/javascript" src="resource/js/utils/token-crypto.js"></script>
+
+<script>
+
+    //encryption.tokenSave("jsUOwapDn2BVHoSzAmox5+93zpvuadQsr9Ez/6rCzP6yFMUzgiaNBa2DigWL7p4weS1yQl/MfVApDHGuqOMIEDdHRsJ6R0RpWmgllalD1cE=");
+   // alert(encryption.tokenCreate());
+</script>
 </html>

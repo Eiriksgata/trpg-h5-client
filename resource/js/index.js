@@ -22,7 +22,7 @@ $(window).ready(function() {
 
 	//房间与用户和角色卡关系
 	window.allRelaiton = parent.allRelaiton
-})
+});
 
 function quitLogin() {
 	$.ajax({

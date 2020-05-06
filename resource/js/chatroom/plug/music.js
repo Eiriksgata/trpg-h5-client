@@ -178,7 +178,7 @@
     let audioEnded = function () {
         $('#progressBar').css('width', 0);
         $('#progressDot').css('left', 0);
-        $('#audioPlayButton').attr('src', '../../resource/play.png');
+        $('#audioPlayButton').attr('src', '../../resource/images/play.png');
     };
 
     /**

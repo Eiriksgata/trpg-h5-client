@@ -8,14 +8,13 @@
 
     };
 
+    let addPlotBoxMessage = function(chatMessage){
+        let userId = window.myUserInfo.id;
+        let roleId = window.allRelaiton[currentRoomId][userId].roleCardId;
+        console.log(userId+","+roleId);
+        //$("#plotChatBox").append(chatMessage.content,);
 
-    function addPlotBoxMessage(chatMessage){
-
-        //let roleId = window.allRelaiton[currentRoomId][];
-
-        $("#plotChatBox").append(chatMessage.content,);
-
-    }
+    };
 
     function getDiceMessageBoxHtml(message,roleName){
         return layuiRender(diceMessageBoxHtml.innerHTML,{

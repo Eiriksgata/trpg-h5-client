@@ -64,7 +64,7 @@ function addCollectionSubmit(data) {
         dataType: "json",
         data: JSON.stringify(data),
         contentType: "application/json;charset=UTF-8",
-        success: function (result) {
+        success: function () {
             loadRoomCollection();
         }
     });
@@ -95,7 +95,7 @@ function chatMessageCollection(control) {
         "memberId": -1,
         "roomId": findRoomId,
         "text": messageText
-    }
+    };
     addCollectionSubmit(data);
     $(control).children('i').html("&#xe67a;");
 }
@@ -107,7 +107,7 @@ function addBlankCollection() {
         "memberId": -1,
         "roomId": findRoomId,
         "text": messageText
-    }
+    };
     addCollectionSubmit(data);
 }
 
@@ -133,7 +133,7 @@ function loadRoomCollection() {
         dataType: "json",
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
-            if (result.code == 0) {
+            if (result.code === 0) {
                 let data;
                 //清空收藏消息，重新载入
                 $("#collectionListBox").html("");
@@ -141,11 +141,11 @@ function loadRoomCollection() {
                     data = {
                         "text": result.data[i].text,
                         "collectionId": result.data[i].id
-                    }
+                    };
                     addCollectionLaytpl(data);
                 }
             }
-            if (result.code == 1) {
+            if (result.code === 1) {
                 layer.msg("读取收藏信息出错:{}", result.message);
             }
 
@@ -155,9 +155,7 @@ function loadRoomCollection() {
 
 //页面层
 function collectionSuspensionMode() {
-    let html = $("#viewCollectionHtml").html();
-    $("#viewCollectionHtml").parent().css("display", "none");
-    $("#viewCollectionHtml").html('');
+    let html = $("#viewCollectionHtml").html().parent().css("display", "none").html('');
     layer.open({
         type: 1,
         moveOut: true,
@@ -168,8 +166,7 @@ function collectionSuspensionMode() {
         fixed: false,
         content: html,
         cancel: function (index, layero) {
-            $("#viewCollectionHtml").parent().css("display", "");
-            $("#viewCollectionHtml").html(html);
+            $("#viewCollectionHtml").parent().css("display", "").html(html);
             loadRoomCollection();
             layer.close(index);
             return false;
