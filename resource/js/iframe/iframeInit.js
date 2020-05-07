@@ -5,13 +5,15 @@
 	});
 
 	let openSocket = function() {
-		if(typeof(WebSocket) == "undefined") {
+		if(typeof(WebSocket) === "undefined") {
 			layer.msg("您的浏览器不支持WebSocket");
 		} else {
 			//实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
 			let socketUrl = REQUESTHEAD + "/linkSocket";
 			socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
-			socket = new WebSocket(socketUrl);
+			socket = new WebSocket(socketUrl,);
+
+
 			//打开事件
 			socket.onopen = function() {
 				$("#loadTipsMessageBox").html("建立通讯链接");
@@ -21,7 +23,7 @@
 			//获得消息事件
 			socket.onmessage = function(msg) {
 				let result = JSON.parse(msg.data);
-				if(result.code == 0) {
+				if(result.code === 0) {
 					messageHandler(result.data);
 				}
 

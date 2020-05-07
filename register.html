@@ -22,17 +22,17 @@
     <![endif]-->
 </head>
 
-<body class="layui-bg-gray">
+<body class="login-bg layui-bg-gray">
 
 <div class="login layui-anim layui-anim-up">
     <form method="post" class="layui-form">
-        <div class="message">Role-Playing Register 注册后邮箱作为用户名登录</div>
+        <div class="message">Role-Playing Register <br/>注册后邮箱作为用户名登录</div>
         <hr class="hr15">
-        <input name="email" placeholder="邮箱" type="text" lay-verify="required" class="layui-input">
+        <input name="email" placeholder="邮箱" type="email" lay-verify="email" class="layui-input">
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
+        <input name="password" lay-verify="password" placeholder="密码" type="password" class="layui-input">
         <hr class="hr15">
-        <input id="passwordAgain" lay-verify="required" placeholder="重复密码" type="password" class="layui-input">
+        <input id="passwordAgain" lay-verify="password" placeholder="重复密码" type="password" class="layui-input">
         <hr class="hr15">
 
         <input name="mailVerificationCode" lay-verify="required" placeholder="邮箱验证码" type="text" class="layui-input"
@@ -43,10 +43,12 @@
         <input value="注册" lay-submit lay-filter="register" style="width:100%;" type="submit">
         <hr class="hr15">
 
-        <button onclick="toLoginPage()" class="layui-btn">登录页面</button>
-        <hr class="hr20">
     </form>
+
+    <button id="loginPageBtn" class="layui-btn">登录页面</button>
+    <hr class="hr20">
 </div>
 </body>
+<script type="text/javascript" src="resource/js/iframe/constant.js"></script>
 <script type="text/javascript" src="resource/js/register.js"></script>
 </html>

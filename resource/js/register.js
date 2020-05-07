@@ -1,81 +1,71 @@
 (function (w) {
 
-    let loginSubmit = function (data) {
-        let token = encryption.tokenCreate();
-        $.ajax({
-            type: "put",
-            url: REQUESTHEAD + "/auth/common",
-            beforeSend: function (request) {
-                request.setRequestHeader("token", token);
-            },
-            data: data,
-            dataType: "json",
-            contentType: "application/json;charset=UTF-8",
-            sync: false,
-            success: function (result) {
-                layer.msg(result.message);
-                if (result.code === 0) {
-
-                    //处理返还的token
-                    // layui.data("login", {
-                    //     key: "token",
-                    //     value: result.data
-                    // });
-                    encryption.tokenSave(result.data);
-
-                    //倒计时跳转
-                    setTimeout(function () {
-                        toIndexPage();
-                    }, 1000);
-
-                }
-            },
-            error: function (result) {
-                layer.msg("请求出错，请向管理员反馈:" + result);
-            }
-        });
-    };
-
     let getEmailCode = function (btn) {
         $(btn).attr("disabled", true);
+        $(btn).addClass("layui-btn-disabled");
         $.ajax({
             type: "get",
-            url: REQUESTHEAD + "/register/email/getCode?email=" + $("#userName").val(),
+            url: REQUESTHEAD + "/register/email/getCode?email=" + $("input[name='email']").val(),
+            sync: false,
             success: function (result) {
                 if (result.code === 0) {
                     let countTime = 70;
                     let emailCodeTimer = setInterval(function () {
                         countTime--;
-                        $(btn).html("冷却倒计时(" + countTime + ")");
+                        $(btn).html("请稍等(" + countTime + ")");
                         if (countTime <= 0) {
                             $(btn).attr("disabled", false);
                             $(btn).html("获取验证码");
+                            $(btn).removeClass("layui-btn-disabled");
                             clearInterval(emailCodeTimer);
                         }
                     }, 1000);
                 } else {
                     $(btn).attr("disabled", false);
+                    $(btn).removeClass("layui-btn-disabled");
                 }
-                alert(result.message);
+                layer.msg(result.message);
             }
         });
+
     };
 
     let registerSubmit = function (data) {
+        $("input[lay-filter='register']")
+            .addClass("layui-bg-gray")
+            .attr("disable", true);
+        let registerBtnTimer = setTimeout(function () {
+            layer.msg("服务器长时间无响应，请尝试重新操作。");
+            $("input[lay-filter='register']")
+                .removeClass("layui-bg-gray")
+                .attr("disable", false);
+
+        }, 15000);
         $.ajax({
             type: "put",
-            url: REQUESTHEAD + "/register/eamil",
+            url: REQUESTHEAD + "/register/email",
             data: data,
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
+            sync: false,
             success: function (result) {
+
+                clearTimeout(registerBtnTimer);
+
                 if (result.code === 0) {
-                    alert(result.message);
-                    toLoginPage();
+                    layer.msg(result.message + "(稍后跳转到登录页面)");
+                    $("input[lay-filter='register']").val("注册成功");
+                    setTimeout(function () {
+                        toLoginPage();
+                    }, 1500);
+
+                } else {
+                    layer.msg(result.message);
+                    $("input[lay-filter='register']")
+                        .removeClass("layui-bg-gray")
+                        .attr("disable", false);
                 }
-                if (result.code === 1) {
-                    alert(result.message);
-                }
+
             }
         });
 
@@ -85,18 +75,7 @@
         $(location).attr('href', 'login.html');
     };
 
-    let toIndexPage = function () {
-        $(location).attr('href', 'BackstagPage/iframe.html');
-    };
-
-
-    let toRegisterPage = function () {
-        $(location).attr('href', 'register.html');
-    };
-
-
     $(document).ready(function () {
-
         layui.use('form', function () {
             let form = layui.form;
 
@@ -104,10 +83,8 @@
             form.on('submit(register)', function (data) {
                 if ($("input[name='password']").val() === $("#passwordAgain").val()) {
                     layer.msg("数据注册中，请稍等.");
-                    console.log(JSON.stringify(data.field));
-                    // registerSubmit(JSON.stringify(
-                    //     data.field
-                    // ));
+
+                    registerSubmit(JSON.stringify(data.field));
                     return false;
                 } else {
                     layer.msg("两次输入的密码不一致，请检查你输入的密码.")
@@ -117,15 +94,14 @@
         });
 
         $("#getVerifyCode").on("click", function () {
-
+            getEmailCode(this);
         });
 
+        $("#loginPageBtn").on("click", function () {
+            toLoginPage();
+        });
 
     });
-
-
-    w.toRegisterPage = toRegisterPage;
-    w.toLoginPage = toLoginPage;
 
 
 })(window);

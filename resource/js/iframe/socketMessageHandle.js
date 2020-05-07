@@ -14,7 +14,7 @@
 			
 		}
 
-	}
+	};
 
 	let dataInit = function() {
 		InitLoad.getMyUserInfo();
@@ -23,7 +23,7 @@
 		$("#loadTipsMessageBox").remove();
 		$("iframe").attr("src","index.html");
 		
-	}
+	};
 
 	w.messageHandler = messageHandler;
 })(window);
