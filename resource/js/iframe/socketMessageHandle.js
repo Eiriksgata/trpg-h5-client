@@ -2,7 +2,7 @@
 
 	let messageHandler = function(socketData) {
 		//进行自定义消息创建判定,并且转换为特殊的文本格式
-		if(socketData.message != null || socketData.message != undefined) {
+		if(socketData.message != null || socketData.message !== undefined) {
 			socketData.message = MessageAnalysis.richTextConvert(socketData.message);
 		}
 

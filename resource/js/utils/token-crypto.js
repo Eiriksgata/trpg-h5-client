@@ -21,13 +21,14 @@
             decode  = JSON.parse(decrypt(token, device));
         }catch (e) {
             //解码过程出错，清理掉存储的数据结构
+            console.log( e.toString());
             layui.data("login",null);
             return;
         }
 
         let content = {
             "initTime": (new Date()).getTime() ,
-            "expirationTime": (new Date()).getTime() + 1000 * 60 * 5,
+            "expirationTime": (new Date()).getTime() + 1000 * 60 * 3,
             "key": decode.key
         };
 

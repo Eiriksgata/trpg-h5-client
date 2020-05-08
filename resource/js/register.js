@@ -7,6 +7,9 @@
             type: "get",
             url: REQUESTHEAD + "/register/email/getCode?email=" + $("input[name='email']").val(),
             sync: false,
+            beforeSend:function(request){
+                request.setRequestHeader("Accept-Language","en-us")
+            },
             success: function (result) {
                 if (result.code === 0) {
                     let countTime = 70;

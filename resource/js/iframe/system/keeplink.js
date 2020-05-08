@@ -1,5 +1,13 @@
 (function () {
     let backgroundKeepLinkTimer;
+    let keepLinkTimer;
+
+    keepLinkTimer = setInterval(function(){
+       if (socket != null && socket !== undefined){
+           socket.send("");
+       }
+    },3000);
+
     document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
             //这里写切换到后台的时候要保存的东西
@@ -18,5 +26,7 @@
             clearInterval(backgroundKeepLinkTimer);
         }
     });
+
+
 
 })();

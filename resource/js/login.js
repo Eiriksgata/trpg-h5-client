@@ -24,11 +24,13 @@
                     request.setRequestHeader("token", token);
                 }
 
+
             },
             data: data,
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             sync: false,
+
             success: function (result) {
                 clearTimeout(loginBtnTimer);
                 layer.msg(result.message);

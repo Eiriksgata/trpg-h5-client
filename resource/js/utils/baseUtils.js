@@ -1,3 +1,4 @@
+
 function Base64() {
     // private property
     let _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -26,7 +27,7 @@ function Base64() {
                 _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
         }
         return output;
-    }
+    };
 
     // public method for decoding
     this.decode = function (input) {
