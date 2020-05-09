@@ -6,7 +6,7 @@
        if (socket != null && socket !== undefined){
            socket.send("");
        }
-    },3000);
+    },30000);
 
     document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
@@ -18,7 +18,7 @@
                     } else {
                         clearInterval(backgroundKeepLinkTimer);
                     }
-                }, 50000);
+                }, 30000);
             }
 
         } else {

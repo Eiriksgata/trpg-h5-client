@@ -3,28 +3,30 @@
  */
 
 //存储用户需要用到的 用户数据
-window.allMemberInfoMap = {};
+//window.allMemberInfoMap = {};
 
 //长连接
 window.socket = null;
 
 //当前用户的信息
-window.myUserInfo = {};
+//window.myUserInfo = {};
 
 //房间信息
-window.allRoomInfoMap = {};
+//window.allRoomInfoMap = {};
 
 //用户加入的房间信息
-window.allJoinRoomInfoMap = {};
+//window.allJoinRoomInfoMap = {};
 
 //角色卡信息 ,以Id进行唯一识别对应
-window.allRoleCardInfoMap = {};
+//window.allRoleCardInfoMap = {};
 
-//从链接后接收到的信息
-window.allChatMessageRecord = {};
+//连接状态下接收到的信息
+//window.allChatMessageRecord = {};
 
 //房间与用户和角色卡关系
-window.allRelaiton = {};
+//window.allRelation = {};
+
+
 
 
 

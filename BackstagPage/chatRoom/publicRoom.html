@@ -67,7 +67,7 @@
 					<h2 style="margin-bottom: 5px;">{{d.roomName}}</h2>
 					<h3 style="margin-bottom: 5px;">房间ID:{{d.roomId}}</h3>
 					<h3 style="margin-bottom: 5px;">人数上限:{{d.player}}</h3>
-					<h3 style="margin-bottom: 5px;">创建人:<a style="color: blue;" onclick="openMemberInfo({{d.createId}})">[点击查看]</a>
+					<h3 style="margin-bottom: 5px;">创建人:<a style="color: blue;" onclick="openMemberInfo({{d.createUserId}})">[点击查看]</a>
                 </h3>
 					<a href="roomVerified.html?roomId={{d.roomId}}" class="layui-btn">加入房间</a>
 					<a onclick="openRoomDescribe('{{d.introduce}}')" class="layui-btn">介绍</a>

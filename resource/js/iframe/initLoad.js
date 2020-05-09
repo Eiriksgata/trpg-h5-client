@@ -1,72 +1,125 @@
-(function (w) {
+(function () {
     let InitLoad = {};
 
     InitLoad.getMyUserInfo = function () {
         $("#loadTipsMessageBox").html("载入用户信息");
-        $.ajax({
-            type: "get",
-            url: REQUESTHEAD + "/my/user/info",
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
-            async: false,
-            success: function (result) {
-                if (result.code !== 0) {
-                    layer.msg(result.message);
-                    return;
+
+        if (layui.data("appData").myUserInfo == null) {
+            $.ajax({
+                type: "get",
+                url: REQUESTHEAD + "/my/user/info",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                async: false,
+                success: function (result) {
+                    if (result.code !== 0) {
+                        layer.msg(result.message);
+                        return;
+                    }
+                    let myUserInfo = result.data;
+
+                    //存储到本地的浏览器中
+                    layui.data("appData", {
+                        key: "myUserInfo",
+                        value: myUserInfo
+                    });
+
+                    let allMemberInfoMap = layui.data("appData").allMemberInfo;
+                    if (allMemberInfoMap == null){
+                        allMemberInfoMap = {};
+                    }
+
+                    allMemberInfoMap[myUserInfo.id] = myUserInfo;
+                    layui.data("appData", {
+                        key: "allMemberInfo",
+                        value: allMemberInfoMap
+                    })
+
+
                 }
-                window.myUserInfo = result.data;
-                allMemberInfoMap[myUserInfo.id] = myUserInfo;
-                console.log(JSON.stringify(result));
-            }
-        });
+            });
+        } else {
+            window.myUserInfo = layui.data("appData").myUserInfo;
+            console.log("本地加载MyUserInfo数据");
+        }
     };
 
     InitLoad.getMyJoinRoomInfo = function () {
-        $("#loadTipsMessageBox").html("载入已加入的房间信息");
-        $.ajax({
-            type: "get",
-            url: REQUESTHEAD + "/my/join/roomInfoList",
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
-            async: false,
-            success: function (result) {
-                if (result.code !== 0) {
-                    layer.msg(result.message);
-                    return;
+        $("#loadTipsMessageBox").html("载入房间信息");
+        if (layui.data("appData").allRoomInfo == null) {
+            $.ajax({
+                type: "get",
+                url: REQUESTHEAD + "/my/join/roomInfoList",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                async: false,
+                success: function (result) {
+                    if (result.code !== 0) {
+                        layer.msg(result.message);
+                        return;
+                    }
+                    let data = result.data;
+                    //let allRoomInfoMap = {};
+
+                    let allRoomInfoMap = {};
+                    for (let i = 0; i < data.length; i++) {
+                        allRoomInfoMap[data[i].roomId] = data[i];
+                    }
+
+                    //建立数据表结构
+                    layui.data("appData", {
+                        key: "allRoomInfo",
+                        value: allRoomInfoMap
+                    });
+
+
+                    //console.log(JSON.stringify(allRoomInfoMap));
                 }
-                let data = result.data;
-                for (let i = 0; i < data.length; i++) {
-                    window.allRoomInfoMap[data[i].roomId] = data[i];
-                }
-                console.log(JSON.stringify(allRoomInfoMap));
-            }
-        });
+            });
+        } else {
+            //window.myUserInfo = layui.data("frame").allRoomInfoMap;
+
+            console.log("本地加载AllRoomInfoMap数据");
+        }
+
     };
 
     InitLoad.getMyRelationship = function () {
         $("#loadTipsMessageBox").html("载入关联");
-        $.ajax({
-            type: "get",
-            url: REQUESTHEAD + "/my/allRoomRelationship",
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
-            async: false,
-            success: function (result) {
-                if (result.code !== 0) {
-                    layer.msg(result.message);
-                    return;
+
+        if (layui.data("appData").allRelation == null) {
+            $.ajax({
+                type: "get",
+                url: REQUESTHEAD + "/my/allRoomRelationship",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                async: false,
+                success: function (result) {
+                    if (result.code !== 0) {
+                        layer.msg(result.message);
+                        return;
+                    }
+                    let data = result.data;
+                    let allRelation = relationDataHandle(data);
+                    layui.data("appData", {
+                        key: "allRelation",
+                        value: allRelation
+                    })
+                    //console.log(JSON.stringify(allRelaiton));
                 }
-                let data = result.data;
-                window.allRelaiton = relationDataHandle(data);
-                console.log(JSON.stringify(allRelaiton));
-            }
-        });
+            });
+
+        } else {
+            console.log("本地加载allRelation数据");
+
+        }
+
     };
 
 
@@ -122,5 +175,5 @@
     };
 
 
-    w.InitLoad = InitLoad;
-})(window);
+    window.InitLoad = InitLoad;
+})();

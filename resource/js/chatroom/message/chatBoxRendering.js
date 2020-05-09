@@ -2,6 +2,10 @@
 (function(w){
 
     let chatBox = {};
+    let regionCode = {};
+    regionCode.PLOT = "剧情";
+    regionCode.SQUARE = "广场";
+
 
     chatBox.plotBoxAddMessage = function(message){
 
@@ -11,8 +15,15 @@
     let addPlotBoxMessage = function(chatMessage){
         let userId = window.myUserInfo.id;
         let roleId = window.allRelaiton[currentRoomId][userId].roleCardId;
+        if (userId == null || roleId == null) return ;
+
         console.log(userId+","+roleId);
         //$("#plotChatBox").append(chatMessage.content,);
+
+    };
+
+    let addSUQARE = function(chatMessage){
+        let userId = window.myUserInfo.id;
 
     };
 
@@ -27,6 +38,7 @@
 
 
     w.chatBox = chatBox;
+    w.regionCode = regionCode;
 
 
 })(window);

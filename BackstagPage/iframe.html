@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<iframe allowtransparency="no" frameborder="no" border="0" marginheight="0" marginwidth="0"
+<iframe id="pageFrame" allowtransparency="no" frameborder="no" border="0" marginheight="0" marginwidth="0"
         style="width: 100%;height: 100%;vertical-align: top;" src="loadPage.html"></iframe>
 <div id="loadTipsMessageBox"
      style="position: absolute;left: 10%;top: 80%;text-align: center;width: 80%;color: white;font-size: 23px;">请求载入数据中
@@ -53,10 +53,13 @@
 <script type="text/javascript" src="../resource/js/utils/baseUtils.js"></script>
 <script type="text/javascript" src="../resource/js/utils/token-crypto.js"></script>
 
+<script type="text/javascript" src="../resource/js/entity/senderData.js"></script>
 
 <script>
 
-
+    let chatMessage = new ChatMessageVo();
+    chatMessage = JSON.parse("{\"messageType\":2,\"message\":\"test\"}");
+    console.log(chatMessage);
 
 </script>
 </html>
