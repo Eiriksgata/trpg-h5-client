@@ -59,7 +59,7 @@
                 <tr>
                     <td>生日:</td>
                     <td>
-                        <input id="birthday" type="date" value="" disabled>
+                        <input id="birthday" type="date" value="" disabled >
                     </td>
                 </tr>
                 <tr>
@@ -82,49 +82,8 @@
 
 <script>
 
-    // window.onload = function() {
-    // 	let findMemberId = window.location.search;
-    // 	let urlString = "http://localhost/user/info?id=" + findMemberId;
-    // 	$.ajax({
-    // 		url: urlString,
-    // 		type: "get",
-    // 		dataType: "json",
-    // 		xhrFields: {
-    // 			withCredentials: true
-    // 		},
-    // 		crossDomain: true,
-    // 		contentType: "application/json;charset=UTF-8",
-    // 		success: function(result) {
-    // 			let data = result.data;
-    // 			if(result.code == 0) {
-    // 				$("#memberId").html(data.id);
-    // 				$("#memberName").html(data.name);
-    // 				$("#memberAge").html(data.age);
-    // 				$("#memberCocAge").html(data.cocAge);
-    // 				$("#memberPhone").html(data.phone);
-    //
-    // 				if(data.sex == 0) {
-    // 					$("#memberSex").html("保密");
-    // 				}
-    // 				if(data.sex == 1) {
-    // 					$("#memberSex").html("男");
-    //
-    // 				}
-    // 				if(data.sex == 2) {
-    // 					$("#memberSex").html("女");
-    // 				}
-    //
-    // 				$("#memberRemarks").html(data.remarks);
-    // 				$("#memberImg").attr('src', data.img);
-    //
-    // 			}
-    // 		}
-    // 	});
-    // };
-
     window.onload = function () {
         let findMemberId = window.location.search.substring(10);
-        let urlString = "http://localhost/user/info?id=" + findMemberId;
         let data = window.parent.window.parent.RequestData.getUserInfo(findMemberId);
 
 
@@ -138,9 +97,7 @@
         } else {
             $("#memberSex").html(data.sex);
         }
-        //$("#lastLoginDate").val(data.lastLoginDate);
 
-        //console.log(Format(data.lastLoginDate,"yyyy-MM-dd"));
         layui.use('util', function () {
             let util = layui.util;
 
@@ -152,17 +109,11 @@
             if (data.lastLoginDate != null) {
                 $("#lastLoginDate").val(util.toDateString(data.lastLoginDate, "yyyy-MM-dd"));
             }
-
-
         });
 
-
         $("#memberEmail").html(data.email);
-
         $("#memberRemarks").html(data.intro);
         $("#memberImg").attr('src', data.userIcon);
-
-
     };
 
 </script>
