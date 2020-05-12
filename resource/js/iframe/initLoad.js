@@ -27,7 +27,7 @@
                     });
 
                     let allMemberInfoMap = layui.data("appData").allMemberInfo;
-                    if (allMemberInfoMap == null){
+                    if (allMemberInfoMap == null) {
                         allMemberInfoMap = {};
                     }
 
@@ -36,8 +36,6 @@
                         key: "allMemberInfo",
                         value: allMemberInfoMap
                     })
-
-
                 }
             });
         } else {
@@ -63,25 +61,19 @@
                         return;
                     }
                     let data = result.data;
-                    //let allRoomInfoMap = {};
-
                     let allRoomInfoMap = {};
                     for (let i = 0; i < data.length; i++) {
-                        allRoomInfoMap[data[i].roomId] = data[i];
+                        allRoomInfoMap[data[i].id] = data[i];
                     }
-
                     //建立数据表结构
                     layui.data("appData", {
                         key: "allRoomInfo",
                         value: allRoomInfoMap
                     });
-
-
                     //console.log(JSON.stringify(allRoomInfoMap));
                 }
             });
         } else {
-            //window.myUserInfo = layui.data("frame").allRoomInfoMap;
 
             console.log("本地加载AllRoomInfoMap数据");
         }
@@ -90,11 +82,14 @@
 
     InitLoad.getMyRelationship = function () {
         $("#loadTipsMessageBox").html("载入关联");
+        let allRoomInfo = layui.data("appData").allRoomInfo;
 
-        if (layui.data("appData").allRelation == null) {
+        //根据已加入的房间进行房间关系的载入
+        $.each(allRoomInfo, function (key, values) {
+
             $.ajax({
                 type: "get",
-                url: REQUESTHEAD + "/my/allRoomRelationship",
+                url: REQUESTHEAD + "/findRoomRelationship?roomId=" + allRoomInfo[key].roomId,
                 xhrFields: {
                     withCredentials: true
                 },
@@ -106,34 +101,30 @@
                         return;
                     }
                     let data = result.data;
-                    let allRelation = relationDataHandle(data);
+
+                    let allRelation = layui.data("appData").allRelation;
+                    if (allRelation == null) {
+                        allRelation = {};
+                    }
+
+                    for (let i = 0; i < data.length; i++) {
+                        if (allRelation[key] == null) {
+                            allRelation[key] = {};
+                        }
+                        allRelation[key][data[i].userId] = data[i];
+                    }
+
                     layui.data("appData", {
                         key: "allRelation",
                         value: allRelation
                     })
-                    //console.log(JSON.stringify(allRelaiton));
+
+
                 }
             });
-
-        } else {
-            console.log("本地加载allRelation数据");
-
-        }
+        });
 
     };
-
-
-    function relationDataHandle(data) {
-        let result = {};
-        data.map(function (room) {
-            room.map(function (relation) {
-                let value = {};
-                value[relation.userId] = relation;
-                result[relation.roomId] = value;
-            })
-        });
-        return result;
-    }
 
 
     jQuery.cookie = function (name, value, options) {
@@ -173,7 +164,6 @@
             return cookieValue;
         }
     };
-
 
     window.InitLoad = InitLoad;
 })();

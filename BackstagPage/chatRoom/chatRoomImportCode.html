@@ -1,22 +1,24 @@
 <!--描述：页面渲染部分-->
 <script type="text/html" id="memberListMenuHtml">
-	<div>
-		<button onclick="removeMember({{d.memberId}})" class="layui-btn">移除玩家</button>
-	</div>
+    <div>
+        <button onclick="removeMember({{d.memberId}})" class="layui-btn">移除玩家</button>
+    </div>
 </script>
 
 <!-- 描述：私聊玩家列表渲染 -->
 <script type="text/html" id="privateMessageMemberListHtml">
-	<a style="color: black;" href="javascript:void(0);">
-		<div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
-			<img width="60" height="60" src="{{d.url}}" class='media-object img-circle' />
-			<p style="width: 60px;text-align: center;" title="{{d.name}}">
-				{{# var getName = function(){if(d.name.length > 10){return d.name.substring(0,7)+'...';} return d.name; }}} {{getName()}}
-			</p>
-			<span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge" style="position: relative;top: -90px;">0</span>
+    <a style="color: black;" href="javascript:void(0);">
+        <div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
+            <img width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
+            <p style="width: 60px;text-align: center;" title="{{d.name}}">
+                {{# var getName = function(){if(d.name.length > 10){return d.name.substring(0,7)+'...';} return d.name;
+                }}} {{getName()}}
+            </p>
+            <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
+                  style="position: relative;top: -90px;">0</span>
 
-		</div>
-	</a>
+        </div>
+    </a>
 
 </script>
 
@@ -24,80 +26,91 @@
 	描述：聊天图片菜单选项渲染
 -->
 <script type="text/html" id="chatMessagePictureMenuHtml">
-	<div>
-		<button class='layui-btn' onclick="quickAddEmoticon('{{d.url}}');">添加</button>
-		<button class="layui-btn" onclick="copyText('{{d.url}}')">复制</button>
-		<button class="layui-btn" onclick="xadmin.open('图片','{{d.url}}','','')">查看</button>
-	</div>
+    <div>
+        <button class='layui-btn' onclick="quickAddEmoticon('{{d.url}}');">添加</button>
+        <button class="layui-btn" onclick="copyText('{{d.url}}')">复制</button>
+        <button class="layui-btn" onclick="xadmin.open('图片','{{d.url}}','','')">查看</button>
+    </div>
 </script>
 
 <!--描述：表情包选择框渲染-->
 <script type="text/html" id="emoticonPageHtml">
-	<div class="checkbox">
-		<label>
+    <div class="checkbox">
+        <label>
             <input id="deleteEmoticonCheck" type="checkbox"> 删除表情包
         </label>
-		<label>
+        <label>
             <input type="url" id="emoticonUrlInput" placeholder="表情URL"/>
             <button onclick="addEmoticon()" class="layui-btn">添加表情</button>
         </label>
-	</div>
+    </div>
 
-	<div id="emoticonView">
+    <div id="emoticonView">
 
-	</div>
+    </div>
 </script>
 
 <!--描述：表情包图片载入渲染-->
 <script type="text/html" id="emoticonBoxHtml">
-	{{# layui.each(d.data,function(index,item){ }}
-	<a onclick="selectSendEmoticon(this);">
-		<div style="width:65px;height:65px;float: left;box-shadow: darkgrey 1px 1px 10px 1px ;//边框阴影 ">
-			<img width="65" height="65" emoticonId="{{item.id}}" src="{{item.url}}" />
-		</div>
-	</a>
-	{{# }); }}
+    {{# layui.each(d.data,function(index,item){ }}
+    <a onclick="selectSendEmoticon(this);">
+        <div style="width:65px;height:65px;float: left;box-shadow: darkgrey 1px 1px 10px 1px ;//边框阴影 ">
+            <img width="65" height="65" emoticonId="{{item.id}}" src="{{item.url}}"/>
+        </div>
+    </a>
+    {{# }); }}
 
 </script>
 
 <!--描述：气泡选择框 -->
 <script type="text/html" id="chatBubblePageHtml">
-	气泡背景颜色:
-	<div id="bubbleColorSelect"></div><br/> 字体颜色:
-	<div id="bubbleFontColorSelect"></div><br/> 字体大小:
-	<input onchange="changeBubbleFontSize(this);" type="number" class="layui-input" /> 自定义背景框:
-	<input type="url" class="layui-input" /> 自定义字体:
-	<input type="url" class="layui-input" />
+    气泡背景颜色:
+    <div id="bubbleColorSelect"></div><br/> 字体颜色:
+    <div id="bubbleFontColorSelect"></div><br/> 字体大小:
+    <input onchange="changeBubbleFontSize(this);" type="number" class="layui-input"/> 自定义背景框:
+    <input type="url" class="layui-input"/> 自定义字体:
+    <input type="url" class="layui-input"/>
 </script>
 
 <script type="text/html" id="chatBubbleMenuHtml">
-	<button class="layui-btn" onclick="openChatBubbleSetPage()">气泡设置</button>
+    <button class="layui-btn" onclick="openChatBubbleSetPage()">气泡设置</button>
 </script>
 
 <script type="text/html" id="mapsHtml">
-	<div id="colorSelect"></div>
-	标记名称:<input type="text" name="signInput" /><br/> 尺寸大小:
-	<input name="signSizeInput" type="number" value="25" style="width: 50px;" /> 图片URL:
-	<input title="用来输入图片url资源" name="mapsPictrueInput" />
-	<button onclick="updateMapsPicture()" class="layui-btn">更改地图</button>
-	<button onclick="clientPushMapsData()" class="layui-btn">推送</button>
-	<button onclick='xadmin.open("upload","../upload/resourceUpload.html","","")' class="layui-btn">本地上传</button>
-	<p>地图的总尺寸为 300*1000 因此自定义图片铺满写300即可</p>
-	<div>
-		<i code='0' name="addSignButton" title="基础点" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe617;</i>
-		<i code='1' name="addSignButton" title="空心点" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe643;</i>
-		<i code='2' name="addSignButton" title="声音" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe688;</i>
-		<i code='3' name="addSignButton" title="问号" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe607;</i>
-		<i code='4' name="addSignButton" title="方块" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe857;</i>
-		<i code='5' name="addSignButton" title="火" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe756;</i>
-		<i code='6' name="addSignButton" title="横线" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe65f;</i>
-		<i code='7' name="addSignButton" title="竖线" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe671;</i>
-		<i code='8' name="addSignButton" title="提示" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe702;</i>
-		<i code='9' name="addSignButton" title="自定义图片" onclick="addControl(this);" class="layui-icon" style="font-size: 25px;">&#xe61f;</i>
-	</div>
+    <div id="colorSelect"></div>
+    标记名称:<input type="text" name="signInput"/><br/> 尺寸大小:
+    <input name="signSizeInput" type="number" value="25" style="width: 50px;"/> 图片URL:
+    <input title="用来输入图片url资源" name="mapsPictrueInput"/>
+    <button onclick="updateMapsPicture()" class="layui-btn">更改地图</button>
+    <button onclick="clientPushMapsData()" class="layui-btn">推送</button>
+    <button onclick='xadmin.open("upload","../upload/resourceUpload.html","","")' class="layui-btn">本地上传</button>
+    <p>地图的总尺寸为 300*1000 因此自定义图片铺满写300即可</p>
+    <div>
+        <i code='0' name="addSignButton" title="基础点" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe617;</i>
+        <i code='1' name="addSignButton" title="空心点" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe643;</i>
+        <i code='2' name="addSignButton" title="声音" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe688;</i>
+        <i code='3' name="addSignButton" title="问号" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe607;</i>
+        <i code='4' name="addSignButton" title="方块" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe857;</i>
+        <i code='5' name="addSignButton" title="火" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe756;</i>
+        <i code='6' name="addSignButton" title="横线" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe65f;</i>
+        <i code='7' name="addSignButton" title="竖线" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe671;</i>
+        <i code='8' name="addSignButton" title="提示" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe702;</i>
+        <i code='9' name="addSignButton" title="自定义图片" onclick="addControl(this);" class="layui-icon"
+           style="font-size: 25px;">&#xe61f;</i>
+    </div>
 
-	<div id="viewArea" style="background-image:; background-repeat: no-repeat;background-size: 100% 100%;position:absolute;top:150px;left:0px;width:300px;height: 1000px;border: 1px solid black; background-color: wheat;">
-	</div>
+    <div id="viewArea"
+         style="background-image:; background-repeat: no-repeat;background-size: 100% 100%;position:absolute;top:150px;left:0px;width:300px;height: 1000px;border: 1px solid black; background-color: wheat;">
+    </div>
 </script>
 
 <!--
@@ -106,229 +119,248 @@
 	描述：房间音乐菜单
 -->
 <script type="text/html" id="roomMusicMenuHtml">
-	<div>
-		<button onclick="openChangMusicPage()" class="layui-btn">更换歌曲</button>
-		<button onclick="hideMusicPlay()" class="layui-btn">隐藏</button>
-	</div>
+    <div>
+        <button onclick="openChangMusicPage()" class="layui-btn">更换歌曲</button>
+        <button onclick="hideMusicPlay()" class="layui-btn">隐藏</button>
+    </div>
 </script>
 
 <script type="text/html" id="roomMusicChangePageHtml">
-	<div style="width: 100%;max-width:300px ;">
-		音乐URL:
-		<input name='roomMusicUrlInput' class='layui-input' placeholder='Place input URL' />
+    <div style="width: 100%;max-width:300px ;">
+        音乐URL:
+        <input name='roomMusicUrlInput' class='layui-input' placeholder='Place input URL'/>
 
-	</div>
+    </div>
 </script>
 
 <script type="text/html" id="richInputPageHtml">
-	<select id='richSelect' class='layui-select' name='richTextType' lay-verify='url'>
-		<option value='picture'>图片</option>
-		<option value='music'>音乐</option>
-		<option value='link'>链接</option>
-	</select>
-	<input name='richUrlInput' class='layui-input' placeholder='Place input URL' />
+    <select id='richSelect' class='layui-select' name='richTextType' lay-verify='url'>
+        <option value='picture'>图片</option>
+        <option value='music'>音乐</option>
+        <option value='link'>链接</option>
+    </select>
+    <input name='richUrlInput' class='layui-input' placeholder='Place input URL'/>
 
-	<button class="layui-btn" onclick='xadmin.open("Upload","../upload/resourceUpload.html","","");setTextInputName("richUrlInput");'>本地上传
+    <button class="layui-btn"
+            onclick='xadmin.open("Upload","../upload/resourceUpload.html","","");setTextInputName("richUrlInput");'>本地上传
     </button>
 </script>
 
 <script type="text/html" id="collectionListHtml">
-	<div class="bubble-contont">
-		<div onclick="deleteCollection(this)" value='{{d.collectionId}}' style="float: right;margin-left: 10px;">
-			<i class="layui-icon">&#xe640;</i>
-		</div>
-		<span onclick="collectionEdit(this)" value='{{d.collectionId}}'>{{d.text}}</span>
-	</div>
+    <div class="bubble-contont">
+        <div onclick="deleteCollection(this)" value='{{d.collectionId}}' style="float: right;margin-left: 10px;">
+            <i class="layui-icon">&#xe640;</i>
+        </div>
+        <span onclick="collectionEdit(this)" value='{{d.collectionId}}'>{{d.text}}</span>
+    </div>
 </script>
 
 <script id="memberListHtml" type="text/html">
 
-	<div class='layui-container' style='width: 100%;height: 85px;' onclick='memberListMenu(this,{{d.memberId}});'>
-
-		<span id='{{d.memberState}}' style='float: left;position:absolute;left: 00px;top:40px' class='layui-badge-dot layui-bg-{{d.state}}'></span>
-		<a href='javascript:void(0);' onclick="xadmin.open( 'MemberInfo', '../member/findMemberInfo.html?memberId={{d.memberId}}') ">
-			<div style='float: left;position:absolute;left: 20px;top: 10px;text-align: center;'>
-				<img title="{{d.memberName}} " class='media-object img-circle' width='65' height='65' src='{{d.memberImg}}' />
-		</a>
-		<span>
-				{{# var getName = function(){ if(d.memberName.length > 9){return d.memberName.substring(0,9)+'..';} return d.memberName;  }}}
+    <div class='layui-container' style='width: 100%;height: 85px;' onclick='memberListMenu(this,{{d.memberId}});'>
+        <span id='{{d.memberState}}' style='float: left;position:absolute;left: 00px;top:40px'
+              class='layui-badge-dot layui-bg-{{d.state}}'></span>
+        <a href='javascript:void(0);'
+           onclick="xadmin.open( 'MemberInfo', '../member/findMemberInfo.html?memberId={{d.memberId}}') ">
+            <div style='float: left;position:absolute;left: 20px;top: 10px;text-align: center;'>
+                <img title="{{d.memberName}} " class='media-object img-circle' width='65' height='65'
+                     src='{{d.memberImg}}'/>
+        </a>
+        <span>
+				{{# var getName = function(){ if(d.memberName.length > 7){return d.memberName.substring(0,9)+'..';} return d.memberName;  }}}
 				玩家:{{getName()}}
 			</span>
-		</div>
-		<div style='float: left;position:absolute;left: 50px;top: 10px;text-align: center;'>
-			<img title="{{d.roleName}} " alt="{{d.memberId}} " onclick="roleImgClick(this); " class='media-object img-circle' width='65' height='65' src='{{d.roleImg}}' />
-			<!--<span>{{d.roleName}}</span>-->
-		</div>
+    </div>
+    <div style='float: left;position:absolute;left: 50px;top: 10px;text-align: center;'>
+        <img title="{{d.roleName}} " alt="{{d.memberId}} " onclick="roleImgClick(this); "
+             class='media-object img-circle' width='65' height='65' src='{{d.roleImg}}'/>
+        <!--<span>{{d.roleName}}</span>-->
+    </div>
 
-		{{# }} {{# var hof = function(){if(d.openRoleSwitch == 1){return "roleSwitch(this, "+d.memberId+") ";}else{return " ";} } }}
-		<div style='width: 60%;position:absolute;right: 0px;' onclick="{{hof()}} ">
-			<div style='font-weight:bold;font-size: 15px;'>{{d.roleName}}</div>
-			{{# var getProgressWidth = function(value,maxValue){ return (value/maxValue)*100; } }}
+    {{# }} {{# var hof = function(){if(d.openRoleSwitch == 1){return "roleSwitch(this, "+d.memberId+") ";}else{return " ";} } }}
+    <div style='width: 60%;position:absolute;right: 0px;' onclick="{{hof()}} ">
+        <div style='font-weight:bold;font-size: 15px;'>{{d.roleName}}</div>
+        {{# var getProgressWidth = function(value,maxValue){ return (value/maxValue)*100; } }}
 
-			<div title="Health Point:{{d.roleHp}}/{{d.roleHpMax}} ">
-				<span style="float: left;width: 15%;height: 15px; ">HP:</span>
-				<div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+        <div title="Health Point:{{d.roleHp}}/{{d.roleHpMax}} ">
+            <span style="float: left;width: 15%;height: 15px; ">HP:</span>
+            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
 
-					<div class="progress-bar progress-bar-danger progress-bar-striped active " role="progressbar " aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 " style="width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
-						<span>{{d.roleHp}}/{{d.roleHpMax}}</span>
+                <div class="progress-bar progress-bar-danger progress-bar-striped active " role="progressbar "
+                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                     style="width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
+                    <span>{{d.roleHp}}/{{d.roleHpMax}}</span>
 
-					</div>
+                </div>
 
-				</div>
-			</div>
+            </div>
+        </div>
 
-			<div title="Magic Point:{{d.roleMp}}/{{d.roleMpMax}} ">
-				<span style="float: left;width: 15%;height: 15px; ">MP:</span>
-				<div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-					<div class="progress-bar progress-bar-info progress-bar-striped active " role="progressbar " aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 " style="width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
-						<span>{{d.roleMp}}/{{d.roleMpMax}}</span>
-					</div>
-				</div>
-			</div>
+        <div title="Magic Point:{{d.roleMp}}/{{d.roleMpMax}} ">
+            <span style="float: left;width: 15%;height: 15px; ">MP:</span>
+            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                <div class="progress-bar progress-bar-info progress-bar-striped active " role="progressbar "
+                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                     style="width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
+                    <span>{{d.roleMp}}/{{d.roleMpMax}}</span>
+                </div>
+            </div>
+        </div>
 
-			<div title="Armor Point:{{d.roleHp}}/{{d.roleHpMax}} ">
-				<span style="float: left;width: 15%;height: 15px; ">AP:</span>
-				<div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-					<div class="progress-bar progress-bar-warning progress-bar-striped active " role="progressbar " aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 " style="width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
-						<span>{{d.roleAp}}/{{d.roleApMax}}</span>
-					</div>
-				</div>
-			</div>
+        <div title="Armor Point:{{d.roleHp}}/{{d.roleHpMax}} ">
+            <span style="float: left;width: 15%;height: 15px; ">AP:</span>
+            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                <div class="progress-bar progress-bar-warning progress-bar-striped active " role="progressbar "
+                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                     style="width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
+                    <span>{{d.roleAp}}/{{d.roleApMax}}</span>
+                </div>
+            </div>
+        </div>
 
-			<div title="San:{{d.roleSan}}/{{d.roleSanMax}} ">
-				<span style="float: left;width: 15%;height: 15px; ">San:</span>
-				<div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-					<div class="progress-bar progress-bar-success progress-bar-striped active " role="progressbar " aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 " style="width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
-						<span>{{d.roleSan}}/{{d.roleSanMax}}</span>
-					</div>
-				</div>
-			</div>
-			<!--<p>玩家:{{d.memberName}}</p>-->
-		</div>
+        <div title="San:{{d.roleSan}}/{{d.roleSanMax}} ">
+            <span style="float: left;width: 15%;height: 15px; ">San:</span>
+            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                <div class="progress-bar progress-bar-success progress-bar-striped active " role="progressbar "
+                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                     style="width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
+                    <span>{{d.roleSan}}/{{d.roleSanMax}}</span>
+                </div>
+            </div>
+        </div>
+        <!--<p>玩家:{{d.memberName}}</p>-->
+    </div>
 
-	</div>
+    </div>
 </script>
 
 <script id="diceMessageBoxHtml" type="text/html">
-	<div class="media">
-		<div style="float:left;margin: 10px; ">
-			<a href="javascript:void(0); ">
-				<img width="45px " class="media-object " src="{{d.img}} " alt=" ">
-			</a>
-		</div>
-		<div>
-			<h5 style="margin-bottom: 5px; ">{{d.name}}</h5>
-			<div>
-				<!--<div class="bubbleTail-left "></div>-->
-				<div class="bubble-contont-left " style="border: 2px teal solid; ">
+    <div class="media">
+        <div style="float:left;margin: 10px; ">
+            <a href="javascript:void(0); ">
+                <img width="45px " class="media-object " src="{{d.img}} " alt=" ">
+            </a>
+        </div>
+        <div>
+            <h5 style="margin-bottom: 5px; ">{{d.name}}</h5>
+            <div>
+                <!--<div class="bubbleTail-left "></div>-->
+                <div class="bubble-contont-left " style="border: 2px teal solid; ">
 
-					<div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
-						<i class="layui-icon ">&#xe67b;</i>
-					</div>
-					{{#
-						var getRoleName = function(){if(d.roleName == null || d.roleName == '')(return d.message;) return d.roleName + ':' + d.message; }
-					}}
-					<message style='font-size:{{d.fontSize}}px;'>{{getRoleName()}}</message>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
+                        <i class="layui-icon ">&#xe67b;</i>
+                    </div>
+                    {{#
+                    var getRoleName = function(){if(d.roleName == null || d.roleName == '')(return d.message;) return
+                    d.roleName + ':' + d.message; }
+                    }}
+                    <message style='font-size:{{d.fontSize}}px;'>{{getRoleName()}}</message>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script id="collectionEditBoxHtml " type="text/html ">
-	<div class="layui-fluid " style="margin-bottom: 40px; ">
-		<textarea class="layui-textarea "></textarea>
-		<button style="float: right; " onclick="updateTextarea(this) " class="layui-btn ">修改</button>
-	</div>
+    <div class="layui-fluid " style="margin-bottom: 40px; ">
+        <textarea class="layui-textarea "></textarea>
+        <button style="float: right; " onclick="updateTextarea(this) " class="layui-btn ">修改</button>
+    </div>
 </script>
 
 <script id="mobileBoxHtml" type="text/html">
-	<!-- 手机页面布局 -->
-	<div class="">
-		<div class="swiper-container swiper1 swiper-container-horizontal swiper-container-free-mode">
-			<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-				<div class="swiper-slide selected swiper-slide-active">玩家列表</div>
-				<div class="swiper-slide swiper-slide-next" style="width: 30px">游戏<span name="plotNewMessageNumber" class="layui-badge layui-bg-orange">0</span></div>
-				<div class="swiper-slide">私聊<span name="privateNewMessageNumber" class="layui-badge layui-bg-black">0</span></div>
-				<div class="swiper-slide">讨论组</div>
-				<div class="swiper-slide">广场<span name="makeNewMessageNumber" class="layui-badge layui-bg-blue">0</span>
-				</div>
+    <!-- 手机页面布局 -->
+    <div class="">
+        <div class="swiper-container swiper1 swiper-container-horizontal swiper-container-free-mode">
+            <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+                <div class="swiper-slide selected swiper-slide-active">玩家列表</div>
+                <div class="swiper-slide swiper-slide-next" style="width: 30px">游戏<span name="plotNewMessageNumber"
+                                                                                        class="layui-badge layui-bg-orange">0</span>
+                </div>
+                <div class="swiper-slide">私聊<span name="privateNewMessageNumber"
+                                                  class="layui-badge layui-bg-black">0</span></div>
+                <div class="swiper-slide">讨论组</div>
+                <div class="swiper-slide">广场<span name="makeNewMessageNumber" class="layui-badge layui-bg-blue">0</span>
+                </div>
 
-				<div class="swiper-slide">收藏</div>
-				<div class="swiper-slide">工具</div>
-			</div>
-		</div>
+                <div class="swiper-slide">收藏</div>
+                <div class="swiper-slide">工具</div>
+            </div>
+        </div>
 
-		<div class="swiper-container swiper2 swiper-container-horizontal swiper-container-autoheight">
-			<div class="swiper-wrapper">
-				<div id="mobileContent" class="swiper-slide swiper-slide-active"></div>
-				<div class="swiper-slide"></div>
-				<div class="swiper-slide"></div>
-				<div class="swiper-slide"></div>
-				<div class="swiper-slide"></div>
-				<div class="swiper-slide"></div>
-				<div class="swiper-slide">
-					<button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html');">快速修改角色卡信息</button>
-					<button class="layui-btn" onclick="showMusicPlay();">显示音乐播放器</button>
-					<button class="layui-btn" onclick="openMessageRecord();">历史消息</button>
-					<button class="layui-btn" onclick="openChatBubbleSetPage();">气泡设置</button>
-					<button class="layui-btn" onclick="openMaps()">地图</button>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="swiper-container swiper2 swiper-container-horizontal swiper-container-autoheight">
+            <div class="swiper-wrapper">
+                <div id="mobileContent" class="swiper-slide swiper-slide-active"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide"></div>
+                <div class="swiper-slide">
+                    <button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html');">快速修改角色卡信息</button>
+                    <button class="layui-btn" onclick="showMusicPlay();">显示音乐播放器</button>
+                    <button class="layui-btn" onclick="openMessageRecord();">历史消息</button>
+                    <button class="layui-btn" onclick="openChatBubbleSetPage();">气泡设置</button>
+                    <button class="layui-btn" onclick="openMaps()">地图</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script id="memberChatMessageBoxHtml" type="text/html ">
-	<div class="media " messageType="{{d.messageType}} " messageId="{{d.messageId}} ">
-		{{# if(d.addType == 0) { }}
+    <div class="media " messageType="{{d.messageType}} " messageId="{{d.messageId}} ">
+        {{# if(d.addType == 0) { }}
 
-		<div class=" " style="float:left;margin: 10px; ">
-			<a href="javascript:void(0); ">
-				<img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} " alt="{{d.name}} ">
-			</a>
-		</div>
+        <div class=" " style="float:left;margin: 10px; ">
+            <a href="javascript:void(0); ">
+                <img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} "
+                     alt="{{d.name}} ">
+            </a>
+        </div>
 
-		<div class=" ">
-			<h5>{{d.name}}</h5>
-			<div style=" ">
-				<div class="bubbleTail-left " style="color: {{d.backgroundColor}}; "></div>
+        <div class=" ">
+            <h5>{{d.name}}</h5>
+            <div style=" ">
+                <div class="bubbleTail-left " style="color: {{d.backgroundColor}}; "></div>
 
-				<div class="bubble-contont-left " style="background-color: {{d.backgroundColor}}; ">
+                <div class="bubble-contont-left " style="background-color: {{d.backgroundColor}}; ">
 
-					<div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
-						<i class="layui-icon ">&#xe67b;</i>
-					</div>
-					<message style='font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}</message>
+                    <div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
+                        <i class="layui-icon ">&#xe67b;</i>
+                    </div>
+                    <message style='font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}</message>
 
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-		{{# } }} {{# if(d.addType == 1) { }}
+        {{# } }} {{# if(d.addType == 1) { }}
 
-		<div style="float: right;margin: 10px; ">
-			<a href="javascript:void(0); ">
-				<img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} " alt="{{d.name}} ">
-			</a>
-		</div>
+        <div style="float: right;margin: 10px; ">
+            <a href="javascript:void(0); ">
+                <img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} "
+                     alt="{{d.name}} ">
+            </a>
+        </div>
 
-		<div>
-			<h5 style="text-align: right; ">{{d.name}}</h5>
-			<div style=" ">
-				<div class="bubbleTail-right " style="color: {{d.backgroundColor}}; "></div>
-				<div class="bubble-contont-right " style="background-color: {{d.backgroundColor}};font-size: {{d.fontSize}}px;color:{{d.fontColor}}; ">
-					<div onclick="chatMessageCollection(this); " style="float: left;margin-right: 10px; ">
-						<i class="layui-icon ">&#xe67b;</i>
-					</div>
-					<message style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
-					</message>
+        <div>
+            <h5 style="text-align: right; ">{{d.name}}</h5>
+            <div style=" ">
+                <div class="bubbleTail-right " style="color: {{d.backgroundColor}}; "></div>
+                <div class="bubble-contont-right "
+                     style="background-color: {{d.backgroundColor}};font-size: {{d.fontSize}}px;color:{{d.fontColor}}; ">
+                    <div onclick="chatMessageCollection(this); " style="float: left;margin-right: 10px; ">
+                        <i class="layui-icon ">&#xe67b;</i>
+                    </div>
+                    <message style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
+                    </message>
 
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-		{{# } }}
-	</div>
+        {{# } }}
+    </div>
 
 </script>

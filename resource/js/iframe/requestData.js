@@ -3,13 +3,16 @@
 
     //动态的处理用户的信息数据，如果列表中没有数据，那么会请求服务器获取并且存储，如果有则直接取出
     RequestData.getUserInfo = function (userId) {
+        let isNoLocal = arguments[1] ? arguments[1] : false;
+
         //检查本地的数据
         let allMemberInfoMap = layui.data("appData").allMemberInfo;
         if (allMemberInfoMap == null) {
             allMemberInfoMap = {};
         }
-        if (allMemberInfoMap[userId] == null || allMemberInfoMap[userId] === undefined) {
+        if (isNoLocal || allMemberInfoMap[userId] == null || allMemberInfoMap[userId] === undefined) {
             let memberInfo = null;
+
             $.ajax({
                 type: "get",
                 url: REQUESTHEAD + "/user/info?id=" + userId,
@@ -27,7 +30,6 @@
                                 value: allMemberInfoMap
                             });
                             memberInfo = allMemberInfoMap[result.data.id];
-                            console.log("save data");
                         } else {
                             return null;
                         }
@@ -42,11 +44,12 @@
 
     //动态的向服务器请求获取一个角色卡数据，如果本地有数据那么将不会向服务器请求
     RequestData.getRoleCard = function (roleCardId) {
+        let isNoLocal = arguments[1] ? arguments[1] : false;
         let allRoleCardInfoMap = layui.data("appData").allRoleCardInfo;
         if (allRoleCardInfoMap == null) {
             allRoleCardInfoMap = {};
         }
-        if (allRoleCardInfoMap[roleCardId] == null) {
+        if (isNoLocal || allRoleCardInfoMap[roleCardId] == null) {
             layer.msg("正在向服务器请求数据，请稍等...");
             let roleCardData = null;
             $.ajax({

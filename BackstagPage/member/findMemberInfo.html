@@ -31,7 +31,7 @@
 <div class="layui-container">
     <div class="layui-fluid">
         <div class="layui-col-xs4">
-            <img style="margin-top: 10px;" width="100%" height="100%" id="memberImg" src=""/>
+            <img onerror="imgNoFind(this)" style="margin-top: 10px;" width="100%" height="100%" id="memberImg" src=""/>
         </div>
 
         <div class="layui-col-xs6">
@@ -82,10 +82,14 @@
 
 <script>
 
+    function imgNoFind(img) {
+        img.src = "../../resource/images/null.jpg";
+        img.onerror = null; //如果错误图片也不存在就会死循环一直跳，所以要设置成null，也可以不加
+    }
+
     window.onload = function () {
         let findMemberId = window.location.search.substring(10);
-        let data = window.parent.window.parent.RequestData.getUserInfo(findMemberId);
-
+        let data = window.parent.window.parent.RequestData.getUserInfo(findMemberId,true);
 
         $("#memberId").html(data.id);
         $("#memberName").html(data.nickname);
