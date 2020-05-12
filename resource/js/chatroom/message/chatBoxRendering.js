@@ -19,7 +19,6 @@
 
         console.log(userId+","+roleId);
         //$("#plotChatBox").append(chatMessage.content,);
-
     };
 
     let addSUQARE = function(chatMessage){

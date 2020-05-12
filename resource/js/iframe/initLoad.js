@@ -83,45 +83,14 @@
     InitLoad.getMyRelationship = function () {
         $("#loadTipsMessageBox").html("载入关联");
         let allRoomInfo = layui.data("appData").allRoomInfo;
-
+        if (allRoomInfo == null) {
+            InitLoad.getMyJoinRoomInfo();
+            allRoomInfo = layui.data("appData").allRoomInfo;
+        }
         //根据已加入的房间进行房间关系的载入
+        //系统每次载入都会重新更新一下数据的信息
         $.each(allRoomInfo, function (key, values) {
-
-            $.ajax({
-                type: "get",
-                url: REQUESTHEAD + "/findRoomRelationship?roomId=" + allRoomInfo[key].roomId,
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                async: false,
-                success: function (result) {
-                    if (result.code !== 0) {
-                        layer.msg(result.message);
-                        return;
-                    }
-                    let data = result.data;
-
-                    let allRelation = layui.data("appData").allRelation;
-                    if (allRelation == null) {
-                        allRelation = {};
-                    }
-
-                    for (let i = 0; i < data.length; i++) {
-                        if (allRelation[key] == null) {
-                            allRelation[key] = {};
-                        }
-                        allRelation[key][data[i].userId] = data[i];
-                    }
-
-                    layui.data("appData", {
-                        key: "allRelation",
-                        value: allRelation
-                    })
-
-
-                }
-            });
+            RequestData.getRoomRelation(key);
         });
 
     };

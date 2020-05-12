@@ -11,7 +11,7 @@
         <div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
             <img width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
             <p style="width: 60px;text-align: center;" title="{{d.name}}">
-                {{# var getName = function(){if(d.name.length > 10){return d.name.substring(0,7)+'...';} return d.name;
+                {{# var getName = function(){if(d.name.length >6){return d.name.substring(0,6)+'...';} return d.name;
                 }}} {{getName()}}
             </p>
             <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
@@ -158,78 +158,100 @@
 <script id="memberListHtml" type="text/html">
 
     <div class='layui-container' style='width: 100%;height: 85px;' onclick='memberListMenu(this,{{d.memberId}});'>
-        <span id='{{d.memberState}}' style='float: left;position:absolute;left: 00px;top:40px'
-              class='layui-badge-dot layui-bg-{{d.state}}'></span>
-        <a href='javascript:void(0);'
-           onclick="xadmin.open( 'MemberInfo', '../member/findMemberInfo.html?memberId={{d.memberId}}') ">
-            <div style='float: left;position:absolute;left: 20px;top: 10px;text-align: center;'>
-                <img title="{{d.memberName}} " class='media-object img-circle' width='65' height='65'
-                     src='{{d.memberImg}}'/>
-        </a>
-        <span>
-				{{# var getName = function(){ if(d.memberName.length > 7){return d.memberName.substring(0,9)+'..';} return d.memberName;  }}}
-				玩家:{{getName()}}
-			</span>
-    </div>
-    <div style='float: left;position:absolute;left: 50px;top: 10px;text-align: center;'>
-        <img title="{{d.roleName}} " alt="{{d.memberId}} " onclick="roleImgClick(this); "
-             class='media-object img-circle' width='65' height='65' src='{{d.roleImg}}'/>
-        <!--<span>{{d.roleName}}</span>-->
-    </div>
+        <span style='float: left;position:absolute;left: 0px;top:40px'
+              {{# var getStateColor=function(){ if(d.state){ return 'green';} return 'black'; } }}
+        class='layui-badge-dot layui-bg-{{getStateColor()}}'></span>
 
-    {{# }} {{# var hof = function(){if(d.openRoleSwitch == 1){return "roleSwitch(this, "+d.memberId+") ";}else{return " ";} } }}
-    <div style='width: 60%;position:absolute;right: 0px;' onclick="{{hof()}} ">
-        <div style='font-weight:bold;font-size: 15px;'>{{d.roleName}}</div>
-        {{# var getProgressWidth = function(value,maxValue){ return (value/maxValue)*100; } }}
+        <div>
+            <a href='javascript:void(0);'
+               onclick="xadmin.open( 'MemberInfo', '../member/findMemberInfo.html?memberId={{d.memberId}}') ">
+                <div style='width: 30%;position:absolute;left: 0px;top: 10px;text-align: center;'>
+                    <img onerror="notFound(this)" title="{{d.memberName}} " class='media-object img-circle' width='55'
+                         height='55'
+                         src='{{d.memberImg}}'/>
 
-        <div title="Health Point:{{d.roleHp}}/{{d.roleHpMax}} ">
-            <span style="float: left;width: 15%;height: 15px; ">HP:</span>
-            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-
-                <div class="progress-bar progress-bar-danger progress-bar-striped active " role="progressbar "
-                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                     style="width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
-                    <span>{{d.roleHp}}/{{d.roleHpMax}}</span>
-
+                    <div style="width: 100%">
+                        {{# var getName = function(){ if(d.memberName.length > 5){return
+                        d.memberName.substring(0,5)+'..';}
+                        return d.memberName; }}}
+                        玩家:{{getName()}}
+                    </div>
                 </div>
 
+            </a>
+
+
+            <div style='position:absolute;left: 50px;top: 10px;text-align: center;'>
+                <img onerror="notFound(this)" title="{{d.roleName}} " alt="{{d.memberId}} " onclick="roleImgClick(this); "
+                     class='media-object img-circle' width='55' height='55' src='{{d.roleImg}}'/>
+                <!--<span>{{d.roleName}}</span>-->
             </div>
+
         </div>
 
-        <div title="Magic Point:{{d.roleMp}}/{{d.roleMpMax}} ">
-            <span style="float: left;width: 15%;height: 15px; ">MP:</span>
-            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-                <div class="progress-bar progress-bar-info progress-bar-striped active " role="progressbar "
-                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                     style="width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
-                    <span>{{d.roleMp}}/{{d.roleMpMax}}</span>
-                </div>
-            </div>
-        </div>
 
-        <div title="Armor Point:{{d.roleHp}}/{{d.roleHpMax}} ">
-            <span style="float: left;width: 15%;height: 15px; ">AP:</span>
-            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-                <div class="progress-bar progress-bar-warning progress-bar-striped active " role="progressbar "
-                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                     style="width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
-                    <span>{{d.roleAp}}/{{d.roleApMax}}</span>
-                </div>
-            </div>
-        </div>
+        {{# }} {{# var hof = function(){if(d.openRoleSwitch){return "roleSwitch(this, "+d.memberId+") ";}else{return "
+        ";} } }}
+        <div style='width: 65%;position:absolute;right: 0;' onclick="{{hof()}} ">
+            <div style='font-weight:bold;font-size: 15px;'>{{d.roleName}}</div>
+            {{# var getProgressWidth = function(value,maxValue){ return (value/maxValue)*100; } }}
 
-        <div title="San:{{d.roleSan}}/{{d.roleSanMax}} ">
-            <span style="float: left;width: 15%;height: 15px; ">San:</span>
-            <div class="progress " style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
-                <div class="progress-bar progress-bar-success progress-bar-striped active " role="progressbar "
-                     aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                     style="width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
-                    <span>{{d.roleSan}}/{{d.roleSanMax}}</span>
+            <div title="Health Point:{{d.roleHp}}/{{d.roleHpMax}} ">
+                <span style="float: left;width: 15%;height: 15px; ">HP:</span>
+                <div class="progress "
+                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+
+                    <div class="progress-bar progress-bar-danger progress-bar-striped layui-bg-red active "
+                         role="progressbar "
+                         aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                         style="width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
+                        <span>{{d.roleHp}}/{{d.roleHpMax}}</span>
+
+                    </div>
+
                 </div>
             </div>
+
+            <div title="Magic Point:{{d.roleMp}}/{{d.roleMpMax}} ">
+                <span style="float: left;width: 15%;height: 15px; ">MP:</span>
+                <div class="progress "
+                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                    <div class="progress-bar progress-bar-info progress-bar-striped layui-bg-blue active "
+                         role="progressbar "
+                         aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                         style="width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
+                        <span>{{d.roleMp}}/{{d.roleMpMax}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div title="Armor Point:{{d.roleAP}}/{{d.roleApMax}} ">
+                <span style="float: left;width: 15%;height: 15px; ">AP:</span>
+                <div class="progress "
+                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped layui-bg-orange active "
+                         role="progressbar "
+                         aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                         style="width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
+                        <span>{{d.roleAp}}/{{d.roleApMax}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div title="San:{{d.roleSan}}/{{d.roleSanMax}} ">
+                <span style="float: left;width: 15%;height: 15px; ">San:</span>
+                <div class="progress "
+                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                    <div class="progress-bar progress-bar-success progress-bar-striped layui-bg-cyan active "
+                         role="progressbar "
+                         aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
+                         style="width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
+                        <span>{{d.roleSan}}/{{d.roleSanMax}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--<p>玩家:{{d.memberName}}</p>-->
         </div>
-        <!--<p>玩家:{{d.memberName}}</p>-->
-    </div>
 
     </div>
 </script>

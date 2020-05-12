@@ -1,4 +1,4 @@
-(function (w) {
+(function () {
 
     if (/Android [4-6]/.test(navigator.appVersion)) {
         window.addEventListener('resize', function () {
@@ -27,5 +27,13 @@
     });
 
 
-})(window);
+    let notFound = function (img) {
+        img.src = "../../resource/images/null.jpg";
+        img.onerror = null; //如果错误图片也不存在就会死循环一直跳，所以要设置成null，也可以不加
+        layer.msg("图片信息加载错误");
+    };
+
+    window.notFound = notFound;
+
+})();
 
