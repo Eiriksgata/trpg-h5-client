@@ -5,7 +5,7 @@
         let thisRoomInfo = layui.data("appData").allRoomInfo;
         if (myUserInfo == null) {
             parent.InitLoad.getMyUserInfo();
-            myUserInfo =  layui.data("appData").myUserInfo;
+            myUserInfo = layui.data("appData").myUserInfo;
         }
         return myUserInfo.id === thisRoomInfo[currentRoomId].createUserId;
 
@@ -13,9 +13,11 @@
 
     //开始渲染用户列表
     let memberListBoxInit = function () {
+
         let allRelation = layui.data("appData").allRelation;
         let currentRelation = allRelation[currentRoomId];
-
+        //清空列表数据
+        $("#memberList").html("");
         $.each(currentRelation, function (key, values) {
             memberListBox(values);
         });
@@ -27,7 +29,6 @@
     //单个用户的html数据生成
     let memberListBox = function (relation) {
         let memberInfo = parent.RequestData.getUserInfo(relation.userId);
-        console.log(memberInfo);
         let roleCard;
         let stateMap = parent.RequestData.getUserState([relation.userId]);
         let data;
@@ -131,11 +132,8 @@
         layui.use("laytpl", function () {
             let laytpl = layui.laytpl;
             let getTpl = memberListHtml.innerHTML;
-            console.log(getTpl);
-            console.log(view);
             laytpl(getTpl).render(data, function (html) {
                 $("#memberList").append(html);
-
             });
 
         });

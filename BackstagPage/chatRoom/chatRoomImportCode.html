@@ -46,8 +46,8 @@
     </div>
 
     <div id="emoticonView">
-
     </div>
+
 </script>
 
 <!--描述：表情包图片载入渲染-->
@@ -182,9 +182,10 @@
 
 
             <div style='position:absolute;left: 50px;top: 10px;text-align: center;'>
-                <img onerror="notFound(this)" title="{{d.roleName}} " alt="{{d.memberId}} " onclick="roleImgClick(this); "
+                <img onerror="notFound(this)" title="{{d.roleName}} " alt="{{d.memberId}} "
+                     onclick="roleImgClick(this); "
                      class='media-object img-circle' width='55' height='55' src='{{d.roleImg}}'/>
-                <!--<span>{{d.roleName}}</span>-->
+
             </div>
 
         </div>
@@ -198,13 +199,13 @@
 
             <div title="Health Point:{{d.roleHp}}/{{d.roleHpMax}} ">
                 <span style="float: left;width: 15%;height: 15px; ">HP:</span>
-                <div class="progress "
-                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                <div class="progress"
+                     style="margin: 0;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
 
-                    <div class="progress-bar progress-bar-danger progress-bar-striped layui-bg-red active "
-                         role="progressbar "
+                    <div class="progress-bar progress-bar-danger progress-bar-striped layui-bg-red active"
+                         role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                         style="width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
+                         style="height:15px;width:{{ getProgressWidth(d.roleHp,d.roleHpMax)}}%; ">
                         <span>{{d.roleHp}}/{{d.roleHpMax}}</span>
 
                     </div>
@@ -217,9 +218,9 @@
                 <div class="progress "
                      style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-info progress-bar-striped layui-bg-blue active "
-                         role="progressbar "
+                         role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                         style="width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
+                         style="height:15px;width:{{getProgressWidth(d.roleMp,d.roleMpMax)}}%; ">
                         <span>{{d.roleMp}}/{{d.roleMpMax}}</span>
                     </div>
                 </div>
@@ -230,9 +231,9 @@
                 <div class="progress "
                      style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-warning progress-bar-striped layui-bg-orange active "
-                         role="progressbar "
+                         role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                         style="width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
+                         style="height:15px;width:{{getProgressWidth(d.roleAp,d.roleApMax)}}%; ">
                         <span>{{d.roleAp}}/{{d.roleApMax}}</span>
                     </div>
                 </div>
@@ -243,23 +244,23 @@
                 <div class="progress "
                      style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-success progress-bar-striped layui-bg-cyan active "
-                         role="progressbar "
+                         role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
-                         style="width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
+                         style="height:15px;width:{{getProgressWidth(d.roleSan,d.roleSanMax)}}%; ">
                         <span>{{d.roleSan}}/{{d.roleSanMax}}</span>
                     </div>
                 </div>
             </div>
-            <!--<p>玩家:{{d.memberName}}</p>-->
         </div>
 
     </div>
 </script>
 
+
 <script id="diceMessageBoxHtml" type="text/html">
     <div class="media">
         <div style="float:left;margin: 10px; ">
-            <a href="javascript:void(0); ">
+            <a href="javascript:void(0);">
                 <img width="45px " class="media-object " src="{{d.img}} " alt=" ">
             </a>
         </div>

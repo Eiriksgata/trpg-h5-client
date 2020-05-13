@@ -12,7 +12,12 @@
     //载入房间所需要的信息
     window.roomLoad.loadRoomData();
 
-    //用户列表渲染
-    memberListBoxInit();
+    //用户数据初始加载
+    allRoomDataUpdate();
+
+    //巡检房间数据
+    dataUpdateTimerInit();
+
+
 
 })();

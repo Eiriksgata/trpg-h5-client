@@ -59,7 +59,7 @@
                 <tr>
                     <td>生日:</td>
                     <td>
-                        <input id="birthday" type="date" value="" disabled >
+                        <input id="birthday" type="date" value="" disabled>
                     </td>
                 </tr>
                 <tr>
@@ -84,12 +84,12 @@
 
     function imgNoFind(img) {
         img.src = "../../resource/images/null.jpg";
-        img.onerror = null; //如果错误图片也不存在就会死循环一直跳，所以要设置成null，也可以不加
+        //img.onerror = null; //如果错误图片也不存在就会死循环一直跳，所以要设置成null，也可以不加
     }
 
     window.onload = function () {
         let findMemberId = window.location.search.substring(10);
-        let data = window.parent.window.parent.RequestData.getUserInfo(findMemberId,true);
+        let data = window.parent.window.parent.RequestData.getUserInfo(findMemberId, true);
 
         $("#memberId").html(data.id);
         $("#memberName").html(data.nickname);

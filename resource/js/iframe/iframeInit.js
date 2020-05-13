@@ -3,7 +3,7 @@
     $(window).ready(function () {
         openSocket();
 
-        console.log(RequestData.getUserState([1, 30, 33]));
+        //console.log(RequestData.getUserState([1, 30, 33]));
     });
 
     let openSocket = function () {

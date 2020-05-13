@@ -108,7 +108,6 @@
     };
 
     RequestData.getRoomRelation = function (roomId) {
-        let isNoLocal = arguments[1] ? arguments[1] : false;
 
         $.ajax({
             type: "get",

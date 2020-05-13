@@ -1,4 +1,4 @@
-(function (w) {
+(function () {
 
     let roomLoad = {};
 
@@ -7,7 +7,7 @@
     //加载房间内用到的角色卡数据和用户信息
     roomLoad.loadRoomData = function () {
         let allRelation = layui.data("appData").allRelation;
-        if (allRelation == null){
+        if (allRelation == null) {
             parent.InitLoad.getMyRelationship();
             allRelation = layui.data("appData").allRelation;
         }
@@ -26,9 +26,6 @@
     };
 
 
-
-
-
     window.roomLoad = roomLoad;
 
-})(window);
+})();
