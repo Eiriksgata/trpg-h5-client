@@ -7,16 +7,18 @@
 
 <!-- 描述：私聊玩家列表渲染 -->
 <script type="text/html" id="privateMessageMemberListHtml">
+
     <a style="color: black;" href="javascript:void(0);">
         <div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
-            <img width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
+            <div>
+                <img width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
+                <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
+                      style="position: relative;top: -90px;">0</span>
+            </div>
             <p style="width: 60px;text-align: center;" title="{{d.name}}">
                 {{# var getName = function(){if(d.name.length >6){return d.name.substring(0,6)+'...';} return d.name;
                 }}} {{getName()}}
             </p>
-            <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
-                  style="position: relative;top: -90px;">0</span>
-
         </div>
     </a>
 
@@ -321,7 +323,8 @@
 
         <div class=" " style="float:left;margin: 10px; ">
             <a href="javascript:void(0); ">
-                <img onerror="notFound(this);" width="45px" class="media-object" src="{{d.img}}" alt="{{d.name}}" belong="{{d.region}}"/>
+                <img onerror="notFound(this);" width="45px" class="media-object" src="{{d.img}}" alt="{{d.name}}"
+                     belong="{{d.region}}"/>
             </a>
         </div>
 

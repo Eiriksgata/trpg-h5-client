@@ -19,7 +19,7 @@
         html[0] = $("#memberAndRoleDiv").html();
         html[1] = $("#plotDiv").html();
         html[2] = $("#privateMessageDiv").html();
-        html[3] = $("#discussionGroupDiv").html();
+        html[3] = $("#groupMessageDiv").html();
         html[4] = $("#squareMessageDiv").html();
         html[5] = $("#collectiondiv").html();
 
