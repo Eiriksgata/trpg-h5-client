@@ -18,6 +18,10 @@
     //巡检房间数据
     dataUpdateTimerInit();
 
+    //加载控件事件
+    MessageBox.sendMessageBtnEvent();
 
+    //加载剪切功能监听事件
+    Shear.addEvent();
 
 })();

@@ -22,16 +22,6 @@
 
 </script>
 
-<!--
-	描述：聊天图片菜单选项渲染
--->
-<script type="text/html" id="chatMessagePictureMenuHtml">
-    <div>
-        <button class='layui-btn' onclick="quickAddEmoticon('{{d.url}}');">添加</button>
-        <button class="layui-btn" onclick="copyText('{{d.url}}')">复制</button>
-        <button class="layui-btn" onclick="xadmin.open('图片','{{d.url}}','','')">查看</button>
-    </div>
-</script>
 
 <!--描述：表情包选择框渲染-->
 <script type="text/html" id="emoticonPageHtml">
@@ -47,7 +37,6 @@
 
     <div id="emoticonView">
     </div>
-
 </script>
 
 <!--描述：表情包图片载入渲染-->
@@ -76,6 +65,7 @@
     <button class="layui-btn" onclick="openChatBubbleSetPage()">气泡设置</button>
 </script>
 
+<!-- 地图渲染代码 -->
 <script type="text/html" id="mapsHtml">
     <div id="colorSelect"></div>
     标记名称:<input type="text" name="signInput"/><br/> 尺寸大小:
@@ -84,7 +74,7 @@
     <button onclick="updateMapsPicture()" class="layui-btn">更改地图</button>
     <button onclick="clientPushMapsData()" class="layui-btn">推送</button>
     <button onclick='xadmin.open("upload","../upload/resourceUpload.html","","")' class="layui-btn">本地上传</button>
-    <p>地图的总尺寸为 300*1000 因此自定义图片铺满写300即可</p>
+    <p>地图的总尺寸为 300*1000 因此自定义图片宽度铺满写300即可</p>
     <div>
         <i code='0' name="addSignButton" title="基础点" onclick="addControl(this);" class="layui-icon"
            style="font-size: 25px;">&#xe617;</i>
@@ -113,11 +103,7 @@
     </div>
 </script>
 
-<!--
-	作者：2353686862@qq.com
-	时间：2020-02-28
-	描述：房间音乐菜单
--->
+<!-- 描述：房间音乐菜单 -->
 <script type="text/html" id="roomMusicMenuHtml">
     <div>
         <button onclick="openChangMusicPage()" class="layui-btn">更换歌曲</button>
@@ -133,6 +119,7 @@
     </div>
 </script>
 
+<!-- 富文本渲染框 -->
 <script type="text/html" id="richInputPageHtml">
     <select id='richSelect' class='layui-select' name='richTextType' lay-verify='url'>
         <option value='picture'>图片</option>
@@ -146,6 +133,7 @@
     </button>
 </script>
 
+<!-- 收藏列表内容的渲染代码 -->
 <script type="text/html" id="collectionListHtml">
     <div class="bubble-contont">
         <div onclick="deleteCollection(this)" value='{{d.collectionId}}' style="float: right;margin-left: 10px;">
@@ -155,8 +143,9 @@
     </div>
 </script>
 
-<script id="memberListHtml" type="text/html">
 
+<!-- 玩家列表渲染 -->
+<script id="memberListHtml" type="text/html">
     <div class='layui-container' style='width: 100%;height: 85px;' onclick='memberListMenu(this,{{d.memberId}});'>
         <span style='float: left;position:absolute;left: 0px;top:40px'
               {{# var getStateColor=function(){ if(d.state){ return 'green';} return 'black'; } }}
@@ -181,7 +170,7 @@
             </a>
 
 
-            <div style='position:absolute;left: 50px;top: 10px;text-align: center;'>
+            <div style='position:absolute;left: 30px;top: 10px;text-align: center;'>
                 <img onerror="notFound(this)" title="{{d.roleName}} " alt="{{d.memberId}} "
                      onclick="roleImgClick(this); "
                      class='media-object img-circle' width='55' height='55' src='{{d.roleImg}}'/>
@@ -256,12 +245,12 @@
     </div>
 </script>
 
-
+<!-- 骰子消息渲染页 -->
 <script id="diceMessageBoxHtml" type="text/html">
-    <div class="media">
+    <div style="margin:0;min-width: 230px" class="media">
         <div style="float:left;margin: 10px; ">
             <a href="javascript:void(0);">
-                <img width="45px " class="media-object " src="{{d.img}} " alt=" ">
+                <img width="45px" class="media-object " src="../../resource/images/diceioc.jpg" alt=" ">
             </a>
         </div>
         <div>
@@ -269,21 +258,14 @@
             <div>
                 <!--<div class="bubbleTail-left "></div>-->
                 <div class="bubble-contont-left " style="border: 2px teal solid; ">
-
-                    <div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
-                        <i class="layui-icon ">&#xe67b;</i>
-                    </div>
-                    {{#
-                    var getRoleName = function(){if(d.roleName == null || d.roleName == '')(return d.message;) return
-                    d.roleName + ':' + d.message; }
-                    }}
-                    <message style='font-size:{{d.fontSize}}px;'>{{getRoleName()}}</message>
+                    <message>{{d.message}}</message>
                 </div>
             </div>
         </div>
     </div>
 </script>
 
+<!-- 收藏消息编辑的渲染窗口 -->
 <script id="collectionEditBoxHtml " type="text/html ">
     <div class="layui-fluid " style="margin-bottom: 40px; ">
         <textarea class="layui-textarea "></textarea>
@@ -291,6 +273,7 @@
     </div>
 </script>
 
+<!-- 手机页面渲染 -->
 <script id="mobileBoxHtml" type="text/html">
     <!-- 手机页面布局 -->
     <div class="">
@@ -314,7 +297,7 @@
         <div class="swiper-container swiper2 swiper-container-horizontal swiper-container-autoheight">
             <div class="swiper-wrapper">
                 <div id="mobileContent" class="swiper-slide swiper-slide-active"></div>
-                <div class="swiper-slide"></div>
+                <div id="plotMobileContentBox" class="swiper-slide"></div>
                 <div class="swiper-slide"></div>
                 <div class="swiper-slide"></div>
                 <div class="swiper-slide"></div>
@@ -331,39 +314,37 @@
     </div>
 </script>
 
+<!-- 用户消息渲染 -->
 <script id="memberChatMessageBoxHtml" type="text/html ">
-    <div class="media " messageType="{{d.messageType}} " messageId="{{d.messageId}} ">
-        {{# if(d.addType == 0) { }}
+    <div style="margin:0;min-width: 230px" class="media" recordId="{{d.recordId}}" sendTime="{{d.sendTime}}">
+        {{# if(d.float == 'left') { }}
 
         <div class=" " style="float:left;margin: 10px; ">
             <a href="javascript:void(0); ">
-                <img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} "
-                     alt="{{d.name}} ">
+                <img onerror="notFound(this);" width="45px" class="media-object" src="{{d.img}}" alt="{{d.name}}" belong="{{d.region}}"/>
             </a>
         </div>
 
-        <div class=" ">
+        <div>
             <h5>{{d.name}}</h5>
-            <div style=" ">
+            <div>
                 <div class="bubbleTail-left " style="color: {{d.backgroundColor}}; "></div>
 
                 <div class="bubble-contont-left " style="background-color: {{d.backgroundColor}}; ">
 
-                    <div onclick="chatMessageCollection(this); " style="float: right;margin-left: 10px; ">
-                        <i class="layui-icon ">&#xe67b;</i>
-                    </div>
-                    <message style='font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}</message>
+                    <message recordId="{{d.recordId}}" style='font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>
+                        {{d.message}}
+                    </message>
 
                 </div>
             </div>
         </div>
 
-        {{# } }} {{# if(d.addType == 1) { }}
+        {{# } }} {{# if(d.float == 'right') { }}
 
         <div style="float: right;margin: 10px; ">
             <a href="javascript:void(0); ">
-                <img onclick="atMember(this,{{d.messageType}}) " width="45px " class="media-object " src="{{d.img}} "
-                     alt="{{d.name}} ">
+                <img onerror="notFound(this);" width="45px " class="media-object " src="{{d.img}} " alt="{{d.name}} ">
             </a>
         </div>
 
@@ -373,10 +354,9 @@
                 <div class="bubbleTail-right " style="color: {{d.backgroundColor}}; "></div>
                 <div class="bubble-contont-right "
                      style="background-color: {{d.backgroundColor}};font-size: {{d.fontSize}}px;color:{{d.fontColor}}; ">
-                    <div onclick="chatMessageCollection(this); " style="float: left;margin-right: 10px; ">
-                        <i class="layui-icon ">&#xe67b;</i>
-                    </div>
-                    <message style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
+
+                    <message recordId="{{d.recordId}}"
+                             style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
                     </message>
 
                 </div>
@@ -386,4 +366,16 @@
         {{# } }}
     </div>
 
+</script>
+
+<!--
+	描述：聊天消息长按选项菜单
+-->
+<script type="text/html" id="chatMessageMenuHtml">
+
+    <a style="color: white">收藏 </a>|
+    <a style="color: white">撤回</a>|
+    <a style="color: white" onclick="deleteChatMessageBox({{d.recordId}})">删除</a>|
+
+    <a style="color: white">气泡设置</a>
 </script>

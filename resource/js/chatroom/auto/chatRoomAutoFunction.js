@@ -35,7 +35,7 @@
 
     window.onbeforeunload=function(e){
         // var e=e||window.event;
-         e.returnValue="请确认是否退出？";
+        // e.returnValue="请确认是否退出？";
     };
 
     window.notFound = notFound;

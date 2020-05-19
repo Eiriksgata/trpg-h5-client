@@ -153,7 +153,7 @@ function loadRoomCollection() {
     });
 }
 
-//页面层
+//页面层 悬浮模式
 function collectionSuspensionMode() {
     let html = $("#viewCollectionHtml").html().parent().css("display", "none").html('');
     layer.open({

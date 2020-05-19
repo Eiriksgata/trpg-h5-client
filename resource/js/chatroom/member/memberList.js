@@ -43,7 +43,10 @@
                 roleApMax = 0,
                 roleSan = 0,
                 roleSanMax = 0;
-            roleCard = allRoleCardInfo[relation.roleCardId];
+            roleCard = parent.RequestData.getRoleCard(relation.roleCardId);
+            
+            //if (roleCard.attribute)
+            
             //属性截取判断
             list = roleCard.attribute.match(/hp[0-9]+/g);
             if (list != null && list.length > 0) {

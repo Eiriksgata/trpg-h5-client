@@ -4,9 +4,16 @@
     font-size: 15px;
     min-height: 25px;
     border-radius: 2px;
-    width: 80%;
+    width: 85%;
     float: left;
     text-align: left;
+}
+
+.richtextBtnBox {
+    width: 15%;
+    height: 40px;
+    position: relative;
+    bottom: 0;
 }
 
 .richtextPicture {

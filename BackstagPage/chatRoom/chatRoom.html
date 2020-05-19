@@ -17,9 +17,11 @@
 
     <link rel="stylesheet" href="../../resource/css/chatroom/mobileStyle.css"/>
     <link rel="stylesheet" href="../../resource/lib/gridstack/gridstack.min.css"/>
+    <link rel="stylesheet" href="../../resource/css/chatroom/chatBubbleBox.css"/>
 
     <link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"/>
     <link rel="stylesheet" href="../../resource/css/chatroom/richtextStyle.css"/>
+    <link rel="stylesheet" href="../../resource/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
     <script type="text/javascript" src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
@@ -63,7 +65,7 @@
 </head>
 
 <body>
-<code id="importCode"></code>
+<code style="margin: 0;height: 0;width: 0;padding: 0" id="importCode"></code>
 
 <div class="x-nav">
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
@@ -87,6 +89,7 @@
     <!-- 房间人员信息和角色卡信息 -->
     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
         <div id="memberAndRoleDiv">
+
             <div class="layui-fluid" id='memberListBox'
                  style='border: 3px #dddddd solid;overflow: scroll;max-width:380px;height: 100%;max-height: 400px; overflow-x: hidden ;'>
                 <div id="memberList">
@@ -94,51 +97,60 @@
                 </div>
             </div>
 
-            <div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;">
-                <div onclick="" class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-                    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        <img src="../../resource/images/null.jpg" id="myRoleImg" width="100" height="100"
-                             style="box-shadow: darkgrey 1px 1px 10px 1px ;"/>
+
+            <div class="layui-fluid layui-card" id="myRoleCard" style="max-width:380px; height:100%;">
+                <div class="layui-card-header">
+                    扮演角色卡信息
+                </div>
+
+                <div class="layui-card-body" style="height: 530px;">
+                    <div onclick="" class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                        <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            <img onerror="notFound(this);"
+                                 src="../../resource/images/null.jpg" id="myRoleImg" width="100" height="100"
+                                 style="box-shadow: darkgrey 1px 1px 10px 1px ;"/>
+                        </div>
+                        <div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            名称:
+                        </div>
+                        <div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            年龄:
+                        </div>
+                        <div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            性别:
+                        </div>
+                        <div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            时代:
+                        </div>
+                        <div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            职业:
+                        </div>
+                        <div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            故乡:
+                        </div>
+                        <div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            现住:
+                        </div>
                     </div>
-                    <div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        名称:
+
+                    <div id="skill"
+                         style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
+                         class="layui-col-xs12 layui-col-sm12 layui-col-md12">
                     </div>
-                    <div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        年龄:
-                    </div>
-                    <div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        性别:
-                    </div>
-                    <div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        时代:
-                    </div>
-                    <div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        职业:
-                    </div>
-                    <div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        故乡:
-                    </div>
-                    <div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-                        现住:
+
+                    <div style='border-bottom: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
+                         class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                        <p>携带物品</p>
+                        <div id="takeList" class="playerSkillTextareaStyle" readonly></div>
+                        <p>武器列表</p>
+                        <div id="weaponList" class="playerSkillTextareaStyle" readonly></div>
+                        <p>资产</p>
+                        <div style="text-align: left;" id="assets" class="playerSkillTextareaStyle" readonly></div>
+                        <p>介绍</p>
+                        <div style="text-align: left;" id="roleStory" class="playerSkillTextareaStyle" readonly></div>
                     </div>
                 </div>
 
-                <div id="skill"
-                     style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
-                     class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-                </div>
-
-                <div style='border-bottom: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
-                     class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-                    <p>携带物品</p>
-                    <div id="takeList" class="playerSkillTextareaStyle" readonly></div>
-                    <p>武器列表</p>
-                    <div id="weaponList" class="playerSkillTextareaStyle" readonly></div>
-                    <p>资产</p>
-                    <div style="text-align: left;" id="assets" class="playerSkillTextareaStyle" readonly></div>
-                    <p>介绍</p>
-                    <div style="text-align: left;" id="roleStory" class="playerSkillTextareaStyle" readonly></div>
-                </div>
             </div>
         </div>
     </div>
@@ -153,6 +165,8 @@
                         <source src="../../resource/audio/BlueDucks_FourFlossFiveSix.mp3">
                     </audio>
                     <div class="audio-left">
+                        <!--<i onclick="addControl(this);" class="layui-icon"-->
+                        <!--style="font-size: 35px;text-align: center;line-height: 68px">&#xe652;</i>-->
                         <img id="audioPlayButton" src="../../resource/images/play.png"/>
                     </div>
 
@@ -161,26 +175,31 @@
                         <div class="progress-bar-bg" id="progressBarBg"><span id="progressDot"></span>
                             <div class="progress-bar" id="progressBar"></div>
                         </div>
-                        <div class="audio-time"><span class="audio-length-current" id="audioCurTime">00:00</span><span
-                                class="audio-length-total">00:00</span></div>
+                        <div class="audio-time">
+                            <span class="audio-length-current" id="audioCurTime">00:00</span>
+                            <span class="audio-length-total">00:00</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div style="border: 3px solid orange;box-shadow: darkgrey 1px 1px 10px 1px ;">
-                <div style="height: 25px; background-color: orange;font-size: 18px;"
-                     class="text-center">剧情区域
+                <div style="height: 25px; background-color: orange;font-size: 18px;" class="text-center">剧情区域
                 </div>
-                <div id="plotChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;"></div>
+                <div region="剧情" style="overflow-y:scroll;height: 450px;padding: 5px;"></div>
 
-                <div id="plotTextarea" class="richtextInputBox" ref="paste" contentEditable="true">
+                <div>
+                    <div id="plotTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
+                         contentEditable="true"></div>
+
+                    <button name="sendMessageBtn" region="剧情" class="layui-btn" style="height: 34.8px;width: 15%;">发送
+                    </button>
 
                 </div>
 
-                <button name="plotMessageButton" class="layui-btn" style="width: 15%;height: 40px;">发送</button>
-
-                <div style="overflow-x: scroll;width: 100%;height: 50px;overflow-y: hidden;">
-                    <div style="width: 1000px">
+                <div name="chatBottomBox" class="swiper-no-swiping"
+                     style="overflow-x: scroll;width: 100%;height: 45px;overflow-y: hidden;background-color: white">
+                    <div style="width: 1000px;">
 
                         <div style="float: left;">
                             <select onchange="sendRoleSwitch(this);" style="display: none;" id="selectSendRole"
@@ -188,35 +207,78 @@
                             </select>
                         </div>
 
-                        <div style="float: left;">
-                            <button onclick="openRichInputPage()" style="background-color: black" class="layui-btn">
-                                插入富文本
-                            </button>
+                        <!-- 插入图片 -->
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px;margin-left: 10px">
+                            <i title="插入图片" class="layui-icon" style="line-height:29px;font-size: 23px;height: 30px">
+                                &#xe634;
+                            </i>
+                        </div>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="插入链接" class="layui-icon" style="line-height:28px;font-size: 18px;height: 30px">
+                                &#xe64c;
+                            </i>
                         </div>
 
-                        <div style="float: left;">
-                            <button onclick="openEmoticonPage();" class="layui-btn">表情</button>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="插入音乐" class="layui-icon" style="line-height:28px;font-size: 23px;height: 30px">
+                                &#xe6fc;
+                            </i>
                         </div>
 
-                        <div style="float: left;">
-                            <button class="layui-btn" style="background-color: black"
-                                    onclick="xadmin.open('上传','../upload/resourceUpload.html','','');">上传
-                            </button>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="上传" class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
+                                &#xe681;
+                            </i>
                         </div>
 
-                        <div style="float: left;">
-                            <button class="layui-btn" onclick="openMaps()">地图</button>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="地图" class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
+                                &#xe629;
+                            </i>
                         </div>
 
-                        <div style="float: left;">
-                            <button onclick="openMessageRecord();" style="background-color: black" class="layui-btn">
-                                历史消息
-                            </button>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="历史消息" class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
+                                &#xe63a;
+                            </i>
                         </div>
 
-                        <div style="float: left;">
-                            <button onclick="openChatBubbleSetPage();" class="layui-btn">气泡设置</button>
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="气泡设置" class="layui-icon" style="line-height:30px;font-size: 19px;height: 30px">
+                                &#xe639;
+                            </i>
                         </div>
+
+
+                        <!--<div style="float: left;">-->
+                        <!--<button onclick="openRichInputPage()" style="background-color: black" class="layui-btn">-->
+                        <!--插入富文本-->
+                        <!--</button>-->
+                        <!--</div>-->
+
+                        <!--<div style="float: left;">-->
+                        <!--<button onclick="openEmoticonPage();" class="layui-btn">表情</button>-->
+                        <!--</div>-->
+
+                        <!--<div style="float: left;">-->
+                        <!--<button class="layui-btn" style="background-color: black"-->
+                        <!--onclick="xadmin.open('上传','../upload/resourceUpload.html','','');">上传-->
+                        <!--</button>-->
+                        <!--</div>-->
+
+                        <!--<div style="float: left;">-->
+                        <!--<button class="layui-btn" onclick="openMaps()">地图</button>-->
+                        <!--</div>-->
+
+                        <!--<div style="float: left;">-->
+                        <!--<button onclick="openMessageRecord();" style="background-color: black" class="layui-btn">-->
+                        <!--历史消息-->
+                        <!--</button>-->
+                        <!--</div>-->
+
+                        <!--<div style="float: left;">-->
+                        <!--<button onclick="openChatBubbleSetPage();" class="layui-btn">气泡设置</button>-->
+                        <!--</div>-->
 
                     </div>
                 </div>
@@ -242,23 +304,25 @@
                 <div class="layui-tab-item layui-show">
                     <div id="privateMessageDiv">
                         <div style="border: 3px solid black;box-shadow: darkgrey 1px 1px 10px 1px ;">
-                            <div onclick="hide(this)"
-                                 style="height: 20px; background-color: black;font-size: 14px; color: white;"
+                            <div style="height: 20px; background-color: black;font-size: 14px; color: white;"
                                  class="text-center">私聊区域
                             </div>
                             <div style="overflow-x: scroll;overflow-y:hidden;width: 100%;height: 100px;">
-                                <div id="privateMessagePlayerListBox" style="width: 1000px"></div>
+                                <div id="privateMessagePlayerListBox" style="width: 1000px">
+
+                                </div>
                             </div>
 
-                            <div id="privateChatBox" style="overflow-y:scroll;height: 450px;padding: 5px;">
-                                <div name="privateTab"></div>
-                                <div id="privateHistorical"></div>
+                            <div region="私聊" style="overflow-y:scroll;height: 450px;padding: 5px;">
+                                <!--<div name="privateTab"></div>-->
+                                <!--<div id="privateHistorical"></div>-->
                             </div>
 
                             <div>
-                                <div id="privateTextarea" class="richtextInputBox" ref="paste"
+                                <div id="privateTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
                                      contenteditable="true"></div>
-                                <button name="privateMessageButton" class="layui-btn" style="width: 15%;height: 40px;">
+                                <button region="私聊" name="sendMessageBtn" class="layui-btn"
+                                        style="width: 15%;height: 34.8px;">
                                     发送
                                 </button>
                             </div>
@@ -277,17 +341,17 @@
                                  class="text-center">广场区域
                             </div>
 
-                            <div id="makecomplaintsChatBox"
-                                 style="overflow:scroll; width: 100%;height: 450px;overflow-x:hidden;">
-                                <div name="makecomplaintsTab"></div>
+                            <div region="广场" style="overflow:scroll; width: 100%;height: 450px;overflow-x:hidden;">
+
                             </div>
 
-                            <div id="makecomplaintsInputBox">
-                                <div id="makecomplaintsTextarea" class="richtextInputBox" ref="paste"
+                            <div>
+                                <div id="makecomplaintsTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
                                      contenteditable="true"></div>
-                                <button name="makecomplaintsMessageButton" onclick="sendMessageButton(this,2)"
-                                        class="layui-btn" style="width: 15%;height: 40px;">发送
+                                <button region="广场" name="sendMessageBtn" class="layui-btn"
+                                        style="height: 34.8px;width: 15%;">发送
                                 </button>
+
                             </div>
 
                             <div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
@@ -324,7 +388,11 @@
     </div>
 </div>
 </body>
-
+<script type="text/javascript" src="../../resource/js/chatroom/menu/chatMessageMenu.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/plug/photos.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/plug/pichtureshear.js"></script>
+<script type="text/javascript" src="../../resource/js/config/ChatMessageCode.js"></script>
+<script type="text/javascript" src="../../resource/js/entity/senderData.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/update/loadData.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/member/memberList.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/auto/chatRoomAutoFunction.js"></script>
