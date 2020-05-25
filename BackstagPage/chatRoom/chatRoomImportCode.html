@@ -11,7 +11,7 @@
     <a style="color: black;" href="javascript:void(0);">
         <div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
             <div>
-                <img width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
+                <img onerror="notFound(this);" width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
                 <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
                       style="position: relative;top: -90px;">0</span>
             </div>
@@ -22,6 +22,24 @@
         </div>
     </a>
 
+</script>
+
+<!-- 群聊组的列表渲染 -->
+<script type="text/html" id="groupMessageMemberListHtml">
+
+    <a style="color: black;" href="javascript:void(0);">
+        <div style="float: left;padding: 5px;height: 80px;" title="{{d.name}}">
+            <div style="height: 50px;">
+                <img width="50" height="50" src="{{d.ioc}}"
+                     class='media-object img-circle'/>
+                <span id="GroupMessageNumber{{d.roleId}}" class="layui-badge"
+                      style="position: relative;top: -50px;left: 0">0</span>
+            </div>
+            <p style="width: 50px;text-align: center;">
+                {{d.name}}
+            </p>
+        </div>
+    </a>
 </script>
 
 
@@ -207,7 +225,7 @@
             <div title="Magic Point:{{d.roleMp}}/{{d.roleMpMax}} ">
                 <span style="float: left;width: 15%;height: 15px; ">MP:</span>
                 <div class="progress "
-                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                     style="margin: 0;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-info progress-bar-striped layui-bg-blue active "
                          role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
@@ -220,7 +238,7 @@
             <div title="Armor Point:{{d.roleAP}}/{{d.roleApMax}} ">
                 <span style="float: left;width: 15%;height: 15px; ">AP:</span>
                 <div class="progress "
-                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                     style="margin: 0;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-warning progress-bar-striped layui-bg-orange active "
                          role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "
@@ -233,7 +251,7 @@
             <div title="San:{{d.roleSan}}/{{d.roleSanMax}} ">
                 <span style="float: left;width: 15%;height: 15px; ">San:</span>
                 <div class="progress "
-                     style="margin: 0px;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
+                     style="margin: 0;background-color: #E0E0E0;height: 15px;width: 85%;float: left; ">
                     <div class="progress-bar progress-bar-success progress-bar-striped layui-bg-cyan active "
                          role="progressbar"
                          aria-valuenow=" " aria-valuemin="0 " aria-valuemax="100 "

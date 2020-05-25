@@ -1,8 +1,15 @@
 (function () {
 
     $(window).ready(function () {
-        openSocket();
 
+        $("#loadTipsMessageBox").html("尝试建立数据库信息");
+
+        database.supportCheck();
+
+        database.dataBaseInit();
+
+
+        openSocket();
         //console.log(RequestData.getUserState([1, 30, 33]));
     });
 
@@ -20,7 +27,6 @@
             //打开事件
             socket.onopen = function () {
                 $("#loadTipsMessageBox").html("建立通讯链接");
-
             };
 
             //获得消息事件
