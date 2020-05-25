@@ -9,7 +9,7 @@
         database.dataBaseInit();
 
 
-        openSocket();
+
         //console.log(RequestData.getUserState([1, 30, 33]));
     });
 
@@ -52,6 +52,8 @@
                 socket = null;
             }
         }
-    }
+    };
+
+    window.openSocket = openSocket;
 
 })();

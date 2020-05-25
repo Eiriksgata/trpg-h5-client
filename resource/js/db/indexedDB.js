@@ -3,65 +3,62 @@
     let database = {};
     let DBOpenRequest;
 
-    database.allMemberInfoMapper = null;
-    database.allRelationMapper = null;
-    database.allRoleCardInfoMapper = null;
-    database.allRoomInfoMapper = null;
-    database.allPublicRecord = null;
-    database.allPrivateRecord = null;
-
     database.dataBaseInit = function () {
 
         //打开数据库链接
         DBOpenRequest = window.indexedDB.open("RolePlaying");
         DBOpenRequest.onsuccess = function (e) {
-
-            //建立数据库操作映射请求接口
-            database.allMemberInfoMapper = DBOpenRequest.result.transaction(["allMemberInfo"], "readwrite").objectStore("allMemberInfo");
-            database.allRelationMapper = DBOpenRequest.result.transaction(["allRelation"], "readwrite").objectStore("allRelation");
-            database.allRoleCardInfoMapper = DBOpenRequest.result.transaction(["allRoleCardInfo"], "readwrite").objectStore("allRoleCardInfo");
-            database.allRoomInfoMapper = DBOpenRequest.result.transaction(["allRoomInfo"], "readwrite").objectStore("allRoomInfo");
-            database.allPublicRecord = DBOpenRequest.result.transaction(["allPublicRecord"], "readwrite").objectStore("allPublicRecord");
-            database.allPrivateRecord = DBOpenRequest.result.transaction(["allPrivateRecord"], "readwrite").objectStore("allPrivateRecord");
-
+            window.DBOpenRequest = DBOpenRequest;
+            openSocket();
         };
 
         DBOpenRequest.onupgradeneeded = function (e) {
             let db = e.target.result;
             createDataTable(db);
-
         }
 
     };
 
 
-    database.addPublicRecord = function (record) {
-        let store = dbRequest.transaction(["allPublicRecord"], "readwrite")
-            .objectStore("allPublicRecord");
-        store.add(record);
-        store.onerror = function (event) {
-            console.log("数据库添加数据失败");
-        };
-
-    };
-
-    /**
-     * 可以传入一个集合，也可以传入一个数组集合
-     */
     database.addMemberInfo = function () {
         let data = arguments[0];
-        if (data.length === undefined || data.length == null) {
-            database.allRoomInfoMapper.put(data);
-        } else {
-            $.each(data, function (key, value) {
-                database.allMemberInfoMapper.put(value);
-            });
-        }
-        store.onerror = function (event) {
-            console.log("数据库添加数据失败");
-        }
+        let allMemberInfoMapper = DBOpenRequest.result.transaction(["allMemberInfo"], "readwrite").objectStore("allMemberInfo");
+        allMemberInfoMapper.add(data);
+        alert(data);
     };
 
+    database.addRoomInfo = function () {
+        let data = arguments[0];
+        let allRoomInfoMapper = DBOpenRequest.result.transaction(["allRoomInfo"], "readwrite").objectStore("allRoomInfo");
+        allRoomInfoMapper.add(data);
+
+    };
+
+    database.addRelation = function () {
+        let data = arguments[0];
+        let allRelationMapper = DBOpenRequest.result.transaction(["allRelation"], "readwrite").objectStore("allRelation");
+        allRelationMapper.add(data);
+
+    };
+
+    database.addRoleCard = function () {
+        let data = arguments[0];
+        let allRoleCardInfoMapper = DBOpenRequest.result.transaction(["allRoleCardInfo"], "readwrite").objectStore("allRoleCardInfo");
+        allRoleCardInfoMapper.add(data);
+
+    };
+
+    database.addPublicRecord = function () {
+        let data = arguments[0];
+        let allPublicRecord = DBOpenRequest.result.transaction(["allPublicRecord"], "readwrite").objectStore("allPublicRecord");
+        allPublicRecord.add(data);
+    };
+
+    database.addPrivateRecord = function () {
+        let data = arguments[0];
+        let allPrivateRecord = DBOpenRequest.result.transaction(["allPrivateRecord"], "readwrite").objectStore("allPrivateRecord");
+        allPrivateRecord.add(data);
+    };
 
     let createDataTable = function (db) {
         let tempTable;
@@ -174,6 +171,5 @@
 
 
     window.database = database;
-
 
 })();

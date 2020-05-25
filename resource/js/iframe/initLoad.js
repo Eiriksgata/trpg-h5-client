@@ -3,7 +3,6 @@
 
     InitLoad.getMyUserInfo = function () {
         $("#loadTipsMessageBox").html("载入用户信息");
-
         if (layui.data("appData").myUserInfo == null) {
             $.ajax({
                 type: "get",
@@ -26,16 +25,9 @@
                         value: myUserInfo
                     });
 
-                    let allMemberInfoMap = layui.data("appData").allMemberInfo;
-                    if (allMemberInfoMap == null) {
-                        allMemberInfoMap = {};
-                    }
+                    //将信息存到数据中
+                    database.addMemberInfo(myUserInfo);
 
-                    allMemberInfoMap[myUserInfo.id] = myUserInfo;
-                    layui.data("appData", {
-                        key: "allMemberInfo",
-                        value: allMemberInfoMap
-                    })
                 }
             });
         } else {
@@ -61,7 +53,7 @@
                 }
                 let data = result.data;
                 $.each(data, (key, roomInfo) => {
-                    database.allRoomInfoMapper.add(roomInfo);
+                    database.addRoomInfo(roomInfo);
                 });
 
             }
@@ -70,18 +62,20 @@
 
     InitLoad.getMyRelationship = function () {
         $("#loadTipsMessageBox").html("载入关联");
-        let allRoomInfo = layui.data("appData").allRoomInfo;
-        if (allRoomInfo == null) {
-            InitLoad.getMyJoinRoomInfo();
-            allRoomInfo = layui.data("appData").allRoomInfo;
-        }
-        //根据已加入的房间进行房间关系的载入
-        //系统每次载入都会重新更新一下数据的信息
-        $.each(allRoomInfo, function (key, values) {
-            RequestData.getRoomRelation(key);
-        });
-
+        let request = window.DBOpenRequest.result
+            .transaction(["allRoomInfo"], "readonly")
+            .objectStore("allRoomInfo")
+            .openCursor().onsuccess = function (event) {
+            let cursor = event.target.result;
+            if (cursor) {
+                //根据已加入的房间进行房间关系的载入
+                //系统每次载入都会重新更新一下数据的信息
+                console.log(cursor);
+                RequestData.getRoomRelation(cursor.value.id);
+                cursor.continue();
+            }
+        };
     };
-    
+
     window.InitLoad = InitLoad;
 })();

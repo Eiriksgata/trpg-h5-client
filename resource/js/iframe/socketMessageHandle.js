@@ -32,7 +32,6 @@
         InitLoad.getMyRelationship();
         $("#loadTipsMessageBox").remove();
         $("#pageFrame").attr("src", "index.html");
-
     };
 
 
