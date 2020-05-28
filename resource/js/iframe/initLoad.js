@@ -1,8 +1,11 @@
 (function () {
     let InitLoad = {};
 
-    InitLoad.getMyUserInfo = function () {
+    InitLoad.getMyUserInfo = async function () {
         $("#loadTipsMessageBox").html("载入用户信息");
+
+        console.log(await RequestData.getUserInfo(14));
+
         if (layui.data("appData").myUserInfo == null) {
             $.ajax({
                 type: "get",
@@ -52,7 +55,7 @@
                     return;
                 }
                 let data = result.data;
-                $.each(data, (key, roomInfo) => {
+                $.each(data, function (key, roomInfo) {
                     database.addRoomInfo(roomInfo);
                 });
 
@@ -62,15 +65,11 @@
 
     InitLoad.getMyRelationship = function () {
         $("#loadTipsMessageBox").html("载入关联");
-        let request = window.DBOpenRequest.result
-            .transaction(["allRoomInfo"], "readonly")
-            .objectStore("allRoomInfo")
-            .openCursor().onsuccess = function (event) {
+        database.findAll("allRoomInfo").onsuccess = function (event) {
             let cursor = event.target.result;
             if (cursor) {
                 //根据已加入的房间进行房间关系的载入
                 //系统每次载入都会重新更新一下数据的信息
-                console.log(cursor);
                 RequestData.getRoomRelation(cursor.value.id);
                 cursor.continue();
             }

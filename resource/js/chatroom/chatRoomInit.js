@@ -24,12 +24,4 @@
     //加载剪切功能监听事件
     Shear.addEvent();
 
-
-    layui.data("group", {
-        key: "10010",
-        value: "test"
-    });
-
-
-
 })();

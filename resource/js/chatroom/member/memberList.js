@@ -16,6 +16,8 @@
 
         let allRelation = layui.data("appData").allRelation;
         let currentRelation = allRelation[currentRoomId];
+
+
         //清空列表数据
         $("#memberList").html("");
         $.each(currentRelation, function (key, values) {
@@ -44,9 +46,9 @@
                 roleSan = 0,
                 roleSanMax = 0;
             roleCard = parent.RequestData.getRoleCard(relation.roleCardId);
-            
+
             //if (roleCard.attribute)
-            
+
             //属性截取判断
             list = roleCard.attribute.match(/hp[0-9]+/g);
             if (list != null && list.length > 0) {

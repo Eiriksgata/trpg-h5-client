@@ -6,7 +6,7 @@
     database.dataBaseInit = function () {
 
         //打开数据库链接
-        DBOpenRequest = window.indexedDB.open("RolePlaying");
+        DBOpenRequest = window.indexedDB.open("RolePlaying", 1);
         DBOpenRequest.onsuccess = function (e) {
             window.DBOpenRequest = DBOpenRequest;
             openSocket();
@@ -59,6 +59,52 @@
         let allPrivateRecord = DBOpenRequest.result.transaction(["allPrivateRecord"], "readwrite").objectStore("allPrivateRecord");
         allPrivateRecord.add(data);
     };
+
+
+    /**
+     * 查询表格的所有数据
+     * @param tableName
+     * @returns {IDBRequest} 返回一个 openCursor 的方法需要实现
+     */
+    database.findAll = function (tableName) {
+        return DBOpenRequest.result.transaction([tableName], "readonly").objectStore(tableName).openCursor();
+    };
+
+    /**
+     * 数据库索引查询
+     * @param tableName 查询的表格名称
+     * @param indexName 查询的索引名称，当为NULL时，是按ID查询
+     * @param value 查询返回值 如果是查询id，请直接输入整形数字，不要输入字符串
+     * @returns {Promise} 异步同步扁平化处理
+     */
+    database.findByIndexName = function (tableName, indexName, value) {
+        return new Promise(function (resolve, reject) {
+            let request = null;
+            if (indexName == null || indexName === "id") {
+                request = DBOpenRequest.result.transaction([tableName], "readonly")
+                    .objectStore(tableName).get(value);
+            } else {
+                request = DBOpenRequest.result.transaction([tableName], "readonly")
+                    .objectStore(tableName).index(indexName).get(value);
+            }
+
+            request.onsuccess = function (event) {
+                resolve(request.result);
+            };
+
+            request.onerror = function (event) {
+                reject("查询数据库信息出错");
+            }
+
+        }).then(function (memberInfo) {
+            testData = memberInfo;
+            return memberInfo;
+        }).catch(function (e) {
+            console.log(e);
+        });
+
+    };
+
 
     let createDataTable = function (db) {
         let tempTable;
