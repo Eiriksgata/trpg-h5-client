@@ -6,22 +6,26 @@
     //设置当前页面的房间ID
     window.currentRoomId = window.location.search.substring(8);
 
-    //判断自己是否属于房主
-
 
     //载入房间所需要的信息
-    window.roomLoad.loadRoomData();
+    window.roomLoad.loadRoomData().then(function () {
 
-    //用户数据初始加载
-    allRoomDataUpdate();
+        //请求识别用户是否是房主信息
+        isHomeownersCheck();
 
-    //巡检房间数据
-    dataUpdateTimerInit();
+        //用户数据初始加载
+        allRoomDataUpdate();
 
-    //加载控件事件
-    MessageBox.sendMessageBtnEvent();
+        //巡检房间数据
+        dataUpdateTimerInit();
 
-    //加载剪切功能监听事件
-    Shear.addEvent();
+        //加载控件事件
+        MessageBox.sendMessageBtnEvent();
+
+        //加载剪切功能监听事件
+        Shear.addEvent();
+
+    });
+
 
 })();

@@ -59,5 +59,13 @@
 
 <script>
 
+    setTimeout(function () {
+        database.findByIndexName("allRoomInfo", "id", 1).then(relation => {
+            console.log(relation);
+
+        });
+
+    }, 1000);
+
 </script>
 </html>

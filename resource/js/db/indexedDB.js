@@ -24,7 +24,6 @@
         let data = arguments[0];
         let allMemberInfoMapper = DBOpenRequest.result.transaction(["allMemberInfo"], "readwrite").objectStore("allMemberInfo");
         allMemberInfoMapper.add(data);
-        alert(data);
     };
 
     database.addRoomInfo = function () {
@@ -75,7 +74,8 @@
      * @param tableName 查询的表格名称
      * @param indexName 查询的索引名称，当为NULL时，是按ID查询
      * @param value 查询返回值 如果是查询id，请直接输入整形数字，不要输入字符串
-     * @returns {Promise} 异步同步扁平化处理
+     * @returns {Promise} 异步同步扁平化处理 如果是按id查询，返回的是一个查询结果数据
+     * 如果查询为其他的 索引号，那么返回的是一个数组
      */
     database.findByIndexName = function (tableName, indexName, value) {
         return new Promise(function (resolve, reject) {
@@ -85,7 +85,7 @@
                     .objectStore(tableName).get(value);
             } else {
                 request = DBOpenRequest.result.transaction([tableName], "readonly")
-                    .objectStore(tableName).index(indexName).get(value);
+                    .objectStore(tableName).index(indexName).getAll(value);
             }
 
             request.onsuccess = function (event) {
@@ -96,9 +96,8 @@
                 reject("查询数据库信息出错");
             }
 
-        }).then(function (memberInfo) {
-            testData = memberInfo;
-            return memberInfo;
+        }).then(function (findData) {
+            return findData;
         }).catch(function (e) {
             console.log(e);
         });

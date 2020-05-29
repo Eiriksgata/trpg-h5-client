@@ -94,14 +94,7 @@
 
                     if (result.code === 0) {
                         $("#loadTipsMessageBox").html(result.message);
-
-                        //更新本地的存储数据
-                        let allRoomInfo = layui.data("appData").allRoomInfo;
-                        allRoomInfo[result.data.id] = result.data;
-                        layui.data("appData", {
-                            key: "allRoomInfo",
-                            value: allRoomInfo
-                        });
+                        parent.database.addRoomInfo(result.data);
 
                         //计时关闭自身
                         setTimeout(function () {

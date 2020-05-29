@@ -1,40 +1,50 @@
 (function () {
 
     let loadMyRoleCardBox = function () {
-        let allRelation = layui.data("appData").allRelation[currentRoomId];
-        let roleId = allRelation[layui.data("appData").myUserInfo.id].roleCardId;
-        let role = layui.data("appData").allRoleCardInfo[roleId];
-        let skillController = $("#skill");
-        skillController.empty();
-        if (role == null) return;
+        // database.findByIndexName("allRelation","")
+        let roomRelation = parent.RequestData.getRoomRelation(currentRoomId);
+        let roleId;
 
-        attributeHandle(role.attribute);
+        $.each(roomRelation, function (key, value) {
+            if (value.userId === layui.data("appData").myUserInfo.id) {
+                roleId = value.roleCardId;
+            }
+        });
 
-        $("#roleName").html("名字:" + role.name);
-        $("#roleAge").html("年龄:" + role.age);
+        parent.RequestData.getRoleCard(roleId).then(function (role) {
 
-        if (role.sex === 0) {
-            $("#roleSex").html("性别:保密");
-        }
-        if (role.sex === 1) {
-            $("#roleSex").html("性别:男");
+            let skillController = $("#skill");
+            skillController.empty();
+            if (role == null) return;
 
-        }
-        if (role.sex === 2) {
-            $("#roleSex").html("性别:女");
-        }
+            attributeHandle(role.attribute);
 
-        //修改角色图片
-        $("#myRoleImg").attr("src", role.img);
-        $("#roleTimes").html("时代:" + role.times);
-        $("#roleOccupation").html("职业:" + role.occupation);
-        $("#roleResidence").html("现住:" + role.residence);
-        $("#roleHometown").html("故乡:" + role.hometown);
+            $("#roleName").html("名字:" + role.name);
+            $("#roleAge").html("年龄:" + role.age);
 
-        $("#takeList").html(role.takeList.replace(/\n+/g, "<br>"));
-        $("#weaponList").html(role.weaponList.replace(/\n+/g, "<br>"));
-        $("#assets").html(role.assets.replace(/\n+/g, "<br>"));
-        $("#roleStory").html(role.roleStory.replace(/\n+/g, "<br>"));
+            if (role.sex === 0) {
+                $("#roleSex").html("性别:保密");
+            }
+            if (role.sex === 1) {
+                $("#roleSex").html("性别:男");
+
+            }
+            if (role.sex === 2) {
+                $("#roleSex").html("性别:女");
+            }
+
+            //修改角色图片
+            $("#myRoleImg").attr("src", role.img);
+            $("#roleTimes").html("时代:" + role.times);
+            $("#roleOccupation").html("职业:" + role.occupation);
+            $("#roleResidence").html("现住:" + role.residence);
+            $("#roleHometown").html("故乡:" + role.hometown);
+
+            $("#takeList").html(role.takeList.replace(/\n+/g, "<br>"));
+            $("#weaponList").html(role.weaponList.replace(/\n+/g, "<br>"));
+            $("#assets").html(role.assets.replace(/\n+/g, "<br>"));
+            $("#roleStory").html(role.roleStory.replace(/\n+/g, "<br>"));
+        });
 
     };
 

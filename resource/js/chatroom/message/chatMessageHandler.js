@@ -16,45 +16,60 @@
 
 
     MessageBox.getDiceMessageBoxHtml = function (messageData) {
-
-        let data = {};
-        let currentRoomRelation = layui.data("appData").allRelation[currentRoomId];
-        let roleCard = parent.RequestData.getRoleCard(currentRoomRelation[messageData.senderId].roleCardId);
-        data.name = "骰子";
-        let scrollOpen = true;
-
-        let regionBox = $("div[region='" + messageData.region + "']")[0];
-
-        if (regionBox.scrollHeight - (regionBox.scrollTop + regionBox.clientHeight) > 10) {
-            scrollOpen = false;
-        }
-
-        if (roleCard == null) {
-            //let memberInfo = layui.data("appData").allMemberInfo[messageData.senderId];
-            data.message = "[" + messageData.senderNike + "]" + messageData.content;
-        } else {
-            data.message = "[" + roleCard.name + "]" + messageData.content;
-        }
+        parent.database.findByIndexName("allRelation", "roomId", currentRoomId).then(
+            function (roomRelationList) {
+                let data = {};
+                let roleCarId = null;
+                let roleCard = null;
+                let scrollOpen = true;
+                let regionBox = $("div[region='" + messageData.region + "']")[0];
+                data.name = "骰子";
 
 
-        layui.use("laytpl", function (laytpl) {
-            laytpl(diceMessageBoxHtml.innerHTML).render(data, function (html) {
-                $("div[region='" + messageData.region + "']").append(html);
-            });
-        });
+                $.each(roomRelationList, function (key, value) {
+                    if (value.userId === messageData.senderId) {
+                        roleCard = value.roleCardId;
+                        return false;
+                    }
+                });
 
-        if (scrollOpen) {
-            regionBox.scrollTop = regionBox.scrollHeight;
-        } else {
-            //小tips
-            let inputBox = $("button[region='" + messageData.region + "']").prev();
-            inputBox.attr("id", "tempTips");
-            layer.tips(data.name + ':' + data.message, "#tempTips", {
-                tips: [1, '#3595CC'],
-                time: 4000
-            });
-            inputBox.attr("id", "");
-        }
+                if (roleCarId == null || roleCarId === undefined) {
+                    data.message = "[" + messageData.senderNike + "]" + messageData.content;
+                } else {
+                    roleCard = parent.RequestData.getRoleCard(roleCarId);
+                }
+
+                if (regionBox.scrollHeight - (regionBox.scrollTop + regionBox.clientHeight) > 10) {
+                    scrollOpen = false;
+                }
+
+                if (roleCard == null) {
+                    data.message = "[" + messageData.senderNike + "]" + messageData.content;
+                } else {
+                    data.message = "[" + roleCard.name + "]" + messageData.content;
+                }
+
+
+                layui.use("laytpl", function (laytpl) {
+                    laytpl(diceMessageBoxHtml.innerHTML).render(data, function (html) {
+                        $("div[region='" + messageData.region + "']").append(html);
+                    });
+                });
+
+                if (scrollOpen) {
+                    regionBox.scrollTop = regionBox.scrollHeight;
+                } else {
+                    //小tips
+                    let inputBox = $("button[region='" + messageData.region + "']").prev();
+                    inputBox.attr("id", "tempTips");
+                    layer.tips(data.name + ':' + data.message, "#tempTips", {
+                        tips: [1, '#3595CC'],
+                        time: 4000
+                    });
+                    inputBox.attr("id", "");
+                }
+            }
+        );
 
 
     };
@@ -67,18 +82,12 @@
         let boxFloat = "left";
         let subsidiaryType = messageData.subsidiaryType;
         let scrollOpen = true;
-
         let regionBox = $("div[region='" + messageData.region + "']")[0];
-        //$("div[region='" + messageData.region + "']");
-
-
         if (regionBox.scrollHeight - (regionBox.scrollTop + regionBox.clientHeight) > 10) {
             scrollOpen = false;
         }
 
         messageData.content = messageData.content.replace(/\n+/g, "<br>");
-
-
         //对于气泡的风格进行修改
         if (style == null || style === "") {
             style = {
@@ -101,29 +110,6 @@
             }
         }
 
-
-        function setMemberInfo() {
-            //读取用户的信息数据
-            let senderInfo = parent.RequestData.getUserInfo(messageData.senderId);
-            console.log(senderInfo);
-            //data.name = senderInfo.nickname;
-            data.img = senderInfo.userIcon;
-        }
-
-        if (messageData.region === "广场") {
-            setMemberInfo();
-        } else {
-            //尝试获取用户的扮演角色数据
-            let relation = layui.data("appData").allRelation[currentRoomId];
-            let roleCard = parent.RequestData.getRoleCard(relation[messageData.senderId].roleCardId);
-            if (relation == null || roleCard == null) {
-                setMemberInfo();
-            } else {
-                //data.name = roleCard.name;
-                data.img = roleCard.img;
-            }
-        }
-
         data.name = messageData.senderNike;
         data.backgroundColor = backgroundColor;
         data.message = messageData.content;
@@ -134,26 +120,60 @@
         data.recordId = messageData.recordId;
         data.sendTime = messageData.sendTime;
 
+        //先初步设置用户的自带头像，然后再修改为角色头像
+        //获取用户的信息
+        parent.RequestData.getUserInfo(messageData.senderId).then(
+            function (senderInfo) {
+                data.img = senderInfo.userIcon;
 
-        layui.use('laytpl', function (laytpl) {
-            laytpl(memberChatMessageBoxHtml.innerHTML).render(data, function (html) {
-                $("div[region='" + messageData.region + "']").append(html);
-                //alert(html);
-            });
-        });
+                //尝试获取用户的扮演角色数据
+                parent.database.findByIndexName("allRelation", "roomId", parseInt(currentRoomId))
+                    .then(function (relationList) {
 
-        if (scrollOpen || messageData.senderId === layui.data("appData").myUserInfo.id) {
-            regionBox.scrollTop = regionBox.scrollHeight;
-        } else {
-            //小tips
-            let inputBox = $("button[region='" + messageData.region + "']").prev();
-            inputBox.attr("id", "tempTips");
-            layer.tips(data.name + ':' + data.message, "#tempTips", {
-                tips: [1, '#3595CC'],
-                time: 4000
-            });
-            inputBox.attr("id", "");
-        }
+                        let roleCardId = null;
+                        $.each(relationList, function (key, value) {
+
+                            if (value.userId === messageData.senderId) {
+                                roleCardId = value.roleCardId;
+
+                                return false;
+                            }
+
+                        });
+
+                        parent.RequestData.getRoleCard(roleCardId).then(
+                            function (roleCardInfo) {
+                                if (roleCardInfo == null || roleCardInfo === undefined) {
+                                    return;
+                                }
+                                data.img = roleCardInfo.img;
+
+                                layui.use('laytpl', function (laytpl) {
+                                    laytpl(memberChatMessageBoxHtml.innerHTML).render(data, function (html) {
+                                        $("div[region='" + messageData.region + "']").append(html);
+                                        //alert(html);
+                                    });
+                                });
+
+                                if (scrollOpen || messageData.senderId === layui.data("appData").myUserInfo.id) {
+                                    regionBox.scrollTop = regionBox.scrollHeight;
+                                } else {
+                                    //小tips
+                                    let inputBox = $("button[region='" + messageData.region + "']").prev();
+                                    inputBox.attr("id", "tempTips");
+                                    layer.tips(data.name + ':' + data.message, "#tempTips", {
+                                        tips: [1, '#3595CC'],
+                                        time: 4000
+                                    });
+                                    inputBox.attr("id", "");
+                                }
+
+                            }
+                        )
+
+                    });
+            }
+        );
 
 
     };
