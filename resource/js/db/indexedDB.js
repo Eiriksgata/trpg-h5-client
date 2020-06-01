@@ -23,46 +23,46 @@
     database.addMemberInfo = function () {
         let data = arguments[0];
         let allMemberInfoMapper = DBOpenRequest.result.transaction(["allMemberInfo"], "readwrite").objectStore("allMemberInfo");
-        allMemberInfoMapper.add(data);
+        allMemberInfoMapper.put(data);
     };
 
     database.addRoomInfo = function () {
         let data = arguments[0];
         let allRoomInfoMapper = DBOpenRequest.result.transaction(["allRoomInfo"], "readwrite").objectStore("allRoomInfo");
-        allRoomInfoMapper.add(data);
+        allRoomInfoMapper.put(data);
 
     };
 
     database.addRelation = function () {
         let data = arguments[0];
         let allRelationMapper = DBOpenRequest.result.transaction(["allRelation"], "readwrite").objectStore("allRelation");
-        allRelationMapper.add(data);
+        allRelationMapper.put(data);
 
     };
 
     database.addRoleCard = function () {
         let data = arguments[0];
         let allRoleCardInfoMapper = DBOpenRequest.result.transaction(["allRoleCardInfo"], "readwrite").objectStore("allRoleCardInfo");
-        allRoleCardInfoMapper.add(data);
+        allRoleCardInfoMapper.put(data);
 
     };
 
     database.addPublicRecord = function () {
         let data = arguments[0];
         let allPublicRecord = DBOpenRequest.result.transaction(["allPublicRecord"], "readwrite").objectStore("allPublicRecord");
-        allPublicRecord.add(data);
+        allPublicRecord.put(data);
     };
 
     database.addPrivateRecord = function () {
         let data = arguments[0];
         let allPrivateRecord = DBOpenRequest.result.transaction(["allPrivateRecord"], "readwrite").objectStore("allPrivateRecord");
-        allPrivateRecord.add(data);
+        allPrivateRecord.put(data);
     };
 
 
     /**
      * 查询表格的所有数据
-     * @param tableName
+     * @param tableName 查询表名
      * @returns {IDBRequest} 返回一个 openCursor 的方法需要实现
      */
     database.findAll = function (tableName) {
@@ -82,7 +82,7 @@
             let request = null;
             if (indexName == null || indexName === "id") {
                 request = DBOpenRequest.result.transaction([tableName], "readonly")
-                    .objectStore(tableName).get(value);
+                    .objectStore(tableName).get(parseInt(value));
             } else {
                 request = DBOpenRequest.result.transaction([tableName], "readonly")
                     .objectStore(tableName).index(indexName).getAll(value);
@@ -184,13 +184,15 @@
 
         if (!db.objectStoreNames.contains("allPublicRecord")) {
             tempTable = db.createObjectStore("allPublicRecord", {keyPath: "id"});
+
             tempTable.createIndex("time", "time", {unique: false});
             tempTable.createIndex("message", "message", {unique: false});
             tempTable.createIndex("senderId", "senderId", {unique: false});
             tempTable.createIndex("nike", "nike", {unique: false});
+            tempTable.createIndex("roomId", "roomId", {unique: false});
             tempTable.createIndex("messageType", "messageType", {unique: false});
             tempTable.createIndex("region", "region", {unique: false});
-        }
+           }
 
 
         if (!db.objectStoreNames.contains("allPrivateRecord")) {
@@ -205,6 +207,7 @@
             tempTable.createIndex("messageType", "messageType", {unique: false});
             tempTable.createIndex("region", "region", {unique: false});
         }
+
     };
 
     database.supportCheck = function () {

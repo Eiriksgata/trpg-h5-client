@@ -1,6 +1,6 @@
 (function () {
     let RequestData = {};
-    
+
     /**
      * 动态的处理用户的信息数据，如果列表中没有数据，那么会请求服务器获取并且存储，如果有则直接取出
      * @param userId
@@ -8,9 +8,12 @@
      */
     RequestData.getUserInfo = async function (userId) {
         let isNoLocal = arguments[1] ? arguments[1] : false;
+        if (userId == null || userId === undefined) {
+            return null;
+        }
         //检查本地的数据
         let userInfo = null;
-        await database.findByIndexName("allMemberInfo", "id", userId).then(function (requestResult) {
+        await database.findByIndexName("allMemberInfo", "id", parseInt(userId)).then(function (requestResult) {
             userInfo = requestResult;
         });
         if (isNoLocal || userInfo == null || userInfo === undefined) {
@@ -46,7 +49,10 @@
     RequestData.getRoleCard = async function (roleCardId) {
         let isNoLocal = arguments[1] ? arguments[1] : false;
         let roleCard = null;
-        await database.findByIndexName("allRoleCardInfo", "id", roleCardId).then(function (resultData) {
+        if (roleCardId == null || roleCardId === undefined) {
+            return null;
+        }
+        await database.findByIndexName("allRoleCardInfo", "id", parseInt(roleCardId)).then(function (resultData) {
             roleCard = resultData;
         });
 

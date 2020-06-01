@@ -192,8 +192,19 @@
             //获取按键所属于的区域
             let btnRegion = $(this).attr("region");
 
+            //对所在的区域进行不同消息整合发送处理
             let messageVo = new ChatMessageVo();
-            messageVo.messageType = ChatMessageCode.FORWARD;
+
+            //如果是公开区域那么将不需要填太多的数据
+            if (btnRegion === "剧情" || btnRegion === "广场") {
+                messageVo.messageType = ChatMessageCode.FORWARD;
+            } else {
+                //如果是私聊区域，先获取发送给哪些人，两人私聊的情况下也需要通过数组的形式发送接收人数据信息
+
+
+            }
+
+
             messageVo.content = Rich.analysis(content);
             messageVo.region = btnRegion;
             messageVo.roomId = currentRoomId;

@@ -1,10 +1,8 @@
 (function () {
     let InitLoad = {};
 
-    InitLoad.getMyUserInfo = async function () {
+    InitLoad.getMyUserInfo = function () {
         $("#loadTipsMessageBox").html("载入用户信息");
-
-        console.log(await RequestData.getUserInfo(14));
 
         if (layui.data("appData").myUserInfo == null) {
             $.ajax({

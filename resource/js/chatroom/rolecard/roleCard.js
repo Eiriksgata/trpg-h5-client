@@ -15,24 +15,38 @@
 
             let skillController = $("#skill");
             skillController.empty();
-            if (role == null) return;
+            if (role == null) {
+                $("#roleName").html("名字:未绑定");
+                $("#roleAge").html("年龄:");
+                $("#roleSex").html("性别:");
+
+                //修改角色图片
+                $("#myRoleImg").attr("src", " ");
+                $("#roleTimes").html("时代:");
+                $("#roleOccupation").html("职业:");
+                $("#roleResidence").html("现住:");
+                $("#roleHometown").html("故乡:");
+
+                $("#takeList").html("");
+                $("#weaponList").html("");
+                $("#assets").html("");
+                $("#roleStory").html("");
+                return;
+            }
 
             attributeHandle(role.attribute);
 
             $("#roleName").html("名字:" + role.name);
             $("#roleAge").html("年龄:" + role.age);
-
             if (role.sex === 0) {
                 $("#roleSex").html("性别:保密");
             }
             if (role.sex === 1) {
                 $("#roleSex").html("性别:男");
-
             }
             if (role.sex === 2) {
                 $("#roleSex").html("性别:女");
             }
-
             //修改角色图片
             $("#myRoleImg").attr("src", role.img);
             $("#roleTimes").html("时代:" + role.times);

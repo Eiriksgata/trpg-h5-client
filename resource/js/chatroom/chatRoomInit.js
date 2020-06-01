@@ -19,6 +19,25 @@
         //巡检房间数据
         dataUpdateTimerInit();
 
+        //加载公共的聊天消息记录
+        parent.MessageRecord.getAllPublicRecordByRoomId(currentRoomId).then(function (record) {
+            console.log(record);
+            $.each(record, function (key, value) {
+                parent.messageHandler({
+                    "content": value.message,
+                    "messageType": value.messageType,
+                    "recordId": value.id,
+                    "region": value.region,
+                    "roomId": value.roomId,
+                    "sendTime": value.sendTime,
+                    "senderId": value.senderId,
+                    "senderNike": value.nike
+                });
+            });
+
+        });
+
+
         //加载控件事件
         MessageBox.sendMessageBtnEvent();
 

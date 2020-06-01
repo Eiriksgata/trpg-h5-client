@@ -89,9 +89,8 @@
     <!-- 房间人员信息和角色卡信息 -->
     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
         <div id="memberAndRoleDiv">
-
             <div class="layui-fluid" id='memberListBox'
-                 style='border: 3px #dddddd solid;overflow: scroll;max-width:380px;height: 100%;max-height: 400px; overflow-x: hidden ;'>
+                 style='border: 3px #dddddd solid;overflow: scroll;max-width:380px;height:300px;overflow-x: hidden ;'>
                 <div id="memberList">
 
                 </div>
@@ -291,8 +290,8 @@
     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
         <div id="oderDiv" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-tab-title">
-                <li onclick="selectChatWindow('private')">私聊<span name="privateNewMessageNumber"
-                                                                  class="layui-badge layui-bg-black">0</span></li>
+                <li onclick="selectChatWindow('private')">讨论组<span name="groupNewMessageNumber"
+                                                                   class="layui-badge layui-bg-black">0</span></li>
                 <li onclick="selectChatWindow('make')">广场<span name="makeNewMessageNumber"
                                                                class="layui-badge  layui-bg-blue">0</span></li>
                 <li>讨论组</li>
@@ -300,69 +299,9 @@
             </ul>
 
             <div class="layui-tab-content">
-                <!--描述：私聊区窗口-->
+
+
                 <div class="layui-tab-item layui-show">
-                    <div id="privateMessageDiv">
-                        <div style="border: 3px solid black;box-shadow: darkgrey 1px 1px 10px 1px ;">
-                            <div style="height: 20px; background-color: black;font-size: 14px; color: white;"
-                                 class="text-center">私聊区域
-                            </div>
-                            <div style="overflow-x: scroll;overflow-y:hidden;width: 100%;height: 100px;">
-                                <div id="privateMessagePlayerListBox" style="width: 1000px">
-
-                                </div>
-                            </div>
-
-                            <div region="私聊" style="overflow-y:scroll;height: 450px;padding: 5px;">
-                                <!--<div name="privateTab"></div>-->
-                                <!--<div id="privateHistorical"></div>-->
-                            </div>
-
-                            <div>
-                                <div id="privateTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
-                                     contenteditable="true"></div>
-                                <button region="私聊" name="sendMessageBtn" class="layui-btn"
-                                        style="width: 15%;height: 34.8px;">
-                                    发送
-                                </button>
-                            </div>
-
-                            <div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-tab-item">
-
-                    <!-- 广场区域 -->
-                    <div id="squareMessageDiv">
-                        <div style="border: 3px solid #89c0d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
-                            <div style="height: 20px; background-color: #89c0d2;font-size: 14px; color: white;"
-                                 class="text-center">广场区域
-                            </div>
-
-                            <div region="广场" style="overflow-y:scroll;height: 450px;padding: 5px;">
-
-                            </div>
-
-                            <div>
-                                <div id="squareTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
-                                     contenteditable="true"></div>
-                                <button region="广场" name="sendMessageBtn" class="layui-btn"
-                                        style="height: 34.8px;width: 15%;">发送
-                                </button>
-
-                            </div>
-
-                            <div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-tab-item">
-
                     <!-- 讨论组区域 -->
                     <div id="groupMessageDiv">
                         <div style="border: 3px solid #454f9e;box-shadow: darkgrey 1px 1px 10px 1px ;">
@@ -405,13 +344,39 @@
                         </div>
                     </div>
 
-                </div>
 
+                </div>
                 <div class="layui-tab-item">
+                    <!-- 广场区域 -->
+                    <div id="squareMessageDiv">
+                        <div style="border: 3px solid #89c0d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
+                            <div style="height: 20px; background-color: #89c0d2;font-size: 14px; color: white;"
+                                 class="text-center">广场区域
+                            </div>
+
+                            <div region="广场" style="overflow-y:scroll;height: 450px;padding: 5px;">
+                            </div>
+
+                            <div>
+                                <div id="squareTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
+                                     contenteditable="true"></div>
+                                <button region="广场" name="sendMessageBtn" class="layui-btn"
+                                        style="height: 34.8px;width: 15%;">发送
+                                </button>
+
+                            </div>
+
+                            <div style="width: 100%;height: 1px;overflow-y: hidden;"></div>
+
+                        </div>
+                    </div>
+
                     <!--描述：收藏功能-->
-                    <div id="collectiondiv" style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
+                    <div id="collectiondiv"
+                         style="border: 3px solid #d2d2d2;box-shadow: darkgrey 1px 1px 10px 1px ;">
                         <div>
-                            <i title="添加" onclick="addBlankCollection();" class="layui-icon" style="font-size: 25px;">&#xe654;</i>
+                            <i title="添加" onclick="addBlankCollection();" class="layui-icon"
+                               style="font-size: 25px;">&#xe654;</i>
                             <i title="悬浮模式" onclick="collectionSuspensionMode();" class="layui-icon"
                                style="font-size: 25px;">&#xe656;</i>
                         </div>
@@ -420,6 +385,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
         </div>

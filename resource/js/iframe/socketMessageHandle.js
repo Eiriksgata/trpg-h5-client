@@ -12,11 +12,15 @@
                 dataInit();
                 return;
             case ChatMessageCode.FORWARD:
-                chatMessageRecord(socketData);
+                MessageRecord.chatMessageRecord(socketData);
                 window.frames["pageFrame"].contentWindow.MessageBox.getChatMessageBoxHtml(socketData);
                 return;
             case ChatMessageCode.DICEMESSAGE:
                 window.frames["pageFrame"].contentWindow.MessageBox.getDiceMessageBoxHtml(socketData);
+                return;
+            case ChatMessageCode.ROOMPRIVATE:
+
+
                 return;
             case ChatMessageCode.UPDATELOADROOMDATA:
                 window.frames["pageFrame"].contentWindow.allRoomDataUpdate();
@@ -51,28 +55,6 @@
 
     };
 
-
-    /**
-     * 记录房间聊天数据
-     */
-    let chatMessageRecord = function (data) {
-
-
-
-        // if (allChatMessageRecord[data.roomId] == null || allChatMessageRecord === undefined) {
-        //     allChatMessageRecord[data.roomId] = {
-        //         roomId: data.roomId,
-        //         newMessageCount: 0,
-        //         messageList: [{
-        //             data
-        //         }]
-        //     }
-        // } else {
-        //     allChatMessageRecord[data.roomId].newMessageCount++;
-        //     allChatMessageRecord[data.roomId].messageList.push(data);
-        // }
-        // console.log(allChatMessageRecord);
-    };
 
     $(window).ready(function () {
         getRoomId();

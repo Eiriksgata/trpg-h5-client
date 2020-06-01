@@ -15,13 +15,12 @@
 
 
     let addMobileBox = function () {
-        let html = new Array(6);
+        let html = new Array(5);
         html[0] = $("#memberAndRoleDiv").html();
         html[1] = $("#plotDiv").html();
-        html[2] = $("#privateMessageDiv").html();
-        html[3] = $("#groupMessageDiv").html();
-        html[4] = $("#squareMessageDiv").html();
-        html[5] = $("#collectiondiv").html();
+        html[2] = $("#groupMessageDiv").html();
+        html[3] = $("#squareMessageDiv").html();
+        html[4] = $("#collectiondiv").html();
 
         $("#view").html(mobileBoxHtml.innerHTML);
         let control = $("#mobileContent");

@@ -17,7 +17,7 @@
 
     //开始渲染用户列表
     let memberListBoxInit = function () {
-        parent.database.findByIndexName("allRelation", "roomId", currentRoomId)
+        parent.database.findByIndexName("allRelation", "roomId", parseInt(currentRoomId))
             .then(relationList => {
                 //清空列表数据
                 $("#memberList").html("");
@@ -33,7 +33,9 @@
 
     //单个用户的html数据生成
     let memberListBox = function (relation) {
+
         parent.RequestData.getUserInfo(relation.userId).then(
+
             function (memberInfo) {
                 let stateMap = parent.RequestData.getUserState([relation.userId]);
                 let data;
@@ -48,6 +50,8 @@
                         roleSanMax = 0;
                     parent.RequestData.getRoleCard(relation.roleCardId).then(
                         function (roleCard) {
+
+
                             //属性截取判断
                             list = roleCard.attribute.match(/hp[0-9]+/g);
                             if (list != null && list.length > 0) {

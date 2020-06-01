@@ -1,18 +1,30 @@
 (function () {
 
+    let GroupMessage = {};
 
-    let groupListInit = function () {
-        let roomRelation = layui.data("appData").allRelation[currentRoomId];
-        let allMemberInfo = layui.data("appData").allMemberInfo;
+    GroupMessage.receiverId = [];
+
+    /**
+     * 两人之间的玩家私聊列表框进行简单的渲染
+     */
+    GroupMessage.playerListInit = function () {
+
+    };
+
+    /**
+     * 具有群组消息列表渲染
+     */
+    GroupMessage.groupListInit = function () {
+
+    };
+
+
+    /**
+     * 统一监听消息接受人员信息更改事件
+     */
 
 
 
-        let data = {};
-        roomRelation.map(function (key, value) {
-            if (parent.RequestData.getUserInfo(key) != null) {
-                let roleCard = parent.RequestData.getRoleCard(value.roleCardId);
-                data.name = roleCard.name;
-            }
-        })
-    }
+    window.GroupMessage = GroupMessage;
+
 })();
