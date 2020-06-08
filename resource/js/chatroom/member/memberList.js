@@ -18,7 +18,7 @@
     //开始渲染用户列表
     let memberListBoxInit = function () {
         parent.database.findByIndexName("allRelation", "roomId", parseInt(currentRoomId))
-            .then(relationList => {
+            .then(function (relationList) {
                 //清空列表数据
                 $("#memberList").html("");
                 $.each(relationList, function (key, value) {
@@ -35,7 +35,6 @@
     let memberListBox = function (relation) {
 
         parent.RequestData.getUserInfo(relation.userId).then(
-
             function (memberInfo) {
                 let stateMap = parent.RequestData.getUserState([relation.userId]);
                 let data;

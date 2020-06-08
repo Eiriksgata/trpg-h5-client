@@ -2,8 +2,8 @@
 
     let chatBox = {};
     let regionCode = {};
-    regionCode.PLOT = "剧情";
-    regionCode.SQUARE = "广场";
+    regionCode.PLOT = "plot";
+    regionCode.SQUARE = "square";
 
 
     chatBox.plotBoxAddMessage = function (message) {

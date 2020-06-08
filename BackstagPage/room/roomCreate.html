@@ -1,183 +1,187 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>ROOM CREATE</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-		<link rel="stylesheet" href="../../resource/css/xadmin/font.css">
-		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
-		<script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
-		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
-		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-		<!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>ROOM CREATE</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../resource/css/xadmin/font.css">
+    <link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
+    <script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
+    <script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 
-	<body>
+<body>
 
-		<div class="layui-container">
-			<div class="layui-card">
-				<div class="layui-card-header">房间基础信息</div>
-				<div class="layui-card-body">
-					<form class="layui-form" style="margin: 10px;">
-						<div class="layui-form-item">
-							<label for="username" class="layui-form-label">
-                          <span class="x-red">*</span>房间名
-                     </label>
-							<div class="layui-input-inline">
-								<input type="text" name="roomName" name="username" required="" class="layui-input">
-							</div>
-						</div>
+<div class="layui-container">
+    <div class="layui-card">
+        <div class="layui-card-header">房间基础信息</div>
+        <div class="layui-card-body">
+            <form class="layui-form" style="margin: 10px;">
+                <div class="layui-form-item">
+                    <label for="username" class="layui-form-label">
+                        <span class="x-red">*</span>房间名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="roomName" name="username" required="" class="layui-input">
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label for="phone" class="layui-form-label">
-                          <span class="x-red"></span>密码
-                      </label>
-							<div class="layui-input-inline">
-								<input type="text" name="roomPassword" required="" class="layui-input">
-							</div>
-							<div class="layui-form-mid layui-word-aux">
-								<span class="x-red">*</span>如果密码为空则默认不需要密码
-							</div>
-						</div>
+                <div class="layui-form-item">
+                    <label for="phone" class="layui-form-label">
+                        <span class="x-red"></span>密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="roomPassword" required="" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>如果密码为空则默认不需要密码
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label for="L_email" class="layui-form-label">
-                          <span class="x-red">*</span>玩家人数
-                      </label>
-							<div class="layui-input-inline">
-								<input type="text" name="playerNumber" required="" class="layui-input" value="1">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>玩家人数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="playerNumber" required="" class="layui-input" value="1">
 
-								<div class="layui-form-mid layui-word-aux">
-									<span class="x-red">*</span>玩家人数最少1人
-								</div>
-							</div>
-						</div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>玩家人数最少1人
+                        </div>
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label for="L_email" class="layui-form-label">
-                         	房间骰子面数
-                      </label>
-							<div class="layui-input-inline">
-								<input type="text" name="diceFace" required="" class="layui-input" value="100">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        房间骰子面数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="diceFace" required="" class="layui-input" value="100">
 
-								<div class="layui-form-mid layui-word-aux">
-									影响骰子丢出的最大数值效果，类似于默认为100面骰=1D100
-								</div>
-							</div>
-						</div>
+                        <div class="layui-form-mid layui-word-aux">
+                            影响骰子丢出的最大数值效果，类似于默认为100面骰=1D100
+                        </div>
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label for="L_email" class="layui-form-label">
-                         	房规
-                      </label>
-							<div class="layui-input-inline">
-								<input type="text" name="houseRules" required="" class="layui-input" value="1">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        房规
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="houseRules" required="" class="layui-input" value="1">
 
-								<div class="layui-form-mid layui-word-aux">
-									<p>房规影响骰子丢出的数值成功类型，默认为1，那么大成功规定为 1 大失败为 100.</p>
-									<p>如果数值为0, 那么没有大成功和大失败.</p>
-									如果数值为5,那么大成功为1-5 大失败为96-100.以此类推.
-								</div>
-							</div>
-						</div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <p>房规影响骰子丢出的数值成功类型，默认为1，那么大成功规定为 1 大失败为 100.</p>
+                            <p>如果数值为0, 那么没有大成功和大失败.</p>
+                            如果数值为5,那么大成功为1-5 大失败为96-100.以此类推.
+                        </div>
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label class="layui-form-label">是否显示在公开列表</label>
-							<div class="layui-input-block">
-								<input id="display" type="radio" name="display" value="0" title="隐藏">
-								<input id="show" type="radio" name="display" value="1" title="显示">
-							</div>
-						</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否显示在公开列表</label>
+                    <div class="layui-input-block">
+                        <input id="display" type="radio" name="display" value="0" title="隐藏">
+                        <input id="show" type="radio" name="display" value="1" title="显示">
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label class="layui-form-label">房间种类</label>
-							<div class="layui-input-block">
-								<input type="radio" name="type" value="0" title="a模式" checked>
-								<input type="radio" name="type" value="1" title="b模式">
-								<input type="radio" name="type" value="2" title="c模式">
-								<div class="layui-form-mid layui-word-aux">
-									<p>房间种类会影响 房间内的玩家们可以看到对方的数据信息程度。</p>
-									<p>a模式:所有人可以看到对方的生命 等一些公开 属性 (例如 HP MP AP SAN)</p>
-									<p>b模式:所有人看不到别人的任何信息，除了名字和头像。</p>
-									<p>c模式:所有人都可以互相的看到对方的卡所有信息</p>
-								</div>
-							</div>
-						</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房间种类</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="type" value="0" title="a模式" checked>
+                        <input type="radio" name="type" value="1" title="b模式">
+                        <input type="radio" name="type" value="2" title="c模式">
+                        <div class="layui-form-mid layui-word-aux">
+                            <p>房间种类会影响 房间内的玩家们可以看到对方的数据信息程度。</p>
+                            <p>a模式:所有人可以看到对方的生命 等一些公开 属性 (例如 HP MP AP SAN)</p>
+                            <p>b模式:所有人看不到别人的任何信息，除了名字和头像。</p>
+                            <p>c模式:所有人都可以互相的看到对方的卡所有信息</p>
+                        </div>
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label class="layui-form-label">房间图标</label>
-							<div class="layui-input-block">
-								<a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('ioc');" class="layui-btn">上传图片</a>
-								<input onchange="changeImgSrc(this,'ioc')" name="ioc" placeholder="需要输入正确的URL" lay-verify='' class="layui-input" />
-								<img style="max-width: 150px;max-height: 150px;" name="ioc" src="" />
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房间图标</label>
+                    <div class="layui-input-block">
+                        <a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('ioc');"
+                           class="layui-btn">上传图片</a>
+                        <input onchange="changeImgSrc(this,'ioc')" name="ioc" placeholder="需要输入正确的URL" lay-verify=''
+                               class="layui-input"/>
+                        <img style="max-width: 150px;max-height: 150px;" name="ioc" src=""/>
 
-							</div>
-						</div>
+                    </div>
+                </div>
 
-						<div class="layui-form-item">
-							<label class="layui-form-label">房间介绍</label>
-							<div class="layui-input-block">
-								<a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('introduce');" class="layui-btn">上传图片</a>
-								
-								<img width="100%" style="max-width: 350px;" name="introduce" src="" />
-								<p>房间介绍采用图片的形式，主要方便用户制作令人眼花的图片介绍风格。</p>
-								<p>在一定程度上方便玩家们，感受到模组的风格类型。</p>
-							</div>
-						</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房间介绍</label>
+                    <div class="layui-input-block">
+                        <a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('introduce');"
+                           class="layui-btn">上传图片</a>
 
-						<div class="layui-form-item">
-							<button style="width: 100%;" class="layui-btn" lay-filter="createRoom" lay-submit="">
-                          	创建房间
-                      		</button>
-						</div>
-					</form>
+                        <img width="100%" style="max-width: 350px;" name="introduce" src=""/>
+                        <p>房间介绍采用图片的形式，主要方便用户制作令人眼花的图片介绍风格。</p>
+                        <p>在一定程度上方便玩家们，感受到模组的风格类型。</p>
+                    </div>
+                </div>
 
-				</div>
-			</div>
-		</div>
+                <div class="layui-form-item">
+                    <button style="width: 100%;" class="layui-btn" lay-filter="createRoom" lay-submit="">
+                        创建房间
+                    </button>
+                </div>
+            </form>
 
-		<script>
-			layui.use('form', function() {
-				var form = layui.form;
+        </div>
+    </div>
+</div>
 
-				//监听提交
-				form.on('submit(createRoom)', function(data) {
-					$.ajax({
-						type: "put",
-						url: "http://localhost/createRoom",
-						xhrFields: {
-							withCredentials: true
-						},
-						crossDomain: true,
-						data: JSON.stringify(data.field),
-						dataType: 'json',
-						contentType: "application/json;charset=UTF-8",
-						success: function(result) {
-							layer.msg(result.message);
-						}
-					});
-					return false;
-				});
-			});
-			
-		</script>
-		<script>
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
-	</body>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(createRoom)', function (data) {
+            $.ajax({
+                type: "put",
+                url: "http://localhost/createRoom",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: JSON.stringify(data.field),
+                dataType: 'json',
+                contentType: "application/json;charset=UTF-8",
+                success: function (result) {
+                    layer.msg(result.message);
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
 
 </html>

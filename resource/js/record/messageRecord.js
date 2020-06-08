@@ -48,7 +48,7 @@
      * 记录房间聊天数据
      */
     MessageRecord.chatMessageRecord = function (data) {
-        if (data.region === "广场" || data.region === "剧情") {
+        if (data.region === "square" || data.region === "plot") {
             MessageRecord.addPublicRoomMessage(data);
         } else {
             MessageRecord.addPrivateRoomMessage(data);

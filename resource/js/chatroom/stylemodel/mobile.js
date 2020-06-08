@@ -9,8 +9,14 @@
         //重新加载控件事件
         //MessageBox.sendMessageBtnEvent();
 
-        $("div[name='chatBottomBox']").css("height","30px");
+        $("div[name='chatBottomBox']").css("height", "30px");
 
+        //重新设置消息计数
+        MessageCount.showMessageCount("plot");
+        MessageCount.showMessageCount("square");
+
+        //重新绑定消息计数清除事件
+        MessageCount.selectButtonEvent();
     });
 
 
@@ -21,7 +27,6 @@
         html[2] = $("#groupMessageDiv").html();
         html[3] = $("#squareMessageDiv").html();
         html[4] = $("#collectiondiv").html();
-
         $("#view").html(mobileBoxHtml.innerHTML);
         let control = $("#mobileContent");
 
@@ -29,7 +34,6 @@
             control.html(html[i]);
             control = control.next();
         }
-        //$(".swiper-slide swiper-slide-active").append()
 
     };
 

@@ -7,9 +7,8 @@
      * 捕捉消息内容长按事件
      */
     $("body").on("touchstart", "message", function () {
-
+        let control = $(this);
         timer = setTimeout(function () {
-            let control = $(this);
             messageMenuShow(control);
         }, 1000);
 
@@ -19,6 +18,7 @@
 
     }).on("mousedown", "message", function () {
         let control = $(this);
+        console.log(control);
         /**
          * 长按计时
          * @type {number}

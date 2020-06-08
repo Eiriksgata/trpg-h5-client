@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../../resource/lib/gridstack/gridstack.min.css"/>
     <link rel="stylesheet" href="../../resource/css/chatroom/chatBubbleBox.css"/>
 
-    <link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"/>
+    <link rel="stylesheet" href="../../resource/lib/font-awesome.min.css"/>
     <link rel="stylesheet" href="../../resource/css/chatroom/richtextStyle.css"/>
     <link rel="stylesheet" href="../../resource/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../../resource/lib/knockout-min.js"></script>
     <script type="text/javascript" src="../../resource/lib/lodash.min.js"></script>
     <script type="text/javascript" src="../../resource/lib/gridstack/gridstack.min.js"></script>
-    <script src="http://libs.baidu.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../resource/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -75,6 +75,7 @@
     <div style="width: 80%;overflow-x: scroll;overflow-y: hidden;">
         <div style="width: 1000px">
             <a class="layui-btn" href="publicRoom.html">返回房间列表</a>
+            <button id="switchRoomButton" class="layui-btn">切换房间</button>
             <button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html')">快速修改角色卡信息</button>
             <button class="layui-btn" id="mobileModelButton">手机模式</button>
             <button class="layui-btn" id="diyModelButton">DIY模式(宽屏模式下才有用)</button>
@@ -185,13 +186,13 @@
             <div style="border: 3px solid orange;box-shadow: darkgrey 1px 1px 10px 1px ;">
                 <div style="height: 25px; background-color: orange;font-size: 18px;" class="text-center">剧情区域
                 </div>
-                <div region="剧情" style="overflow-y:scroll;height: 450px;padding: 5px;"></div>
+                <div region="plot" style="overflow-y:scroll;height: 450px;padding: 5px;"></div>
 
                 <div>
                     <div id="plotTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
                          contentEditable="true"></div>
 
-                    <button name="sendMessageBtn" region="剧情" class="layui-btn" style="height: 34.8px;width: 15%;">发送
+                    <button name="sendMessageBtn" region="plot" class="layui-btn" style="height: 34.8px;width: 15%;">发送
                     </button>
 
                 </div>
@@ -290,10 +291,10 @@
     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
         <div id="oderDiv" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-tab-title">
-                <li onclick="selectChatWindow('private')">讨论组<span name="groupNewMessageNumber"
-                                                                   class="layui-badge layui-bg-black">0</span></li>
-                <li onclick="selectChatWindow('make')">广场<span name="makeNewMessageNumber"
-                                                               class="layui-badge  layui-bg-blue">0</span></li>
+                <li name="groupAllNewMessageCount">讨论组<span
+                        class="layui-badge layui-bg-black">0</span></li>
+                <li name="squareAllNewMessageCount">广场<span
+                        class="layui-badge layui-bg-blue">0</span></li>
                 <li>讨论组</li>
                 <li>收藏</li>
             </ul>
@@ -311,21 +312,24 @@
 
                             <div style="overflow-x: scroll;overflow-y:hidden;width: 100%;height: 100px;">
                                 <div id="groupListBox" style="width: 1000px">
-                                    <div style="float: left;padding: 5px;height: 80px;" title="新建群聊">
+                                    <div style="float: left;padding: 5px;height: 80px;" title="新建群聊"
+                                         onclick=" GroupMessage.openGroupWindow();">
                                         <div style="height: 50px;">
                                             <img width="50" height="50" src="../../resource/images/addIoc.png"
                                                  class='media-object img-circle'/>
-                                            <span id="GroupMessageNumber{{d.roleId}}" class="layui-badge"
+                                            <span class="layui-badge"
                                                   style="position: relative;top: -50px;left: 0">0</span>
                                         </div>
                                         <p style="width: 50px;text-align: center;">
                                             新建群聊
                                         </p>
                                     </div>
+
+
                                 </div>
                             </div>
 
-                            <div region="讨论组" style="overflow-y:scroll;height: 450px;padding: 5px;">
+                            <div region="group" style="overflow-y:scroll;height: 450px;padding: 5px;">
                                 <!--<div name="privateTab"></div>-->
                                 <!--<div id="privateHistorical"></div>-->
                             </div>
@@ -333,7 +337,7 @@
                             <div>
                                 <div id="groupTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
                                      contenteditable="true"></div>
-                                <button region="讨论组" name="sendMessageBtn" class="layui-btn"
+                                <button region="group" name="sendMessageBtn" class="layui-btn"
                                         style="width: 15%;height: 34.8px;">
                                     发送
                                 </button>
@@ -354,13 +358,13 @@
                                  class="text-center">广场区域
                             </div>
 
-                            <div region="广场" style="overflow-y:scroll;height: 450px;padding: 5px;">
+                            <div region="square" style="overflow-y:scroll;height: 450px;padding: 5px;">
                             </div>
 
                             <div>
                                 <div id="squareTextarea" class="richtextInputBox swiper-no-swiping" ref="paste"
                                      contenteditable="true"></div>
-                                <button region="广场" name="sendMessageBtn" class="layui-btn"
+                                <button region="square" name="sendMessageBtn" class="layui-btn"
                                         style="height: 34.8px;width: 15%;">发送
                                 </button>
 
@@ -385,14 +389,16 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
+
     </div>
+
 </div>
 </body>
+<script type="text/javascript" src="../../resource/js/chatroom/message/groupMessage.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/record/loadRecord.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/message/messageCount.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/menu/chatMessageMenu.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/plug/photos.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/plug/pichtureshear.js"></script>
@@ -416,7 +422,10 @@
 
 <script>
 
-
+    $("#switchRoomButton").on("click", function () {
+        window.currentRoomId = 13;
+        window.ChatRoomSystem.LoadInit();
+    });
 </script>
 
 </html>

@@ -2,11 +2,11 @@
     let backgroundKeepLinkTimer;
     let keepLinkTimer;
 
-    keepLinkTimer = setInterval(function(){
-       if (socket != null && socket !== undefined){
-           socket.send("");
-       }
-    },30000);
+    keepLinkTimer = setInterval(function () {
+        if (socket != null && socket !== undefined) {
+            socket.send("");
+        }
+    }, 30000);
 
     document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
@@ -26,7 +26,6 @@
             clearInterval(backgroundKeepLinkTimer);
         }
     });
-
 
 
 })();

@@ -136,22 +136,22 @@
                             if (value.userId === messageData.senderId) {
                                 roleCardId = value.roleCardId;
 
-                                return false;
+                                //return false;
                             }
 
                         });
 
                         parent.RequestData.getRoleCard(roleCardId).then(
                             function (roleCardInfo) {
-                                if (roleCardInfo == null || roleCardInfo === undefined) {
-                                    return;
+                                console.log(roleCardInfo);
+                                if (roleCardInfo != null) {
+                                    data.img = roleCardInfo.img;
                                 }
-                                data.img = roleCardInfo.img;
 
                                 layui.use('laytpl', function (laytpl) {
                                     laytpl(memberChatMessageBoxHtml.innerHTML).render(data, function (html) {
                                         $("div[region='" + messageData.region + "']").append(html);
-                                        //alert(html);
+                                       // alert(html);
                                     });
                                 });
 
@@ -194,20 +194,25 @@
 
             //对所在的区域进行不同消息整合发送处理
             let messageVo = new ChatMessageVo();
+            messageVo.region = btnRegion;
+            messageVo.content = Rich.analysis(content);
+            messageVo.roomId = currentRoomId;
 
             //如果是公开区域那么将不需要填太多的数据
-            if (btnRegion === "剧情" || btnRegion === "广场") {
+            if (btnRegion === "plot" || btnRegion === "square") {
                 messageVo.messageType = ChatMessageCode.FORWARD;
             } else {
                 //如果是私聊区域，先获取发送给哪些人，两人私聊的情况下也需要通过数组的形式发送接收人数据信息
-
-
+                if (GroupMessage.receiverId == null || GroupMessage.region == null) {
+                    layer.msg("你当前没有选择一个讨论组");
+                    return;
+                }
+                messageVo.messageType = ChatMessageCode.ROOMPRIVATE;
+                messageVo.region = GroupMessage.region;
+                let receiverId = GroupMessage.receiverId;
+                receiverId.push(layui.data("appData").myUserInfo.id);
+                messageVo.receiverId = receiverId;
             }
-
-
-            messageVo.content = Rich.analysis(content);
-            messageVo.region = btnRegion;
-            messageVo.roomId = currentRoomId;
 
             parent.socket.send(JSON.stringify(messageVo));
             //清空文本框消息
