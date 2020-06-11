@@ -101,7 +101,34 @@
         }).catch(function (e) {
             console.log(e);
         });
+    };
 
+    database.delete = function (tableName, indexName, value) {
+
+        return new Promise(function (resolve, reject) {
+            let request = null;
+            if (indexName == null || indexName === "id") {
+                request = DBOpenRequest.result.transaction([tableName], "readwrite")
+                    .objectStore(tableName).delete(parseInt(value));
+            } else {
+                request = DBOpenRequest.result.transaction([tableName], "readwrite")
+                    .objectStore(tableName).deleteIndex(indexName);
+            }
+
+            request.onsuccess = function (event) {
+                resolve(request.result);
+            };
+
+            request.onerror = function (event) {
+                reject("查询数据库信息出错");
+            }
+
+        }).then(function () {
+
+            return true;
+        }).catch(function (e) {
+            console.log(e);
+        });
     };
 
 
@@ -192,7 +219,7 @@
             tempTable.createIndex("roomId", "roomId", {unique: false});
             tempTable.createIndex("messageType", "messageType", {unique: false});
             tempTable.createIndex("region", "region", {unique: false});
-           }
+        }
 
 
         if (!db.objectStoreNames.contains("allPrivateRecord")) {

@@ -24,9 +24,8 @@
         let html = new Array(5);
         html[0] = $("#memberAndRoleDiv").html();
         html[1] = $("#plotDiv").html();
-        html[2] = $("#groupMessageDiv").html();
-        html[3] = $("#squareMessageDiv").html();
-        html[4] = $("#collectiondiv").html();
+        html[2] = $("#squareMessageDiv").html();
+        html[3] = $("#collectiondiv").html();
         $("#view").html(mobileBoxHtml.innerHTML);
         let control = $("#mobileContent");
 

@@ -100,6 +100,7 @@
                 if (result.code === 0) {
                     userStateList = result.data;
                 } else {
+
                     layer.msg(result.message);
                 }
             }
@@ -119,7 +120,9 @@
             async: false,
             success: function (result) {
                 if (result.code !== 0) {
-                    layer.msg(result.message);
+                    //将没加入的房间信息移除
+                    database.delete("allRoomInfo", "id", roomId);
+                    //layer.msg(result.message);
                     return;
                 }
                 let data = result.data;

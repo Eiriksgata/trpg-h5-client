@@ -5,43 +5,6 @@
     </div>
 </script>
 
-<!-- 描述：私聊玩家列表渲染 -->
-<script type="text/html" id="privateMessageMemberListHtml">
-
-    <a style="color: black;" href="javascript:void(0);">
-        <div style="float: left;padding: 5px;height: 80px;" onclick="selectPrivateMemeber(this,{{d.roleId}})">
-            <div>
-                <img onerror="notFound(this);" width="60" height="60" src="{{d.url}}" class='media-object img-circle'/>
-                <span id="receivedPrivateMessageNumber{{d.roleId}}" class="layui-badge"
-                      style="position: relative;top: -90px;">0</span>
-            </div>
-            <p style="width: 60px;text-align: center;" title="{{d.name}}">
-                {{# var getName = function(){if(d.name.length >6){return d.name.substring(0,6)+'...';} return d.name;
-                }}} {{getName()}}
-            </p>
-        </div>
-    </a>
-</script>
-
-
-<!-- 群聊组的列表渲染 -->
-<script type="text/html" id="groupMessageMemberListHtml">
-    <a style="color: black;" href="javascript:void(0);" onclick="GroupMessage.onSwitchGroup(this);"
-       region="{{d.name}}" receiverId="{{d.receiverId}}">
-        <div style="float: left;padding: 5px;height: 80px;" title="{{d.name}}">
-            <div style="height: 50px;">
-                <img onerror="notFound(this)" width="50" height="50" src="{{d.ioc}}"
-                     class='media-object img-circle'/>
-                <span class="layui-badge"
-                      style="position: relative;top: -50px;left: 0">0</span>
-            </div>
-            <p style="width: 50px;text-align: center;">
-                {{d.name}}
-            </p>
-        </div>
-    </a>
-</script>
-
 
 <!--描述：表情包选择框渲染-->
 <script type="text/html" id="emoticonPageHtml">
@@ -301,8 +264,6 @@
                 <div class="swiper-slide swiper-slide-next" style="width: 30px">游戏<span name="plotAllNewMessageCount"
                                                                                         class="layui-badge layui-bg-orange">0</span>
                 </div>
-                <div name="groupAllNewMessageCount" class="swiper-slide">讨论组<span
-                        class="layui-badge layui-bg-black">0</span></div>
 
                 <div name="squareAllNewMessageCount" class="swiper-slide">广场<span
                         class="layui-badge layui-bg-blue">0</span>
@@ -317,7 +278,6 @@
             <div class="swiper-wrapper">
                 <div id="mobileContent" class="swiper-slide swiper-slide-active"></div>
                 <div id="plotMobileContentBox" class="swiper-slide"></div>
-                <div class="swiper-slide"></div>
                 <div class="swiper-slide"></div>
                 <div class="swiper-slide"></div>
                 <div class="swiper-slide">
@@ -397,43 +357,3 @@
     <a style="color: white">气泡设置</a>
 </script>
 
-<!-- 讨论组的新建界面 -->
-<script type="text/html" id="groupCreateHtml">
-
-    <div class="layui-card">
-        <div class="layui-card-body">
-            <form class="layui-form" style="margin: 10px;">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">组名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="groupName" required lay-verify="required" placeholder="请输入标题"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">参与玩家</label>
-                    <div class="layui-input-block">
-                        {{# layui.each(d.allPlayer,function(index,item){ }}
-                        <div>
-                            <img onerror="notFound(this)" style="height: 30px;width: 30px" src="{{item.ioc}}">
-                            <input type="checkbox" name="player{{item.id}}" title="{{item.name}}" lay-skin="primary"/>
-
-                        </div>
-
-                        {{# }); }}
-                    </div>
-                </div>
-
-
-                <div class="layui-form-item">
-                    <button style="width: 100%;" class="layui-btn" lay-filter="createGroup" lay-submit="">
-                        创建群聊组
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
-</script>
