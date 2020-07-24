@@ -3,38 +3,32 @@
 
     InitLoad.getMyUserInfo = function () {
         $("#loadTipsMessageBox").html("载入用户信息");
-
-        if (layui.data("appData").myUserInfo == null) {
-            $.ajax({
-                type: "get",
-                url: REQUESTHEAD + "/my/user/info",
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                async: false,
-                success: function (result) {
-                    if (result.code !== 0) {
-                        layer.msg(result.message);
-                        return;
-                    }
-                    let myUserInfo = result.data;
-
-                    //存储到本地的浏览器中
-                    layui.data("appData", {
-                        key: "myUserInfo",
-                        value: myUserInfo
-                    });
-
-                    //将信息存到数据中
-                    database.addMemberInfo(myUserInfo);
-
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/my/user/info",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: false,
+            success: function (result) {
+                if (result.code !== 0) {
+                    layer.msg(result.message);
+                    return;
                 }
-            });
-        } else {
-            window.myUserInfo = layui.data("appData").myUserInfo;
-            console.log("本地加载MyUserInfo数据");
-        }
+                let myUserInfo = result.data;
+
+                //存储到本地的浏览器中
+                layui.data("appData", {
+                    key: "myUserInfo",
+                    value: myUserInfo
+                });
+
+                //将信息存到数据中
+                database.addMemberInfo(myUserInfo);
+            }
+        });
+
     };
 
     InitLoad.getMyJoinRoomInfo = function () {

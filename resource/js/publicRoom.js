@@ -57,7 +57,7 @@
     let searchRoomId = function () {
         $.ajax({
             type: "get",
-            url: "http://localhost/searchRoomId?roomId=" + $("input[name=searchRoomId]").val(),
+            url: REQUESTHEAD + "/searchRoomId?roomId=" + $("input[name=searchRoomId]").val(),
             xhrFields: {
                 withCredentials: true
             },
@@ -83,7 +83,7 @@
     function loadJoinRoomList() {
         $.ajax({
             type: "get",
-            url: "http://localhost/findJoinRoomList",
+            url: REQUESTHEAD + "/findJoinRoomList",
             xhrFields: {
                 withCredentials: true
             },
@@ -122,7 +122,7 @@
     function loadAllRoomList() {
         $.ajax({
             type: "get",
-            url: "http://localhost/findRoomList?pageNum=" + pageNumber + "&&pageSize=" + pageSize,
+            url: REQUESTHEAD + "/findRoomList?pageNum=" + pageNumber + "&&pageSize=" + pageSize,
             xhrFields: {
                 withCredentials: true
             },
@@ -130,7 +130,7 @@
             success: function (result) {
                 if (result.code === 0) {
                     //检测
-                    if (result.data[0].roomId === lastRoomId) {
+                    if (result.data[0].id === lastRoomId) {
                         $("#loadMoreBtn").html("没有更多了");
                         return;
                     }
@@ -138,7 +138,7 @@
                     loadTableRendering(result.data);
                     $("#loadMoreBtn").attr("disabled", false).removeClass("layui-btn-disabled").html("加载更多");
                     lockMore = false;
-                    lastRoomId = result.data[0].roomId;
+                    lastRoomId = result.data[0].id;
                 } else {
                     layer.msg(result.message);
                 }

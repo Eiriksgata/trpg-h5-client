@@ -16,6 +16,8 @@
 
 
     MessageBox.getDiceMessageBoxHtml = function (messageData) {
+
+
         parent.database.findByIndexName("allRelation", "roomId", currentRoomId).then(
             function (roomRelationList) {
                 let data = {};
@@ -61,12 +63,12 @@
                 } else {
                     //小tips
                     let inputBox = $("button[region='" + messageData.region + "']").prev();
-                    inputBox.attr("id", "tempTips");
-                    layer.tips(data.name + ':' + data.message, "#tempTips", {
+                    //inputBox.attr("id", "tempTips");
+                    layer.tips(data.name + ':' + data.message, "#" + inputBox.attr("id"), {
                         tips: [1, '#3595CC'],
                         time: 4000
                     });
-                    inputBox.attr("id", "");
+                    //inputBox.attr("id", "");
                 }
             }
         );
@@ -143,7 +145,6 @@
 
                         parent.RequestData.getRoleCard(roleCardId).then(
                             function (roleCardInfo) {
-                                console.log(roleCardInfo);
                                 if (roleCardInfo != null) {
                                     data.img = roleCardInfo.img;
                                 }
@@ -151,7 +152,7 @@
                                 layui.use('laytpl', function (laytpl) {
                                     laytpl(memberChatMessageBoxHtml.innerHTML).render(data, function (html) {
                                         $("div[region='" + messageData.region + "']").append(html);
-                                       // alert(html);
+                                        // alert(html);
                                     });
                                 });
 
@@ -160,12 +161,12 @@
                                 } else {
                                     //小tips
                                     let inputBox = $("button[region='" + messageData.region + "']").prev();
-                                    inputBox.attr("id", "tempTips");
-                                    layer.tips(data.name + ':' + data.message, "#tempTips", {
+                                    //inputBox.attr("id", "tempTips");
+                                    layer.tips(data.name + ':' + data.message, "#" + inputBox.attr(id), {
                                         tips: [1, '#3595CC'],
                                         time: 4000
                                     });
-                                    inputBox.attr("id", "");
+                                    //inputBox.attr("id", "");
                                 }
 
                             }
@@ -193,9 +194,10 @@
             let btnRegion = $(this).attr("region");
 
             //对所在的区域进行不同消息整合发送处理
+            Rich.controlCompile();
             let messageVo = new ChatMessageVo();
             messageVo.region = btnRegion;
-            messageVo.content = Rich.analysis(content);
+            messageVo.content = content;
             messageVo.roomId = currentRoomId;
 
             //如果是公开区域那么将不需要填太多的数据
@@ -227,79 +229,6 @@
 
 
     };
-
-
-    (function () {
-
-
-    })();
-
-
-    (function () {
-        let Rich = {};
-
-        Rich.controlCompile = function () {
-            $("img[name='richtextTemporary']").each(function (index) {
-                let text = "[name=richtext,type=picture,content=" + $(this).attr("src") + "]";
-                $(this).replaceWith(text);
-                //pictureList.push(text);
-            });
-
-            $("a[name='richtextTemporary']").each(function (index) {
-                let text = "[name=richtext,type=link,content=" + $(this).attr("href") + "]";
-                $(this).replaceWith(text);
-                //pictureList.push(text);
-            });
-        };
-
-
-        Rich.analysis = function (content) {
-            let regex = /\[name=[A-z]+,type=[A-z]+,content=.*?\]/g;
-            //let inputText = $(inputControl).html();
-            let controlTextList = content.match(regex);
-            if (controlTextList == null) return content;
-            for (let i = 0; i < controlTextList.length; i++) {
-                let controlName = controlTextList[i].match(/name=[A-z]+/)[0].substring(5);
-                let controlType = controlTextList[i].match(/type=[A-z]+/)[0].substring(5);
-                let controlContent = controlTextList[i].match(/content=.*/)[0];
-                if (controlContent == null) {
-                    controlContent = "";
-                } else {
-                    controlContent = controlContent.substring(8, controlContent.length - 1);
-                }
-                content = content.replace(controlTextList[i], getCreateText(controlName, controlType, controlContent));
-                //$(inputControl).html(inputText);
-            }
-
-            return content;
-        };
-
-
-        function getCreateText(name, type, content) {
-            console.log(name + type + content);
-            if (name === "richtext") {
-                switch (type) {
-                    case "picture":
-                        return "<img class='richtextPicture' src='" + content + "'>";
-                    case "link":
-                        return "<a href='" + content + "'>" + content + "</a>";
-                }
-
-            }
-
-        }
-
-        Rich.addImg = function (link) {
-            $("#inputBox").append("<img name='richtextTemporary' class='richtextPicture' src=" + link + " />");
-        };
-
-        Rich.addLink = function (link) {
-            $("#inputBox").append("<a name='richtextTemporary' href='" + link + ">" + link + "</a>");
-        };
-
-        window.Rich = Rich;
-
-    })();
 
 
     window.MessageBox = MessageBox;

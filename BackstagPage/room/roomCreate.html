@@ -29,20 +29,20 @@
         <div class="layui-card-body">
             <form class="layui-form" style="margin: 10px;">
                 <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
+                    <label class="layui-form-label">
                         <span class="x-red">*</span>房间名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" name="roomName" name="username" required="" class="layui-input">
+                        <input type="text" name="name" required="" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <label for="phone" class="layui-form-label">
+                    <label class="layui-form-label">
                         <span class="x-red"></span>密码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" name="roomPassword" required="" class="layui-input">
+                        <input type="text" name="password" required="" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
                         <span class="x-red">*</span>如果密码为空则默认不需要密码
@@ -50,11 +50,11 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
+                    <label class="layui-form-label">
                         <span class="x-red">*</span>玩家人数
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" name="playerNumber" required="" class="layui-input" value="1">
+                        <input type="text" name="player" required="" class="layui-input" value="1">
 
                         <div class="layui-form-mid layui-word-aux">
                             <span class="x-red">*</span>玩家人数最少1人
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
+                    <label class="layui-form-label">
                         房间骰子面数
                     </label>
                     <div class="layui-input-inline">
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
+                    <label class="layui-form-label">
                         房规
                     </label>
                     <div class="layui-input-inline">
@@ -93,10 +93,19 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否显示在公开列表</label>
                     <div class="layui-input-block">
-                        <input id="display" type="radio" name="display" value="0" title="隐藏">
-                        <input id="show" type="radio" name="display" value="1" title="显示">
+                        <input type="radio" name="display" value="0" title="隐藏">
+                        <input type="radio" name="display" value="1" title="显示" checked>
                     </div>
                 </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新成员查看历史消息</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="isFindRecord" value="0" title="允许" checked>
+                        <input type="radio" name="isFindRecord" value="1" title="禁止">
+                    </div>
+                </div>
+
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">房间种类</label>
@@ -148,6 +157,9 @@
     </div>
 </div>
 
+
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+
 <script>
     layui.use('form', function () {
         var form = layui.form;
@@ -156,7 +168,7 @@
         form.on('submit(createRoom)', function (data) {
             $.ajax({
                 type: "put",
-                url: "http://localhost/createRoom",
+                url: REQUESTHEAD + "/createRoom",
                 xhrFields: {
                     withCredentials: true
                 },
@@ -173,15 +185,8 @@
     });
 
 </script>
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
+
 </body>
 
 </html>

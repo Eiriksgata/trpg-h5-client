@@ -3,16 +3,14 @@
     let dataUpdateTimer;
 
     let dataUpdateTimerInit = function () {
+        clearInterval(dataUpdateTimer);
         dataUpdateTimer = setInterval(function () {
             allRoomDataUpdate();
-
-
-
         }, 50000);
 
     };
 
-    let allRoomDataUpdate = function(){
+    let allRoomDataUpdate = function () {
 
         //重新加载房间关系
         loadRoomRelation();
@@ -24,7 +22,6 @@
         loadMyRoleCardBox();
 
     };
-
 
 
     window.allRoomDataUpdate = allRoomDataUpdate;

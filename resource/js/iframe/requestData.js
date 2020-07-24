@@ -80,6 +80,63 @@
         return roleCard;
     };
 
+    /**
+     * 将近期的房间消息同步载入到本地数据库
+     * @param roomId
+     */
+    RequestData.getRoomRecord = function (roomId) {
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/getRoomRecord?roomId=" + roomId,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: false,
+            success: function (result) {
+                if (result.code === 0) {
+                    let resultRecord = result.data;
+                    //将数据载入到数据库当中
+                    $.each(resultRecord, function (key, value) {
+                        database.addPublicRecord(value);
+                    });
+
+                } else {
+                    layer.msg(result.message);
+                }
+            }
+        });
+    };
+
+
+    /**
+     * 获得房间消息所有的同步载入到本地数据库
+     * @param roomId
+     */
+    RequestData.getAllRoomRecord = function (roomId) {
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/getAllRoomRecord?roomId=" + roomId,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: false,
+            success: function (result) {
+                if (result.code === 0) {
+                    let resultRecord = result.data;
+                    //将数据载入到数据库当中
+                    $.each(resultRecord, function (key, value) {
+                        database.addPublicRecord(value);
+                    });
+
+                } else {
+                    layer.msg(result.message);
+                }
+            }
+        });
+    };
+
 
     RequestData.getUserState = function (userIdList) {
         if (userIdList.length <= 0) return null;

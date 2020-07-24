@@ -12,7 +12,7 @@
 
     // 计算签名
     let getAuthorization = function (options, callback) {
-        let url = 'http://localhost/post-policy?key=' + encodeURIComponent(options.Pathname);
+        let url = REQUESTHEAD + '/upload/singer/short?key=' + encodeURIComponent(options.Pathname);
         $.ajax({
             type: "get",
             url: url,
@@ -49,7 +49,7 @@
 
             let auth = info.Authorization;
             let xhr = new XMLHttpRequest();
-            xhr.open('PUT', auth.url, true);
+            xhr.open('PUT', auth.singer, true);
             xhr.upload.onprogress = function (e) {
                 let progress = (Math.round(e.loaded / e.total * 10000) / 100) + '%';
                 layui.use('element', function () {
@@ -62,7 +62,7 @@
             xhr.onload = function () {
                 if (/^2\d\d$/.test('' + xhr.status)) {
                     let ETag = xhr.getResponseHeader('etag');
-                    let resultUrl = auth.url.match(/.*\?sign=/g)[0];
+                    let resultUrl = auth.singer.match(/.*\?sign=/g)[0];
                     resultUrl = resultUrl.substring(0, resultUrl.length - 6);
                     console.log(resultUrl);
                     callback(null, {

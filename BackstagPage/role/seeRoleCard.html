@@ -1,208 +1,210 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>TRPG-MEMBER INFO</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-		<link rel="stylesheet" href="../../resource/css/xadmin/font.css">
-		<link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
-		<script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
-		<link rel="stylesheet" href="../../resource/css/base.css" />
+<head>
+    <meta charset="UTF-8">
+    <title>TRPG-MEMBER INFO</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../resource/css/xadmin/font.css">
+    <link rel="stylesheet" href="../../resource/css/xadmin/xadmin.css">
+    <script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
+    <link rel="stylesheet" href="../../resource/css/base.css"/>
 
-		<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-		<style>
-			html,
-			body {
-				height: 100%;
-				background-color: #f2f2f2;
-			}
-		</style>
-	</head>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
 
-	<body>
-		<div class="x-nav">
+<body>
+<div class="x-nav">
 			<span class="layui-breadcrumb">
             
           </span>
-			<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-				<i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
-		</div>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+</div>
 
-		<div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;text-align: center;">
-			<input onclick="this.select();document.execCommand('copy');layer.msg('链接已复制');" id="shareLink" class="layui-input" placeholder="Share Link" />
-			<img onclick="hide(this)" src="../../resource/images/null.jpg" id="myRoleImg" width="150" height="150" style="box-shadow: darkgrey 1px 1px 10px 1px ;" />
-			<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;">
-				<div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					名称:
-				</div>
-				<div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					年龄:
-				</div>
-				<div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					性别:
-				</div>
-				<div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					时代:
-				</div>
-				<div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					职业:
-				</div>
-				<div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					故乡:
-				</div>
-				<div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-					现住:
-				</div>
+<div class="layui-fluid" id="myRoleCard" style="max-width:380px; height:100%;text-align: center;">
+    <input onclick="this.select();document.execCommand('copy');layer.msg('链接已复制');" id="shareLink" class="layui-input"
+           placeholder="Share Link"/>
+    <img onclick="hide(this)" src="../../resource/images/null.jpg" id="myRoleImg" width="150" height="150"
+         style="box-shadow: darkgrey 1px 1px 10px 1px ;"/>
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12"
+         style="border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;">
+        <div id="roleName" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            名称:
+        </div>
+        <div id="roleAge" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            年龄:
+        </div>
+        <div id="roleSex" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            性别:
+        </div>
+        <div id="roleTimes" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            时代:
+        </div>
+        <div id="roleOccupation" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            职业:
+        </div>
+        <div id="roleHometown" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            故乡:
+        </div>
+        <div id="roleResidence" class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+            现住:
+        </div>
 
-			</div>
+    </div>
 
-			<div style='border-bottom: #01AAED 5px solid;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+    <div style='border-bottom: #01AAED 5px solid;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
 
-			</div>
+    </div>
 
-			<div id="skill" style='border-bottom: #01AAED 5px solid;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+    <div id="skill" style='border-bottom: #01AAED 5px solid;' class="layui-col-xs12 layui-col-sm12 layui-col-md12">
 
-			</div>
+    </div>
 
-			<div id="takeList" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;">
+    <div id="takeList" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;">
 
-			</div>
+    </div>
 
-			<div id="weaponList" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;">
+    <div id="weaponList" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;">
 
-			</div>
+    </div>
 
-			<div id="assets" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;text-align: left;">
+    <div id="assets" class="layui-col-xs12 layui-col-sm12 layui-col-md12"
+         style="border-bottom: #01AAED 5px solid;text-align: left;">
 
-			</div>
+    </div>
 
-			<div id="roleStory" class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="border-bottom: #01AAED 5px solid;text-align: left;">
+    <div id="roleStory" class="layui-col-xs12 layui-col-sm12 layui-col-md12"
+         style="border-bottom: #01AAED 5px solid;text-align: left;">
 
-			</div>
+    </div>
 
-			<div class="layui-form-item">
-				<div style="background-color: lightgray" disabled="disabled" name="remarks" class="layui-textarea">
+    <div class="layui-form-item">
+        <div style="background-color: lightgray" disabled="disabled" name="remarks" class="layui-textarea">
 
-				</div>
-			</div>
+        </div>
+    </div>
 
-			<button onclick="clone();" style="width: 100%;margin-top: 10px;margin-bottom: 10px;" class="layui-btn layui-btn-danger">拷贝</button>
-			<div style="text-align: center;color: red;">拷贝是给拿你卡的人使用的，分享用户不要点击</div>
-		</div>
+    <button onclick="clone();" style="width: 100%;margin-top: 10px;margin-bottom: 10px;"
+            class="layui-btn layui-btn-danger">拷贝
+    </button>
+    <div style="text-align: center;color: red;">拷贝是给拿你卡的人使用的，分享用户不要点击</div>
+</div>
 
-	</body>
+</body>
 
-	<script>
-		var key = window.location.search;
-		$(location).ready(function() {
-			getRoleCardData();
-			var windwslocation = window.location.toLocaleString();
-			if(windwslocation.substring(0, 4) == "http") {
-				$('#shareLink').val(window.location);
-			} else {
-				$('#shareLink').val("http://134.175.43.199/TabletopClient/BackstagPage/seeRoleCard.html" + key);
-			}
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
 
-		});
+<script>
+    var key = window.location.search;
+    $(location).ready(function () {
+        getRoleCardData();
+        var windwslocation = window.location.toLocaleString();
+        if (windwslocation.substring(0, 4) == "http") {
+            $('#shareLink').val(window.location);
+        } else {
+            $('#shareLink').val("http://134.175.43.199/TabletopClient/BackstagPage/seeRoleCard.html" + key);
+        }
 
-		function hide(control) {
-			$(control).nextAll().slideToggle();
-		}
+    });
 
-		function clone() {
-			$.ajax({
-				type: "get",
-				url: "http://localhost/role/clone" + key,
-				xhrFields: {
-					withCredentials: true
-				},
-				crossDomain: true,
-				success: function(result) {
-					layer.msg(result.message);
-				}
-			});
-		}
+    function hide(control) {
+        $(control).nextAll().slideToggle();
+    }
 
-		function getRoleCardData() {
-			$.ajax({
-				type: "get",
-				url: "http://localhost/role/see" + key,
-				xhrFields: {
-					withCredentials: true
-				},
-				crossDomain: true,
-				success: function(result) {
-					if(result.code == 0) {
-						loadMyRoleCardData(result.data);
-					}
-					$("#shareLink").click();
-					layer.msg("链接已复制，粘贴发给KP." + result.message);
-				}
-			});
+    function clone() {
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/role/clone" + key,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                layer.msg(result.message);
+            }
+        });
+    }
 
-		}
+    function getRoleCardData() {
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/role/see" + key,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                if (result.code === 0) {
+                    loadMyRoleCardData(result.data);
+                }
+                $("#shareLink").click();
+                layer.msg("链接已复制，粘贴发给KP." + result.message);
+            }
+        });
 
-		function loadMyRoleCardData(role) {
-			var regex = /([\u4e00-\u9fa5]+|[A-z]+)\d+/g,
-				str = role.attribute;
-			var attribute = str.match(regex);
-			var htmlText = '';
-			var skillControler = $("#skill");
-			skillControler.empty();
-			if(attribute != null) {
-				for(var i = 0; i < attribute.length; i++) {
-					htmlText = "<div onclick='' class='layui-col-xs4 layui-col-sm4 layui-col-md3'>" + attribute[i] + "</div>";
-					skillControler.append(htmlText);
-				}
-			}
+    }
 
-			$("#roleName").html("名字:" + role.name);
-			$("#roleAge").html("年龄:" + role.age);
+    function loadMyRoleCardData(role) {
+        var regex = /([\u4e00-\u9fa5]+|[A-z]+)\d+/g,
+            str = role.attribute;
+        var attribute = str.match(regex);
+        var htmlText = '';
+        var skillControler = $("#skill");
+        skillControler.empty();
+        if (attribute != null) {
+            for (var i = 0; i < attribute.length; i++) {
+                htmlText = "<div onclick='' class='layui-col-xs4 layui-col-sm4 layui-col-md3'>" + attribute[i] + "</div>";
+                skillControler.append(htmlText);
+            }
+        }
 
-			if(role.sex == 0) {
-				$("#roleSex").html("性别:保密");
-			}
-			if(role.sex == 1) {
-				$("#roleSex").html("性别:男");
+        $("#roleName").html("名字:" + role.name);
+        $("#roleAge").html("年龄:" + role.age);
 
-			}
-			if(role.sex == 2) {
-				$("#roleSex").html("性别:女");
-			}
+        if (role.sex == 0) {
+            $("#roleSex").html("性别:保密");
+        }
+        if (role.sex == 1) {
+            $("#roleSex").html("性别:男");
 
-			//修改角色图片
-			$("#myRoleImg").attr("src", role.img);
+        }
+        if (role.sex == 2) {
+            $("#roleSex").html("性别:女");
+        }
 
-			$("#roleTimes").html("时代:" + role.times);
-			$("#roleOccupation").html("职业:" + role.occupation);
-			$("#roleResidence").html("现住:" + role.residence);
-			$("#roleHometown").html("故乡:" + role.hometown);
+        //修改角色图片
+        $("#myRoleImg").attr("src", role.img);
 
-			$("#takeList").html("携带物品:<br>" + role.takeList.replace(/\\n/g, '<br>'));
-			$("#weaponList").html("武器列表:<br>" + role.weaponList.replace(/\\n/g, '<br>'));
-			$("#assets").html("<div style='text-align: center'>资产:</div>" + role.assets.replace(/\\n/g, '<br>'));
-			$("#roleStory").html("<div style='text-align: center'>背景故事:</div>" + role.roleStory.replace(/\\n/g, '<br>'));
-			$("div[name='remarks']").html(role.remarks);
+        $("#roleTimes").html("时代:" + role.times);
+        $("#roleOccupation").html("职业:" + role.occupation);
+        $("#roleResidence").html("现住:" + role.residence);
+        $("#roleHometown").html("故乡:" + role.hometown);
 
-		}
-	</script>
+        $("#takeList").html("携带物品:<br>" + role.takeList.replace(/\\n/g, '<br>'));
+        $("#weaponList").html("武器列表:<br>" + role.weaponList.replace(/\\n/g, '<br>'));
+        $("#assets").html("<div style='text-align: center'>资产:</div>" + role.assets.replace(/\\n/g, '<br>'));
+        $("#roleStory").html("<div style='text-align: center'>背景故事:</div>" + role.roleStory.replace(/\\n/g, '<br>'));
+        $("div[name='remarks']").html(role.remarks);
 
-	<script>
-		var _hmt = _hmt || [];
-		(function() {
-			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
+    }
+</script>
+
 
 </html>

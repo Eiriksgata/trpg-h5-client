@@ -51,7 +51,7 @@
         if (data.region === "square" || data.region === "plot") {
             MessageRecord.addPublicRoomMessage(data);
         } else {
-            MessageRecord.addPrivateRoomMessage(data);
+           // MessageRecord.addPrivateRoomMessage(data);
         }
     };
 

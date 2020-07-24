@@ -2,11 +2,10 @@
 
 
     let messageHandler = function (socketData) {
-        console.log(socketData.roomId + "," + window.frames["pageFrame"].contentWindow.currentRoomId);
 
-        //进行自定义消息创建判定,并且转换为特殊的文本格式
-        if (socketData.content != null) {
-            socketData.content = MessageAnalysis.richTextConvert(socketData.content);
+        if (socketData.messageType === ChatMessageCode.SYSTEM) {
+            dataInit();
+            return;
         }
 
         /**
@@ -18,45 +17,24 @@
             } catch (e) {
                 console.log("当前尚未处于聊天室内或其他原因导致的错误:" + e);
             }
+            MessageRecord.chatMessageRecord(socketData);
+        }
+
+        //进行自定义消息创建判定,并且转换为特殊的文本格式
+        if (socketData.content != null) {
+            socketData.content = Rich.analysis(socketData.content);
         }
 
         /**
-         * 先检测消息是否具有区域的属性
+         * 检测玩家是否处于消息所在的房间
          */
-        if (socketData.region != null || socketData.region !== undefined) {
-            /**
-             * 检测并添加新的区域，方便用于判断使用,存储于本地之中
-             */
-            let region = layui.data("appData").recordRegion;
-            if (region == null || region === undefined) {
-                region = [];
-            }
-            let addNewRegionCount = 0;
-            $.each(region, function (key, value) {
-                if (socketData.region === value) {
-                    addNewRegionCount++;
-                }
-            });
-
-            if (addNewRegionCount === 0) {
-                region.push(socketData.region);
-                layui.data("appData", {
-                    key: "recordRegion",
-                    value: region
-                });
-                //添加新的点击框
-                window.frames["pageFrame"].contentWindow.GroupMessage.addGroupClickBox(socketData.region, socketData.receiverId);
-            }
-
+        if (parseInt(socketData.roomId) !== parseInt(window.frames["pageFrame"].contentWindow.currentRoomId)) {
+            return;
         }
 
 
         switch (socketData.messageType) {
-            case ChatMessageCode.SYSTEM:
-                dataInit();
-                return;
             case ChatMessageCode.FORWARD:
-                MessageRecord.chatMessageRecord(socketData);
                 try {
                     window.frames["pageFrame"].contentWindow.MessageBox.getChatMessageBoxHtml(socketData);
                 } catch (e) {

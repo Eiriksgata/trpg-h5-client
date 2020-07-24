@@ -1,10 +1,11 @@
 (function (w) {
 
     $("#mobileModelButton").click(function () {
-        addMobileBox();
-        initSwiper();
         $("#mobileModelButton").attr("disabled", "disabled");
         $("#diyModelButton").attr("disabled", "disabled");
+        addMobileBox();
+        initSwiper();
+
 
         //重新加载控件事件
         //MessageBox.sendMessageBtnEvent();

@@ -90,8 +90,6 @@
                         "allPlayer": await allPlayer
                     };
 
-                    console.log(data);
-
                     /**
                      * 渲染打开窗口界面
                      */

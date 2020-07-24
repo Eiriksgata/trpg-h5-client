@@ -83,7 +83,7 @@
                 <h2 style="margin-bottom: 5px;">{{d.name}}</h2>
                 <h3 style="margin-bottom: 5px;">房间ID:{{d.id}}</h3>
                 <h3 style="margin-bottom: 5px;">人数上限:{{d.player}}</h3>
-                <h3 style="margin-bottom: 5px;">创建人:<a style="color: blue;"
+                <h3 style="margin-bottom: 5px;">创建人:<a style="color: blue;cursor:pointer; "
                                                        onclick="openMemberInfo({{d.createUserId}})">[点击查看]</a>
                 </h3>
                 <a href="roomVerified.html?roomId={{d.id}}" class="layui-btn">加入房间</a>
@@ -93,6 +93,7 @@
     </div>
 </script>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
 <script type="text/javascript" src="../../resource/js/publicRoom.js"></script>
 
 <script>

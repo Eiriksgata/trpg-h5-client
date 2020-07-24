@@ -69,15 +69,48 @@
         return DBOpenRequest.result.transaction([tableName], "readonly").objectStore(tableName).openCursor();
     };
 
+    database.findAllByIndex = function (tableName, index) {
+        return DBOpenRequest.result.transaction([tableName], "readonly").objectStore(tableName).index(index).openCursor();
+    };
+
+
+    // 查询一个object store的所有数据
+    database.getAllByIndex = function (tableName, index, value) {
+        return new Promise(function (resolve, reject) {
+            let result = DBOpenRequest.result.transaction([tableName], "readonly").objectStore(tableName).index(index).openCursor(value);  //  打开一个游标
+            let data = [];
+            result.onsuccess = function (e) {
+                let cursor = e.target.result;
+
+                if (cursor && cursor !== null && cursor !== undefined) {
+                    let problem = cursor.value;
+                    data.push(problem);
+                    cursor.continue();
+                } else {
+                    resolve(data);
+                }
+            };
+            result.onerror = function (e) {
+                reject("error");
+            };
+        });
+
+    };
+
+
     /**
      * 数据库索引查询
      * @param tableName 查询的表格名称
      * @param indexName 查询的索引名称，当为NULL时，是按ID查询
      * @param value 查询返回值 如果是查询id，请直接输入整形数字，不要输入字符串
+     * @param number 数据量
      * @returns {Promise} 异步同步扁平化处理 如果是按id查询，返回的是一个查询结果数据
      * 如果查询为其他的 索引号，那么返回的是一个数组
+     * ps: 根据不同的浏览器 getAll 返回的数据数量会有所不同，例如谷歌的最大返回数量是49条
+     * 参考F12中的一次搜索记录数，如果需要查询所有的数据，请用openCursor
+     *
      */
-    database.findByIndexName = function (tableName, indexName, value) {
+    database.findByIndexName = function (tableName, indexName, value, number) {
         return new Promise(function (resolve, reject) {
             let request = null;
             if (indexName == null || indexName === "id") {

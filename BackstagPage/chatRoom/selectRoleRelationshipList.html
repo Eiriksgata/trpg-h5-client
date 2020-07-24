@@ -81,6 +81,8 @@
     </div>
 </script>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+
 <script>
     let selectControl;
     let findMemberId = window.location.search.substring(10);
@@ -97,7 +99,7 @@
     function loadMyRoleCardData() {
         $.ajax({
             type: "get",
-            url: "http://localhost/role/findMyRole",
+            url: REQUESTHEAD + "/role/findMyRole",
             xhrFields: {
                 withCredentials: true
             },
@@ -142,7 +144,7 @@
         };
 
         $.ajax({
-            url: "http://localhost/addRoleRelationship",
+            url: REQUESTHEAD + "/addRoleRelationship",
             type: "put",
             dataType: "json",
             xhrFields: {

@@ -3,8 +3,10 @@
     let MessageCount = {};
 
     MessageCount.selectRegion = "";
+
     MessageCount.addCount = function (region) {
-        //if (MessageCount.selectRegion === region) return;
+        if (MessageCount.selectRegion === region) return;
+
         if (MessageCount[region] == null || MessageCount[region] === undefined) {
             MessageCount[region] = 0;
         }
@@ -34,10 +36,12 @@
     MessageCount.selectButtonEvent = function () {
         $("[name='squareAllNewMessageCount']").on("click", function () {
             MessageCount.clearCount("square");
+            MessageCount.selectRegion = "square";
         });
 
         $("[name='plotAllNewMessageCount']").on("click", function () {
             MessageCount.clearCount("plot");
+            MessageCount.selectRegion = "plot";
         });
     };
 

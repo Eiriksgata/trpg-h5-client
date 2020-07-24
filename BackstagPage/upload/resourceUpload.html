@@ -40,6 +40,7 @@
 <input id="resultUrl" onclick="this.select();document.execCommand('copy');layer.msg('链接已复制');" class="layui-input"/>
 <p>点击输入框自动复制</p>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
 
 <script type="text/javascript" src="../../resource/js/chatroom/upload/cosupload.js"></script>
 <script>
@@ -49,12 +50,19 @@
         let element = layui.element;
     });
 
+    layui.use("layer", function () {
+        window.layer = layui.layer;
+    });
+
+
     (function () {
 
 
         // 监听表单提交
         document.getElementById('submitBtn').onclick = function (e) {
             let file = document.getElementById('fileSelector').files[0];
+
+            console.log(file);
             if (!file) {
                 document.getElementById('msg').innerText = '未选择上传文件';
                 return;

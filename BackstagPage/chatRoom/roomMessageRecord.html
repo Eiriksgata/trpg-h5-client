@@ -55,6 +55,8 @@
     </div>
 </script>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+
 <script>
     var findMemberId;
     var record;
@@ -77,7 +79,7 @@
             var table = layui.table;
             $.ajax({
                 type: "get",
-                url: "http://localhost/findRoomMessageRecord" + findMemberId,
+                url: REQUESTHEAD + "/findRoomMessageRecord" + findMemberId,
                 xhrFields: {
                     withCredentials: true
                 },

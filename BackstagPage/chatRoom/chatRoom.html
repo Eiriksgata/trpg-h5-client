@@ -69,25 +69,32 @@
 
 
 <div class="x-nav">
-    <div id="roomListButton"
-         style="width: 30px;height: 100px;background-color: black;color: white;position: fixed;left: 0;top: 40%;font-size: 16px">
-        <div style="margin: 5px;letter-spacing: 0px;line-height: 22px">
-            房间列表
-        </div>
-    </div>
+    <!--<div id="roomListButton"-->
+    <!--style="width: 30px;height: 100px;background-color: #393D49;color: white;position: fixed;left: 0;top: 30%;font-size: 16px">-->
+    <!--<div style="margin: 5px;letter-spacing: 0;line-height: 22px">-->
+    <!--房间列表-->
+    <!--</div>-->
+    <!--</div>-->
 
     <div id="selectRoomList"
-         style="width: 300px;height: 100%;background-color: black;color: white;position: fixed;left: -300px;top: 0;font-size: 17px">
-        <div id="quitSelectRoomList"><=</div>
+         style="width: 300px;height: 100%;
+         background-color: #dddddd;
+         position: fixed;
+         box-shadow:none;
+         left: -300px;
+         top: 0;">
+        <button id="quitSelectRoomButton" class="layui-btn layui-bg-gray">关闭</button>
+        <div id="switchRoomListBox" style="overflow-y: scroll;height: 500px;"></div>
     </div>
+
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
     </a>
     <div style="width: 80%;overflow-x: scroll;overflow-y: hidden;">
         <div style="width: 1000px">
-            <a class="layui-btn" href="publicRoom.html">返回房间列表</a>
-            <button id="switchRoomButton" class="layui-btn">切换房间</button>
+            <a class="layui-btn" href="publicRoom.html">返回大厅</a>
+            <button id="roomListButton" class="layui-btn layui-bg-cyan">切换房间</button>
             <button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html')">快速修改角色卡信息</button>
             <button class="layui-btn" id="mobileModelButton">手机模式</button>
             <button class="layui-btn" id="diyModelButton">DIY模式(宽屏模式下才有用)</button>
@@ -220,7 +227,8 @@
 
                         <!-- 插入图片 -->
                         <div style="float: left;height: 30px;margin:3px;margin-right: 15px;margin-left: 10px">
-                            <i title="插入图片" class="layui-icon" style="line-height:29px;font-size: 23px;height: 30px">
+                            <i id="insertPicture" title="插入图片" class="layui-icon"
+                               style="line-height:29px;font-size: 23px;height: 30px">
                                 &#xe634;
                             </i>
                         </div>
@@ -299,7 +307,7 @@
     </div>
 
     <!-- 私聊 收藏 广场 -->
-    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">\
         <div id="oderDiv" class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-tab-title">
                 <li name="squareAllNewMessageCount">广场<span
@@ -359,10 +367,11 @@
 </div>
 
 
-
 </body>
 
-
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/menu/inputBottomMenu.js"></script>
+<script type="text/javascript" src="../../resource/js/iframe/textanalysis.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/message/groupMessage.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/record/loadRecord.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/message/messageCount.js"></script>
@@ -386,22 +395,12 @@
 <script type="text/javascript" src="../../resource/js/chatroom/timer/dataUpdate.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/message/layuiRendering.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/chatRoomInit.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/switchRoom/switchRoom.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/upload/cosupload.js"></script>
 
 <script>
 
-    $("#switchRoomButton").on("click", function () {
-        window.currentRoomId = 13;
-        window.ChatRoomSystem.LoadInit();
-    });
 
-    $("#roomListButton").on("click", function () {
-        $("#selectRoomList").animate({left: "0px"});
-
-    });
-
-    $("#quitSelectRoomList").on("click", function () {
-        $("#selectRoomList").animate({left: "-300px"});
-    });
 </script>
 
 </html>

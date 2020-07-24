@@ -109,6 +109,7 @@
 
 </body>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
 
 <script>
     let findMemberId;
@@ -125,7 +126,7 @@
         form.on('submit(myMemberInfoUpdate)', function (data) {
             $.ajax({
                 type: "put",
-                url: "http://localhost/member/updateMemberInfo" + findMemberId,
+                url: REQUESTHEAD + "/member/updateMemberInfo" + findMemberId,
                 xhrFields: {
                     withCredentials: true
                 },

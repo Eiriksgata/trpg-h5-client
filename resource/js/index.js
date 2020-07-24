@@ -11,7 +11,7 @@ $(window).ready(function () {
 function quitLogin() {
     $.ajax({
         type: "get",
-        url: "http://localhost/quitLogin",
+        url: REQUESTHEAD + "/quitLogin",
         xhrFields: {
             withCredentials: true
         },
