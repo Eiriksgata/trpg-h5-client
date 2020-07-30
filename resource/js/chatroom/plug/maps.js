@@ -65,7 +65,7 @@ function clientPushMapsData() {
         "messageType": 12,
         "message": message,
         "roleId": userId
-    }
+    };
 
     socket.send(JSON.stringify(data));
 }

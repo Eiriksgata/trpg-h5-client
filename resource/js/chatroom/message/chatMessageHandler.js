@@ -7,13 +7,11 @@
     let MessageBox = {};
 
     MessageBox.addChatMessage = function () {
-
         let scrollOpen = true;
         let div = document.getElementById('gameChatBox');
         let value = div.scrollTop + div.clientHeight;
 
     };
-
 
     MessageBox.getDiceMessageBoxHtml = function (messageData) {
 
@@ -35,21 +33,22 @@
                     }
                 });
 
-                if (roleCarId == null || roleCarId === undefined) {
-                    data.message = "[" + messageData.senderNike + "]" + messageData.content;
-                } else {
-                    roleCard = parent.RequestData.getRoleCard(roleCarId);
-                }
+                // if (roleCarId == null || roleCarId === undefined) {
+                //     data.message = "[" + messageData.senderNike + "]" + messageData.content;
+                // } else {
+                //     roleCard = parent.RequestData.getRoleCard(roleCarId);
+                // }
+                data.message = "[" + messageData.senderNike + "]" + messageData.content;
 
                 if (regionBox.scrollHeight - (regionBox.scrollTop + regionBox.clientHeight) > 10) {
                     scrollOpen = false;
                 }
 
-                if (roleCard == null) {
-                    data.message = "[" + messageData.senderNike + "]" + messageData.content;
-                } else {
-                    data.message = "[" + roleCard.name + "]" + messageData.content;
-                }
+                // if (roleCard == null) {
+                //     data.message = "[" + messageData.senderNike + "]" + messageData.content;
+                // } else {
+                //     data.message = "[" + roleCard.name + "]" + messageData.content;
+                // }
 
 
                 layui.use("laytpl", function (laytpl) {
@@ -195,6 +194,12 @@
 
             //对所在的区域进行不同消息整合发送处理
             Rich.controlCompile();
+
+            console.log(IsURL(content));
+            //判断当前输入的是否是一个链接
+            if (IsURL(content)) {
+                content = Rich.getRichDate("richtext", "link", content);
+            }
             let messageVo = new ChatMessageVo();
             messageVo.region = btnRegion;
             messageVo.content = content;

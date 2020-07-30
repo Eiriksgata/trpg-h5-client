@@ -5,13 +5,15 @@
     Rich.lastClickInputControl = null;
 
     Rich.controlCompile = function () {
-        $("img[name='richtextTemporary']").each(function (index) {
+
+
+        $(".richtextInputBox>img[name='richtextTemporary']").each(function (index) {
             let text = "[name=richtext,type=picture,content=" + $(this).attr("src") + "]";
             $(this).replaceWith(text);
             //pictureList.push(text);
         });
 
-        $("a[name='richtextTemporary']").each(function (index) {
+        $(".richtextInputBox.a[name='richtextTemporary']").each(function (index) {
             let text = "[name=richtext,type=link,content=" + $(this).attr("href") + "]";
             $(this).replaceWith(text);
             //pictureList.push(text);
@@ -33,7 +35,7 @@
             } else {
                 controlContent = controlContent.substring(8, controlContent.length - 1);
             }
-            content = content.replace(controlTextList[i], getCreateText(controlName, controlType, controlContent));
+            content = content.replace(controlTextList[i], Rich.getCreateText(controlName, controlType, controlContent));
             //$(inputControl).html(inputText);
         }
 
@@ -41,19 +43,21 @@
     };
 
 
-    function getCreateText(name, type, content) {
-        console.log(name + type + content);
+    Rich.getCreateText = function (name, type, content) {
         if (name === "richtext") {
             switch (type) {
                 case "picture":
                     return "<img class='richtextPicture' src='" + content + "'>";
                 case "link":
-                    return "<a href='" + content + "'>" + content + "</a>";
+                    return "<a href='javascript:;' onclick=\"xadmin.open('New windows','" + content + "','','')\">" + content + "</a>";
             }
-
         }
+    };
 
-    }
+    Rich.getRichDate = function (name, type, content) {
+        return "[name=" + name + ",type=" + type + ",content=" + content + "]";
+
+    };
 
     Rich.addImg = function (link) {
         let htmlText = $(Rich.lastClickInputControl).html();

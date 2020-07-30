@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
-          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=1,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="stylesheet" href="resource/css/xadmin/font.css"/>
     <link rel="stylesheet" href="resource/css/xadmin/login.css"/>
@@ -24,7 +24,7 @@
 
 <body class="login-bg layui-bg-gray">
 
-<div class="login layui-anim layui-anim-up">
+<div class="login layui-anim layui-anim-up" style="margin-top: 50px">
     <form method="post" class="layui-form">
         <div class="message">Role-Playing Register <br/>注册后邮箱作为用户名登录</div>
         <hr class="hr15">
@@ -34,15 +34,12 @@
         <hr class="hr15">
         <input id="passwordAgain" lay-verify="password" placeholder="重复密码" type="password" class="layui-input">
         <hr class="hr15">
-
         <input name="mailVerificationCode" lay-verify="required" placeholder="邮箱验证码" type="text" class="layui-input"
                style="max-width: 70%;float: left;">
         <button id="getVerifyCode" class="layui-btn" style="height: 50px;">获取验证码</button>
         <hr class="hr15">
-
         <input value="注册" lay-submit lay-filter="register" style="width:100%;" type="submit">
         <hr class="hr15">
-
     </form>
 
     <button id="loginPageBtn" class="layui-btn">登录页面</button>

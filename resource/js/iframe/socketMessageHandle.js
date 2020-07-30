@@ -11,7 +11,7 @@
         /**
          * 检查是否是来自本地的消息载入，如果是则跳过计数，只对新消息进行计数
          */
-        if (socketData.isLocal == null || socketData === undefined) {
+        if ((socketData.isLocal == null || socketData === undefined) && (socketData.messageType === ChatMessageCode.FORWARD)) {
             try {
                 window.frames["pageFrame"].contentWindow.MessageCount.addCount(socketData.region);
             } catch (e) {
@@ -48,12 +48,8 @@
                     console.log("对当前用户尚未在房间内的消息进行处理");
                 }
                 return;
-            case ChatMessageCode.ROOMPRIVATE:
-                //讨论组消息处理
-
-                return;
             case ChatMessageCode.UPDATELOADROOMDATA:
-                window.frames["pageFrame"].contentWindow.allRoomDataUpdate();
+                window.frames["pageFrame"].contentWindow.window.allRoomDataUpdate();
                 return;
 
         }

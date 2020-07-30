@@ -1,4 +1,4 @@
 const NULLIMG = "../images/null.jpg";
-const REQUESTHEAD = "http://192.168.1.106";
+const REQUESTHEAD = "http://localhost";
 
 

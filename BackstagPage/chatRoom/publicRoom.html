@@ -40,8 +40,6 @@
 </div>
 
 <div class="layui-fluid">
-
-
     <button id="findJoinRoomBtn" style="max-width: 300px;" class="layui-btn">查看已加入的房间列表</button>
     <div style="max-width: 300px;">
         <input type="number" name="searchRoomId" placeholder='查询房间ID' style="float: left; width: 85%;"
@@ -55,13 +53,9 @@
     </div>
 
     <div id="roomList">
-
     </div>
 
-
     <button id="loadMoreBtn" style="margin-top: 10px;width: 100%" class="layui-btn">加载更多</button>
-
-
 </div>
 
 <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="text-align: center;color: gray;">
@@ -72,7 +66,7 @@
 </body>
 
 <script type="text/html" id="roomListHtml">
-    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4" style="margin: 10px;">
+    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4" style="margin-top: 10px;">
         <div class="roleCard" style="box-shadow: darkgrey 1px 1px 20px 1px;border: 3px #f2f2f2 solid;">
             <div style="width:135px;height:135px;float: left;box-shadow: darkgrey 1px 1px 10px 1px ;//边框阴影 ">
                 {{# let getIocAttribute = function(){ if(d.ioc == null|| d.ioc == ''){ return
