@@ -51,6 +51,10 @@
             case ChatMessageCode.UPDATELOADROOMDATA:
                 window.frames["pageFrame"].contentWindow.window.allRoomDataUpdate();
                 return;
+            case ChatMessageCode.ROOMMUSIC:
+                let musicMessage = JSON.parse(socketData.content);
+                window.frames["pageFrame"].contentWindow.RoomMusicPlay.addMusic(musicMessage.url, musicMessage.musicName, socketData.senderNike);
+                return;
 
         }
 
