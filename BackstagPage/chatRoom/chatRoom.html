@@ -152,6 +152,7 @@
                         </div>
                     </div>
 
+
                     <div id="skill"
                          style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
                          class="layui-col-xs12 layui-col-sm12 layui-col-md12">
@@ -189,7 +190,7 @@
                     </div>
 
                     <div class="audio-right">
-                        <p style="max-width: 536px;"></p>
+                        <p id="roomMusicTitle" style="max-width: 536px;"></p>
                         <div class="progress-bar-bg" id="progressBarBg"><span id="progressDot"></span>
                             <div class="progress-bar" id="progressBar"></div>
                         </div>
@@ -198,6 +199,38 @@
                             <span class="audio-length-total">00:00</span>
                         </div>
                     </div>
+                </div>
+
+                <div id="musicMenuList"
+                     style="display: none;border: 1px solid #e0e0e0;background-color: white;height: 200px;width: 100%;margin-top: -5px">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li>点歌</li>
+                            <li>收藏</li>
+                            <li>当前播放列表</li>
+                        </ul>
+
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                音乐链接(支持网易云的公开音乐):
+                                <input name="musicUrlInput" class="layui-input"/>
+                                音乐名称(选填):
+                                <input name="musicNameInput" class="layui-input">
+                                <button id="musicUploadButton" class="layui-btn">本地上传</button>
+                                <button id="musicSendButton" class="layui-btn">发送</button>
+                            </div>
+
+                            <div class="layui-tab-item">
+                                功能暂未开放
+                            </div>
+
+                            <div class="layui-tab-item">
+                                功能暂未开放
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -399,8 +432,14 @@
 <script type="text/javascript" src="../../resource/js/chatroom/upload/cosupload.js"></script>
 
 <script>
-
-
+    // console.log($("#roomPlayer>source").attr("src"));
+    // setTimeout(function () {
+    //     RoomMusicPlay.addMusic("../../resource/audio/BlueDucks_FourFlossFiveSix.mp3", "test1", "user1");
+    // }, 2000);
+    //
+    // setTimeout(function () {
+    //     RoomMusicPlay.addMusic("../../resource/audio/BlueDucks_FourFlossFiveSix.mp3", "test2", "user1");
+    // }, 4000);
 </script>
 
 </html>
