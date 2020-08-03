@@ -38,6 +38,7 @@
                 // } else {
                 //     roleCard = parent.RequestData.getRoleCard(roleCarId);
                 // }
+
                 data.message = "[" + messageData.senderNike + "]" + messageData.content;
 
                 if (regionBox.scrollHeight - (regionBox.scrollTop + regionBox.clientHeight) > 10) {
@@ -193,7 +194,7 @@
             let btnRegion = $(this).attr("region");
 
             //对所在的区域进行不同消息整合发送处理
-            Rich.controlCompile();
+            content = Rich.controlCompile(content);
 
             console.log(IsURL(content));
             //判断当前输入的是否是一个链接
