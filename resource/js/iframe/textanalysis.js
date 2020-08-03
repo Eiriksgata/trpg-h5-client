@@ -4,20 +4,24 @@
 
     Rich.lastClickInputControl = null;
 
-    Rich.controlCompile = function () {
+    Rich.controlCompile = function (content) {
+        let imgHtmlList = content.match(/<img.+?>/g);
+        $.each(imgHtmlList, function (key, value) {
+            let text = "[name=richtext,type=picture,content=" + $(value).attr("src") + "]";
 
-
-        $(".richtextInputBox>img[name='richtextTemporary']").each(function (index) {
-            let text = "[name=richtext,type=picture,content=" + $(this).attr("src") + "]";
-            $(this).replaceWith(text);
-            //pictureList.push(text);
+            content = content.replace(value, text);
         });
-
-        $(".richtextInputBox.a[name='richtextTemporary']").each(function (index) {
-            let text = "[name=richtext,type=link,content=" + $(this).attr("href") + "]";
-            $(this).replaceWith(text);
-            //pictureList.push(text);
-        });
+        return content;
+        // $(".richtextInputBox>img[name='richtextTemporary']").each(function (index) {
+        //     let text = "[name=richtext,type=picture,content=" + $(this).attr("src") + "]";
+        //     this.replaceWith(text);
+        //     console.log($(this));
+        // });
+        //
+        // $(".richtextInputBox.a[name='richtextTemporary']").each(function (index) {
+        //     let text = "[name=richtext,type=link,content=" + $(this).attr("href") + "]";
+        //     $(this).replaceWith(text);
+        // });
     };
 
 
