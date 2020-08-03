@@ -91,6 +91,7 @@
        onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
     </a>
+
     <div style="width: 80%;overflow-x: scroll;overflow-y: hidden;">
         <div style="width: 1000px">
             <a class="layui-btn" href="publicRoom.html">返回大厅</a>
@@ -101,6 +102,8 @@
             <button class="layui-btn" onclick="showMusicPlay()">显示音乐播放器</button>
         </div>
     </div>
+
+
 </div>
 
 <div class="grid-stack" id="view">
@@ -151,7 +154,6 @@
                             现住:
                         </div>
                     </div>
-
 
                     <div id="skill"
                          style='border-bottom: #01AAED 5px solid;border-top: #01AAED 5px solid;overflow: scroll;max-width:380px;max-height: 200px; overflow-x: hidden ;'
@@ -265,21 +267,17 @@
                                 &#xe634;
                             </i>
                         </div>
-                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
-                            <i title="插入链接" class="layui-icon" style="line-height:28px;font-size: 18px;height: 30px">
-                                &#xe64c;
-                            </i>
-                        </div>
 
                         <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
-                            <i title="插入音乐" class="layui-icon" style="line-height:28px;font-size: 23px;height: 30px">
-                                &#xe6fc;
-                            </i>
-                        </div>
-
-                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
-                            <i title="上传" class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
+                            <i title="上传" onclick="xadmin.open('上传','../upload/resourceUpload.html','','');"
+                               class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
                                 &#xe681;
+                            </i>
+                        </div>
+
+                        <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
+                            <i title="表情" class="layui-icon" style="line-height:30px;font-size: 21px;height: 30px">
+                                &#xe650;
                             </i>
                         </div>
 
@@ -300,13 +298,6 @@
                                 &#xe639;
                             </i>
                         </div>
-
-
-                        <!--<div style="float: left;">-->
-                        <!--<button onclick="openRichInputPage()" style="background-color: black" class="layui-btn">-->
-                        <!--插入富文本-->
-                        <!--</button>-->
-                        <!--</div>-->
 
                         <!--<div style="float: left;">-->
                         <!--<button onclick="openEmoticonPage();" class="layui-btn">表情</button>-->
@@ -401,6 +392,7 @@
 
 
 </body>
+
 <script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
 <script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/menu/inputBottomMenu.js"></script>
@@ -432,14 +424,8 @@
 <script type="text/javascript" src="../../resource/js/chatroom/upload/cosupload.js"></script>
 
 <script>
-    // console.log($("#roomPlayer>source").attr("src"));
-    // setTimeout(function () {
-    //     RoomMusicPlay.addMusic("../../resource/audio/BlueDucks_FourFlossFiveSix.mp3", "test1", "user1");
-    // }, 2000);
-    //
-    // setTimeout(function () {
-    //     RoomMusicPlay.addMusic("../../resource/audio/BlueDucks_FourFlossFiveSix.mp3", "test2", "user1");
-    // }, 4000);
+
+
 </script>
 
 </html>
