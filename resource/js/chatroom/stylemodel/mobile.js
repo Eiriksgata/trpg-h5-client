@@ -18,6 +18,9 @@
 
         //重新绑定消息计数清除事件
         MessageCount.selectButtonEvent();
+
+        //重新加载下方的图片上传
+        loadUploadButton();
     });
 
 
