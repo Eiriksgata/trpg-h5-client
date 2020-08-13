@@ -190,9 +190,62 @@
             }
         });
         return relation;
-
     };
 
+    RequestData.getMyEmoticon = function () {
+        let data;
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/emoticon/getEmoticon",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: false,
+            success: function (result) {
+                data = result.data;
+            }
+        });
+        return data;
+    };
+
+    RequestData.deleteEmoticon = function (emoticonId) {
+        $.ajax({
+            type: "delete",
+            url: REQUESTHEAD + "/emoticon/deleteEmoticon?emoticonId=" + emoticonId,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: false,
+            success: function (result) {
+                layer.msg(result.message);
+            }
+        });
+    };
+
+    RequestData.addEmoticon = function (url) {
+        let urlList = [];
+        urlList[0] = url;
+        let jsonData = {
+            "urlList": urlList
+        };
+        $.ajax({
+            type: "put",
+            url: REQUESTHEAD + "/emoticon/addEmoticon",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            dataType: "json",
+            data: JSON.stringify(jsonData),
+            contentType: "application/json;charset=UTF-8",
+            async: false,
+            success: function (result) {
+                layer.msg(result.message);
+            }
+        });
+    };
 
     window.RequestData = RequestData;
 })();
