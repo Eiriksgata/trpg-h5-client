@@ -9,8 +9,11 @@
         $("#mobileModelButton").attr("disabled", "disabled");
 
         //重新加载控件事件
-       // MessageBox.sendMessageBtnEvent();
+        // MessageBox.sendMessageBtnEvent();
 
+
+        //重新加载下方的图片上传
+        loadUploadButton();
 
     });
 
