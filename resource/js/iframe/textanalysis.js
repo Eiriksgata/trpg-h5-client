@@ -64,8 +64,11 @@
     };
 
     Rich.addImg = function (link) {
+        if (Rich.lastClickInputControl == null) {
+            Rich.lastClickInputControl = $("#plotTextarea");
+        }
         let htmlText = $(Rich.lastClickInputControl).html();
-        $(Rich.lastClickInputControl).html(htmlText + "<img name='richtextTemporary' class='richtextPicture' src=" + link + " />");
+        $(Rich.lastClickInputControl).html(htmlText + "<img width='100px' name='richtextTemporary' class='richtextPicture' src=" + link + " />");
     };
 
     Rich.addLink = function (link) {
