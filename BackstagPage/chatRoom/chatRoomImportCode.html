@@ -14,7 +14,7 @@
         </label>
         <label>
             <input type="url" id="emoticonUrlInput" placeholder="表情URL"/>
-            <button onclick="addEmoticon()" class="layui-btn">添加表情</button>
+            <button onclick=" Emoticon.addEmoticon()" class="layui-btn">添加表情</button>
         </label>
     </div>
     <div id="emoticonView">
@@ -24,7 +24,7 @@
 <!--描述：表情包图片载入渲染-->
 <script type="text/html" id="emoticonBoxHtml">
     {{# layui.each(d.data,function(index,item){ }}
-    <a onclick="selectSendEmoticon(this);">
+    <a onclick="Emoticon.selectSendEmoticon(this);">
         <div style="width:65px;height:65px;float: left;box-shadow: darkgrey 1px 1px 10px 1px ;//边框阴影 ">
             <img width="65" height="65" emoticonId="{{item.id}}" src="{{item.url}}"/>
         </div>
