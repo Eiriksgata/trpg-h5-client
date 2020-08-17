@@ -214,7 +214,7 @@
 
                         <div class="layui-tab-content">
                             <div class="layui-tab-item layui-show">
-                                音乐链接(支持网易云的公开音乐):
+                                音乐URL:
                                 <input name="musicUrlInput" class="layui-input"/>
                                 音乐名称(选填):
                                 <input name="musicNameInput" class="layui-input">
@@ -287,13 +287,15 @@
                         </div>
 
                         <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
-                            <i title="历史消息" class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
+                            <i title="历史消息" onclick="xadmin.open('record','roomMessageRecord.html','','')"
+                               class="layui-icon" style="line-height:30px;font-size: 23px;height: 30px">
                                 &#xe63a;
                             </i>
                         </div>
 
                         <div style="float: left;height: 30px;margin:3px;margin-right: 15px">
-                            <i title="气泡设置" class="layui-icon" style="line-height:30px;font-size: 19px;height: 30px">
+                            <i onclick="myBubble.openChatBubbleSetPage()" title="气泡设置" class="layui-icon"
+                               style="line-height:30px;font-size: 19px;height: 30px">
                                 &#xe639;
                             </i>
                         </div>
@@ -391,6 +393,7 @@
 
 
 </body>
+<script type="text/javascript" src="../../resource/js/chatroom/plug/chatMessageColor.js"></script>
 <script type="text/javascript" src="../../resource/js/chatroom/plug/emoticon.js"></script>
 <script type="text/javascript" src="../../resource/js/utils/baseUtils.js"></script>
 <script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
