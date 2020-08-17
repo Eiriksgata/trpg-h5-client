@@ -13,7 +13,7 @@
     <script src="../../resource/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../resource/lib/xadmin.js"></script>
     <script type="text/javascript" src="../../resource/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/fileSaver.js"></script>
+    <script type="text/javascript" src="../../resource/js/utils/fileSaver.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -23,110 +23,156 @@
 
 <body>
 
-<div class="x-nav">
-    <button class="layui-btn" onclick='downloadTextFile()'>导出消息记录文件</button>
-    <span class="layui-breadcrumb">
-          </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
-       onclick="location.reload()" title="刷新">
-        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+<!--<div class="x-nav">-->
+<!--<button class="layui-btn" onclick='downloadTextFile()'>导出消息记录文件</button>-->
+<!--<button class="layui-btn">同步云端消息数据</button>-->
+<!--<span class="layui-breadcrumb"></span>-->
+<!--<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"-->
+<!--onclick="location.reload()" title="刷新">-->
+<!--<i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>-->
+
+<!--</div>-->
+
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item">
+        <button data-lang="" class="layui-btn" id="getAllDevice">同步云端消息数据</button>
+    </li>
+
+    <li class="layui-nav-item">
+        <a data-lang="" href="javascript:;">导出</a>
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <dd><a data-lang="" href="javascript:;"
+                   onclick="exportTextData();">导出文本数据</a></dd>
+            <dd><a data-lang="" href="javascript:;"
+                   onclick="exportFormatData();">导出JSON格式化数据</a></dd>
+
+        </dl>
+    </li>
+
+    <li class="layui-nav-item" style="float: right;">
+        <a class="layui-btn layui-btn-small" style=";float:right;margin-top: 15px"
+           onclick="location.reload()" title="刷新">
+            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+    </li>
+
+
+</ul>
+<input id="searchInput" placeholder="搜索[支持正则表达式]" title="Search" class="layui-input">
+
+<div id="recordDiv" class="layui-fluid" style="display: block">
+
 
 </div>
 
-<div class="layui-fluid">
-    <table id="messageList"></table>
-</div>
+<div id="searchResult" class="layui-fluid" style="display: none;"></div>
 
 </body>
 
-<script type="text/html" id="createTimeHtml">
-    {{# var date = new Date(d.time); var times= function(){ return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(); }}} {{times()}}
-</script>
-
 <script type="text/html" id="messageHtml">
-    <div style="width: 200px;">
-        {{# if(d.messageType == 13){ }}
-        <a style="color: blue;" href="{{d.message}}">{{d.message}}</a>
-        {{# } if(d.messageType == 11){ }}
-        <img width="100%" height="100%" src="{{d.message}}"/> {{# } if(d.messageType == 10) { }}
-        <audio controls="" src="{{d.message}}"></audio>
-        {{# } if(d.messageType == 1|| d.messageType == 2){ }} {{d.message}} {{#}}}
-
+    <div name="messageBox">
+        <div style="color: #0000FF;">{{d.name}}</div>
+        <message>
+            {{d.message}}
+        </message>
     </div>
+
 </script>
 
 <script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+<script type="text/javascript" src="../../resource/js/chatroom/plug/photos.js"></script>
 
 <script>
-    var findMemberId;
-    var record;
+
+    let record;
+    let textData = "";
+    let exportJSONData;
+    let currentRoomId = parent.currentRoomId;
+    let allMessageBoxData;
     $(location).ready(function () {
-        findMemberId = window.location.search;
-        loadMessageRecord();
+
+        //查询房间的本地消息记录
+        loadLocalMessageRecord();
+
+
     });
 
-    function downloadTextFile() {
-        var mobileCode = JSON.stringify(record);
+    $("#searchInput").on("change", function () {
+        $("#recordDiv").css("display", "none");
+        $("#searchResult").css("display", "block");
+        $("#searchResult").html("");
+        let searchContent = $(this).val();
+        $("#recordDiv > div[name='messageBox']").each(function () {
+            let playerName = $(this).children("div").html();
+            let playerContent = $(this).children("message").html();
+            let regSearchContent = new RegExp(searchContent);
+            if (regSearchContent.test(playerName) || regSearchContent.test(playerContent)) {
+                $("#searchResult").append($(this).html());
+            }
+        });
+
+    });
+
+    let loadLocalMessageRecord = function () {
+        parent.parent.database.getAllByIndex("allPublicRecord", "roomId", parseInt(currentRoomId)).then(
+            function (data) {
+                //因为消息处理涉及到了异步的操作，因此需要借用一下计时器添加历史记录消息
+                let count = 0;
+                let recordIndex = 0;
+                let loadRecordNumberMax = data.length;
+
+                let loadRecordTimer = setInterval(function () {
+                    if (count > loadRecordNumberMax || count > data.length || data == null || data.length === 0) {
+                        exportJSONData = data;
+                        clearInterval(loadRecordTimer);
+                        console.log("清除计时器");
+                    }
+                    try {
+
+                        layui.use('laytpl', function (laytpl) {
+                            laytpl(messageHtml.innerHTML).render({
+                                name: "[" + data[recordIndex].nike + "]",
+                                message: parent.Rich.analysis(data[recordIndex].message)
+                            }, function (html) {
+                                $("#recordDiv").append(html);
+                            });
+                        });
+
+                        textData += "[" + data[recordIndex].nike + "]\n" + data[recordIndex].message + "\n";
+
+                    } catch (e) {
+                        console.log("读取某条消息中出现了错误,可能原因。1.房间没有存在任何消息。2.错误的消息存储结构类型。3.读取到的消息为空。");
+                    }
+
+                    recordIndex++;
+                    count++;
+
+                }, 10);
+
+
+            }
+        )
+
+    };
+
+    function exportFormatData() {
+        let mobileCode = JSON.stringify(exportJSONData);
         //mobileCode 为写入文件的内容，可以通过获取文本框的value写入
-        var file = new File([mobileCode], "record.json", {
+        let file = new File([mobileCode], "record.json", {
             type: "text/plain;charset=utf-8"
         });
         saveAs(file);
     }
 
-    function loadMessageRecord() {
-        layui.use('table', function () {
-            var table = layui.table;
-            $.ajax({
-                type: "get",
-                url: REQUESTHEAD + "/findRoomMessageRecord" + findMemberId,
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                success: function (result) {
-                    var data = result.data;
-                    var mapData = {};
-                    record = result.data;
-                    for (var i = 0; i < data.length; i++) {
-                        mapData[data[i].id] = data[i];
-                    }
-                    window.RoomInfoData = mapData;
-                    table.render({
-                        elem: '#messageList',
-                        page: true,
-                        data: data,
-                        cols: [
-                            [{
-                                field: 'time',
-                                title: '创建时间',
-                                width: 150,
-                                templet: '#createTimeHtml'
-                            }, {
-                                field: 'nike',
-                                title: '发送人昵称',
-                                width: 100,
-                                sort: true
-                            }, {
-                                field: 'message',
-                                title: '消息文本',
-                                width: 200,
-                                sort: true,
-                                templet: '#messageHtml'
 
-                            }, {
-                                field: 'memberId',
-                                title: '发送人ID',
-                                width: 100,
-                                sort: true
-                            }]
-                        ]
-                    });
-                }
-            });
-
+    function exportTextData() {
+        let mobileCode = textData;
+        //mobileCode 为写入文件的内容，可以通过获取文本框的value写入
+        let file = new File([mobileCode], "record.txt", {
+            type: "text/plain;charset=utf-8"
         });
+        saveAs(file);
     }
+
 </script>
 
 </html>
