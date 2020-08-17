@@ -280,7 +280,7 @@
         if (regex.test(src)) {
             let idRegex = /[0-9]+/g;
             let id = src.match(idRegex)[1];
-            let apiLink = 'https://music-api-jwzcyzizya.now.sh/api/get/song/netease?id=' + id;
+            let apiLink = REQUESTHEAD + '/music/api/getSong?type=netease&id=' + id;
             if (musicName === null || musicName === "") {
                 musicName = src.match(/《.+》/g);
             }
@@ -288,21 +288,33 @@
                 type: "get",
                 url: apiLink,
                 success: function (result) {
-                    if (result.success) {
-                        let musicMessage = {
-                            musicName: musicName,
-                            url: result.url
-                        };
-                        let jsonData = {
-                            "messageType": 9,
-                            "content": JSON.stringify(musicMessage),
-                            "roomId": currentRoomId,
-                            "region": "plot"
-                        };
-                        parent.socket.send(JSON.stringify(jsonData));
+                    if (result.code === 0) {
+                        let data = JSON.parse(result.data);
+                        if (data.success) {
+                            if (data.url === "" || data.url == null) {
+                                layer.msg("无效的解析数据，歌曲ID输入不正确");
+                                return;
+                            }
+                            let musicMessage = {
+                                musicName: musicName,
+                                url: data.url
+                            };
+                            let jsonData = {
+                                "messageType": 9,
+                                "content": JSON.stringify(musicMessage),
+                                "roomId": currentRoomId,
+                                "region": "plot"
+                            };
+                            parent.socket.send(JSON.stringify(jsonData));
+                        } else {
+                            layer.msg(data.message);
+                        }
+
+
                     } else {
-                        layer.msg("网易云歌曲:" + result.message);
+                        layer.msg(result.message);
                     }
+
                 }
             });
             return;
