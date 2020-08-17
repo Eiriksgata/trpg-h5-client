@@ -97,13 +97,18 @@
                 "code": null,
                 "fontSize": 15
             }
+        } else {
+            style = JSON.parse(style);
+        }
+
+        if (messageData.senderId === layui.data("appData").myUserInfo.id) {
+            boxFloat = "right";
         }
 
         if (style.type === 0) {
             if (style.code == null || style.code === "") {
                 if (messageData.senderId === layui.data("appData").myUserInfo.id) {
                     backgroundColor = "#01AAED";
-                    boxFloat = "right";
                 } else {
                     backgroundColor = "#dddddd";
                 }
@@ -111,6 +116,7 @@
                 backgroundColor = style.code;
             }
         }
+
 
         data.name = messageData.senderNike;
         data.backgroundColor = backgroundColor;
@@ -206,6 +212,7 @@
             messageVo.content = content;
             messageVo.roomId = currentRoomId;
 
+
             //如果是公开区域那么将不需要填太多的数据
             if (btnRegion === "plot" || btnRegion === "square") {
                 messageVo.messageType = ChatMessageCode.FORWARD;
@@ -221,6 +228,14 @@
                 receiverId.push(layui.data("appData").myUserInfo.id);
                 messageVo.receiverId = receiverId;
             }
+
+            messageVo.style = {
+                "type": 0,
+                "code": myBubble.color,
+                "fontColor": myBubble.fontColor,
+                "fontSize": myBubble.fontSize,
+                "font": myBubble.font
+            };
 
             parent.socket.send(JSON.stringify(messageVo));
             //清空文本框消息
