@@ -57,14 +57,14 @@
                     element.progress('uploadProgress', progress);
 
                 });
-                console.log('上传进度 ' + (Math.round(e.loaded / e.total * 10000) / 100) + '%');
+                // console.log('上传进度 ' + (Math.round(e.loaded / e.total * 10000) / 100) + '%');
             };
             xhr.onload = function () {
                 if (/^2\d\d$/.test('' + xhr.status)) {
                     let ETag = xhr.getResponseHeader('etag');
                     let resultUrl = auth.singer.match(/.*\?sign=/g)[0];
                     resultUrl = resultUrl.substring(0, resultUrl.length - 6);
-                    console.log(resultUrl);
+                    //console.log(resultUrl);
                     callback(null, {
                         url: resultUrl,
                         ETag: ETag

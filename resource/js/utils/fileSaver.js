@@ -1,10 +1,10 @@
-let saveAs = saveAs || (function (view) {
+var saveAs = saveAs || (function (view) {
     "use strict";
     // IE <10 is explicitly unsupported
     if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
         return;
     }
-    let
+    var
         doc = view.document
         // only get URL when necessary in case Blob.js hasn't overridden it yet
         ,
@@ -14,7 +14,7 @@ let saveAs = saveAs || (function (view) {
         save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a"),
         can_use_save_link = "download" in save_link,
         click = function (node) {
-            let event = new MouseEvent("click");
+            var event = new MouseEvent("click");
             node.dispatchEvent(event);
         },
         is_safari = /constructor/i.test(view.HTMLElement) || view.safari,
@@ -30,7 +30,7 @@ let saveAs = saveAs || (function (view) {
         arbitrary_revoke_timeout = 1000 * 40 // in ms
         ,
         revoke = function (file) {
-            let revoker = function () {
+            var revoker = function () {
                 if (typeof file === "string") { // file is an object URL
                     get_URL().revokeObjectURL(file);
                 } else { // file is a File
@@ -41,9 +41,9 @@ let saveAs = saveAs || (function (view) {
         },
         dispatch = function (filesaver, event_types, event) {
             event_types = [].concat(event_types);
-            let i = event_types.length;
+            var i = event_types.length;
             while (i--) {
-                let listener = filesaver["on" + event_types[i]];
+                var listener = filesaver["on" + event_types[i]];
                 if (typeof listener === "function") {
                     try {
                         listener.call(filesaver, event || filesaver);
@@ -68,7 +68,7 @@ let saveAs = saveAs || (function (view) {
                 blob = auto_bom(blob);
             }
             // First try a.download, then web filesystem, then object URLs
-            let
+            var
                 filesaver = this,
                 type = blob.type,
                 force = type === force_saveable_type,
@@ -80,10 +80,10 @@ let saveAs = saveAs || (function (view) {
                 fs_error = function () {
                     if ((is_chrome_ios || (force && is_safari)) && view.FileReader) {
                         // Safari doesn't allow downloading of blob urls
-                        let reader = new FileReader();
+                        var reader = new FileReader();
                         reader.onloadend = function () {
-                            let url = is_chrome_ios ? reader.result : reader.result.replace(/^data:[^;]*;/, 'data:attachment/file;');
-                            let popup = view.open(url, '_blank');
+                            var url = is_chrome_ios ? reader.result : reader.result.replace(/^data:[^;]*;/, 'data:attachment/file;');
+                            var popup = view.open(url, '_blank');
                             if (!popup) view.location.href = url;
                             url = undefined; // release reference before dispatching
                             filesaver.readyState = filesaver.DONE;
@@ -100,7 +100,7 @@ let saveAs = saveAs || (function (view) {
                     if (force) {
                         view.location.href = object_url;
                     } else {
-                        let opened = view.open(object_url, "_blank");
+                        var opened = view.open(object_url, "_blank");
                         if (!opened) {
                             // Apple does not allow window.open, see https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
                             view.location.href = object_url;

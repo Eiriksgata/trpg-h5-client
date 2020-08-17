@@ -202,7 +202,6 @@
             //对所在的区域进行不同消息整合发送处理
             content = Rich.controlCompile(content);
 
-            console.log(IsURL(content));
             //判断当前输入的是否是一个链接
             if (IsURL(content)) {
                 content = Rich.getRichDate("richtext", "link", content);

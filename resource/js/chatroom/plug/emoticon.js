@@ -22,7 +22,6 @@
                 });
 
                 let data = parent.RequestData.getMyEmoticon();
-                console.log(data);
                 renderingBox(data);
             });
         });
@@ -35,7 +34,6 @@
                 "data": data
             }, function (html) {
                 $("#emoticonView").html(html);
-                console.log(html);
             });
         });
 

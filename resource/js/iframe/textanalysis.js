@@ -51,7 +51,7 @@
         if (name === "richtext") {
             switch (type) {
                 case "picture":
-                    return "<img class='richtextPicture' src='" + content + "'>";
+                    return "<img style='max-width: 70%' class='richtextPicture' src='" + content + "'>";
                 case "link":
                     return "<a href='javascript:;' onclick=\"xadmin.open('New windows','" + content + "','','')\">" + content + "</a>";
             }

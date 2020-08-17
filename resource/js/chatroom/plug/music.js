@@ -86,7 +86,6 @@
                 let pgsWidth = $('.progress-bar-bg').width();
 
                 let rate = (oriLeft + length) / pgsWidth;
-                console.log(rate);
                 audio.currentTime = audio.duration * rate;
 
                 updateProgress(audio);
@@ -166,9 +165,7 @@
                     let pgsWidth = $('.progress-bar-bg').width();
 
                     let rate = (oriLeft + length) / pgsWidth;
-                    console.log(audio.duration);
                     audio.currentTime = audio.duration * rate;
-
                     updateProgress(audio);
                 };
 
