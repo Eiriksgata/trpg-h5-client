@@ -39,24 +39,46 @@
      */
     let messageMenuShow = function (control) {
         $(control).attr("id", "menuTemp");
-        let recordId = $(control).attr("recordId");
+        let recordId = $(control).attr("record-id");
         let data = {
             "recordId": recordId,
+            "text": $(control).html()
         };
-
 
         layui.use('laytpl', function (laytpl) {
             laytpl(chatMessageMenuHtml.innerHTML).render(data, function (html) {
+
                 layer.tips(html, "#menuTemp", {
                     tips: [3, '#000000'], //还可配置颜色
                     time: 2000
                 });
             });
         });
-
         $(control).attr("id", "");
     };
 
+    /**
+     * 菜单功能点击事件
+     */
+    let addCollectionMenuBtn = function (recordId) {
+        console.log(recordId);
+        let text = $("message[record-id='" + recordId + "']").html();
+        let data = {
+            "id": -1,
+            "memberId": -1,
+            "roomId": currentRoomId,
+            "text": text
+        };
+        try {
+            addCollectionSubmit(data);
+        } catch (e) {
+            layui.msg(e);
+            return;
+        }
+        layer.msg("收藏成功");
+
+
+    };
 
     /**
      * 删除当前聊天框的消息内容
@@ -76,6 +98,6 @@
     };
 
     window.deleteChatMessageBox = deleteChatMessageBox;
-
+    window.addCollectionMenuBtn = addCollectionMenuBtn;
 
 })();
