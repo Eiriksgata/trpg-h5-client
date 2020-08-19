@@ -35,21 +35,21 @@
 <body class="login-bg layui-bg-gray">
 
 <div class="login layui-anim layui-anim-up">
-    <div class="message">Role-Playing Login</div>
+    <div class="message">Email Login</div>
     <div id="darkbannerwrap"></div>
 
-    <form method="post" class="layui-form">
-        <input name="user" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
+    <form class="layui-form">
+        <input name="email" placeholder="注册邮箱" type="text" lay-verify="required" class="layui-input">
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码" type="password"
-               class="layui-input">
+        <input name="mailVerificationCode" lay-verify="required" placeholder="邮箱验证码" type="text" class="layui-input"
+               style="max-width: 70%;float: left;">
+        <button id="getVerifyCode" class="layui-btn" style="height: 50px;">获取验证码</button>
         <hr class="hr15">
-        <input value="登录" lay-submit lay-filter="login" type="submit">
+        <input value="登录" lay-submit lay-filter="emailLogin" type="submit">
     </form>
 
     <hr class="hr15">
-    <button id="emailQuickRegisterBtn" class="layui-btn">邮箱快速登录</button>
-    <button id="qqRegisterBtn" class="layui-btn layui-btn-disabled">QQ登录(未开通</button>
+    <button id="logonPageBtn" class="layui-btn">账号密码登录</button>
     <button id="emailRegisterBtn" class="layui-btn">邮箱注册</button>
     <hr class="hr15">
     <button id="oder" class="layui-btn layui-btn-disabled">Other(待更新</button>

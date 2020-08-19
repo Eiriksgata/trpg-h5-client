@@ -11,13 +11,15 @@ $(window).ready(function () {
 function quitLogin() {
     $.ajax({
         type: "get",
-        url: REQUESTHEAD + "/quitLogin",
+        url: REQUESTHEAD + "/login/quit",
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
         success: function (result) {
             layer.msg(result.message + "[2s后自动跳转到登录界面]");
+            layui.data("login", "token", null);
+            layui.data("appData", "myUserInfo", null);
             setTimeout(function () {
                 window.location = "../../login.html";
             }, 2000);

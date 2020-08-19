@@ -23,16 +23,14 @@
                 if (token != null) {
                     request.setRequestHeader("token", token);
                 }
-
-
             },
             data: data,
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             sync: false,
-
             success: function (result) {
                 clearTimeout(loginBtnTimer);
+
                 layer.msg(result.message);
 
                 if (result.code === 0) {
@@ -62,6 +60,31 @@
         });
     };
 
+
+    let emailLoginSubmit = function (data) {
+        $.ajax({
+            type: "put",
+            url: REQUESTHEAD + "/login/quick/email",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            sync: false,
+            success: function (result) {
+                layer.msg(result.message);
+                if (result.code === 0) {
+                    encryption.tokenSave(result.data);
+                    //倒计时跳转
+                    setTimeout(function () {
+                        toIndexPage();
+                    }, 1000);
+                }
+            },
+            error: function (result) {
+                layer.msg("请求出错，请向管理员反馈:" + result);
+            }
+        });
+    };
+
     let toIndexPage = function () {
         $(location).attr('href', 'BackstagPage/iframe.html');
     };
@@ -71,6 +94,68 @@
         $(location).attr('href', 'register.html');
     };
 
+
+    let getEmailCode = function (btn) {
+        $(btn).attr("disabled", true);
+        $(btn).addClass("layui-btn-disabled");
+        $.ajax({
+            type: "get",
+            url: REQUESTHEAD + "/login/quick/email/getCode?email=" + $("input[name='email']").val(),
+            sync: false,
+            beforeSend: function (request) {
+                request.setRequestHeader("Accept-Language", "en-us")
+            },
+            success: function (result) {
+                if (result.code === 0) {
+                    let countTime = 70;
+                    let emailCodeTimer = setInterval(function () {
+                        countTime--;
+                        $(btn).html("请稍等(" + countTime + ")");
+                        if (countTime <= 0) {
+                            $(btn).attr("disabled", false);
+                            $(btn).html("获取验证码");
+                            $(btn).removeClass("layui-btn-disabled");
+                            clearInterval(emailCodeTimer);
+                        }
+                    }, 1000);
+                } else {
+                    $(btn).attr("disabled", false);
+                    $(btn).removeClass("layui-btn-disabled");
+                }
+                layer.msg(result.message);
+            }
+        });
+
+    };
+
+    let loadCheckLoginState = function () {
+        $.ajax({
+            type: "put",
+            url: REQUESTHEAD + "/auth/common",
+            data: JSON.stringify({
+                "user": "",
+                "password": ""
+            }),
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            sync: false,
+            success: function (result) {
+                if (result.code === 0) {
+                    layui.use('layer', function (layer) {
+                        layer.msg("检测到处于登录状态，自动跳转..");
+                    });
+                    //倒计时跳转
+                    setTimeout(function () {
+                        toIndexPage();
+                    }, 1000);
+                }
+
+            },
+            error: function (result) {
+
+            }
+        });
+    };
 
     $(document).ready(function () {
 
@@ -85,6 +170,8 @@
                 "password": ""
             }));
 
+        } else {
+            loadCheckLoginState();
         }
 
         layui.use('form', function () {
@@ -97,11 +184,28 @@
                 return false;
             });
 
+            form.on('submit(emailLogin)', function (data) {
+                layer.msg("正在登录中，请稍等.");
+                emailLoginSubmit(JSON.stringify(data.field));
+                return false;
+            });
 
         });
 
         $("#emailRegisterBtn").on("click", function () {
             toRegisterPage();
+        });
+
+        $("#logonPageBtn").on("click", function () {
+            $(location).attr('href', 'login.html');
+        });
+
+        $("#emailQuickRegisterBtn").on("click", function () {
+            $(location).attr('href', 'emailLogin.html');
+        });
+
+        $("#getVerifyCode").on("click", function () {
+            getEmailCode(this);
         });
 
     });
