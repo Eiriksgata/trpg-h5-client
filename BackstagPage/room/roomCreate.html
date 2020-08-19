@@ -129,7 +129,10 @@
                            class="layui-btn">上传图片</a>
                         <input onchange="changeImgSrc(this,'ioc')" name="ioc" placeholder="需要输入正确的URL" lay-verify=''
                                class="layui-input"/>
-                        <img style="max-width: 150px;max-height: 150px;" name="ioc" src=""/>
+                        <div>
+
+                            <img style="max-width: 150px;max-height: 150px;" name="ioc" src=""/>
+                        </div>
 
                     </div>
                 </div>
@@ -139,8 +142,13 @@
                     <div class="layui-input-block">
                         <a onclick="xadmin.open('upload','../upload/resourceUpload.html','','');setTextInputName('introduce');"
                            class="layui-btn">上传图片</a>
+                        <input onchange="changeImgSrc(this,'introduce')" name="introduce" placeholder="需要输入正确的URL"
+                               lay-verify=''
+                               class="layui-input"/>
 
-                        <img width="100%" style="max-width: 350px;" name="introduce" src=""/>
+                        <div>
+                            <img width="100%" style="max-width: 350px;" name="introduce" src=""/>
+                        </div>
                         <p>房间介绍采用图片的形式，主要方便用户制作令人眼花的图片介绍风格。</p>
                         <p>在一定程度上方便玩家们，感受到模组的风格类型。</p>
                     </div>
@@ -166,6 +174,8 @@
 
         //监听提交
         form.on('submit(createRoom)', function (data) {
+            let submitData = data.field;
+            //submitData.introduce = $("img[name='introduce']").attr("src");
             $.ajax({
                 type: "put",
                 url: REQUESTHEAD + "/createRoom",
@@ -173,11 +183,14 @@
                     withCredentials: true
                 },
                 crossDomain: true,
-                data: JSON.stringify(data.field),
+                data: JSON.stringify(submitData),
                 dataType: 'json',
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
                     layer.msg(result.message);
+                    setTimeout(function () {
+                        xadmin.del_tab();
+                    }, 1500);
                 }
             });
             return false;
