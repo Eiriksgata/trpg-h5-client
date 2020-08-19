@@ -35,7 +35,9 @@
 
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item">
-        <button data-lang="" class="layui-btn" id="getAllDevice">同步云端消息数据</button>
+        <button data-lang="" class="layui-btn"
+                id="synchronizeRecordBtn">同步云端消息数据
+        </button>
     </li>
 
     <li class="layui-nav-item">
@@ -89,11 +91,8 @@
     let currentRoomId = parent.currentRoomId;
     let allMessageBoxData;
     $(location).ready(function () {
-
         //查询房间的本地消息记录
         loadLocalMessageRecord();
-
-
     });
 
     $("#searchInput").on("change", function () {
@@ -172,6 +171,16 @@
         });
         saveAs(file);
     }
+
+    $("#synchronizeRecordBtn").on("click", function () {
+        layer.msg("同步消息中，请稍等");
+        parent.parent.RequestData.getAllRoomRecord(parent.currentRoomId);
+        layer.msg("同步消息完成，稍后会刷新页面");
+        setTimeout(function () {
+            location.reload();
+        }, 1000)
+    });
+
 
 </script>
 
