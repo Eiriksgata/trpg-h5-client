@@ -1,6 +1,3 @@
-/**
- * 收藏功能
- */
 $(location).ready(function () {
     loadRoomCollection();
 });
@@ -14,7 +11,6 @@ function deleteCollection(control) {
 function collectionEdit(control) {
     let text = $(control).html();
     let htmlStr = "<textarea id='collectionEditArea' class='layui-textarea'>" + text + "</textarea>";
-
     layer.confirm(htmlStr, {
         btn: ['确定', '取消'] //按钮
     }, function () {
@@ -23,7 +19,7 @@ function collectionEdit(control) {
         let data = {
             "id": collectionId,
             "memberId": -1,
-            "roomId": findRoomId,
+            "roomId": currentRoomId,
             "text": changeText
         };
         $(control).html(changeText);
@@ -39,7 +35,7 @@ function collectionEdit(control) {
 function updateCollectionSubmit(data) {
     $.ajax({
         type: "put",
-        url: "http://localhost/roomMessageCollection/updateInfo",
+        url: REQUESTHEAD + "/collection/message/updateInfo",
         xhrFields: {
             withCredentials: true
         },
@@ -56,7 +52,7 @@ function updateCollectionSubmit(data) {
 function addCollectionSubmit(data) {
     $.ajax({
         type: "put",
-        url: "http://localhost/roomMessageCollection/add",
+        url: REQUESTHEAD + "/collection/message/add",
         xhrFields: {
             withCredentials: true
         },
@@ -64,7 +60,7 @@ function addCollectionSubmit(data) {
         dataType: "json",
         data: JSON.stringify(data),
         contentType: "application/json;charset=UTF-8",
-        success: function () {
+        success: function (result) {
             loadRoomCollection();
         }
     });
@@ -73,7 +69,7 @@ function addCollectionSubmit(data) {
 function deleteCollectionSubmit(id) {
     $.ajax({
         type: "delete",
-        url: "http://localhost/roomMessageCollection/delete?id=" + id,
+        url: REQUESTHEAD + "/collection/message/delete?id=" + id,
         xhrFields: {
             withCredentials: true
         },
@@ -87,45 +83,30 @@ function deleteCollectionSubmit(id) {
     });
 }
 
-function chatMessageCollection(control) {
-    let messageText = $(control).next('message').html();
-
-    let data = {
-        "id": -1,
-        "memberId": -1,
-        "roomId": findRoomId,
-        "text": messageText
-    };
-    addCollectionSubmit(data);
-    $(control).children('i').html("&#xe67a;");
-}
-
 function addBlankCollection() {
     let messageText = '点击文字进行编辑';
     let data = {
         "id": -1,
         "memberId": -1,
-        "roomId": findRoomId,
+        "roomId": currentRoomId,
         "text": messageText
     };
     addCollectionSubmit(data);
 }
 
 function addCollectionLaytpl(data) {
-
     layui.use('laytpl', function (laytpl) {
         let getTpl = collectionListHtml.innerHTML;
         laytpl(getTpl).render(data, function (html) {
             $("#collectionListBox").append(html);
         });
-
     });
 }
 
 function loadRoomCollection() {
     $.ajax({
         type: "get",
-        url: "http://localhost/roomMessageCollection/findByRoom?roomId=" + findRoomId,
+        url: REQUESTHEAD + "/collection/message/findByRoom?roomId=" + currentRoomId,
         xhrFields: {
             withCredentials: true
         },
@@ -153,9 +134,11 @@ function loadRoomCollection() {
     });
 }
 
-//页面层 悬浮模式
+//页面层
 function collectionSuspensionMode() {
-    let html = $("#viewCollectionHtml").html().parent().css("display", "none").html('');
+    let html = $("#viewCollectionHtml").html();
+    $("#viewCollectionHtml").parent().css("display", "none");
+    $("#viewCollectionHtml").html('');
     layer.open({
         type: 1,
         moveOut: true,
@@ -166,12 +149,12 @@ function collectionSuspensionMode() {
         fixed: false,
         content: html,
         cancel: function (index, layero) {
-            $("#viewCollectionHtml").parent().css("display", "").html(html);
+            $("#viewCollectionHtml").parent().css("display", "");
+            $("#viewCollectionHtml").html(html);
             loadRoomCollection();
             layer.close(index);
             return false;
         }
     });
-
 
 }
