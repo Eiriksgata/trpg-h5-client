@@ -240,7 +240,7 @@
             <div>
                 <!--<div class="bubbleTail-left "></div>-->
                 <div class="bubble-contont-left " style="border: 2px teal solid; ">
-                    <message recordId="{{d.recordId}}"
+                    <message record-id="{{d.recordId}}"
                              style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
                     </message>
                 </div>
@@ -267,11 +267,9 @@
                 <div class="swiper-slide swiper-slide-next " name="plotAllNewMessageCount" style="width: 30px">游戏<span
                         class="layui-badge layui-bg-orange">0</span>
                 </div>
-
                 <div name="squareAllNewMessageCount" class="swiper-slide">广场<span
                         class="layui-badge layui-bg-blue">0</span>
                 </div>
-
                 <div class="swiper-slide">收藏</div>
                 <div class="swiper-slide">工具</div>
             </div>
@@ -285,10 +283,6 @@
                 <div class="swiper-slide"></div>
                 <div class="swiper-slide">
                     <button class="layui-btn" onclick="xadmin.open('角色列表','../role/roleList.html');">快速修改角色卡信息</button>
-                    <button class="layui-btn" onclick="showMusicPlay();">显示音乐播放器</button>
-                    <button class="layui-btn" onclick="openMessageRecord();">历史消息</button>
-                    <button class="layui-btn" onclick="openChatBubbleSetPage();">气泡设置</button>
-                    <button class="layui-btn" onclick="openMaps()">地图</button>
                 </div>
             </div>
         </div>
@@ -297,7 +291,7 @@
 
 <!-- 用户消息渲染 -->
 <script id="memberChatMessageBoxHtml" type="text/html ">
-    <div style="margin:0;min-width: 230px" class="media" recordId="{{d.recordId}}" sendTime="{{d.sendTime}}">
+    <div style="margin:0;min-width: 230px" class="media" record-id="{{d.recordId}}" sendTime="{{d.sendTime}}">
         {{# if(d.float == 'left') { }}
 
         <div class=" " style="float:left;margin: 10px; ">
@@ -314,7 +308,7 @@
 
                 <div class="bubble-contont-left " style="background-color: {{d.backgroundColor}}; ">
 
-                    <message recordId="{{d.recordId}}"
+                    <message record-id="{{d.recordId}}"
                              style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
                     </message>
 
@@ -337,7 +331,7 @@
                 <div class="bubble-contont-right "
                      style="background-color: {{d.backgroundColor}};font-size: {{d.fontSize}}px;color:{{d.fontColor}}; ">
 
-                    <message recordId="{{d.recordId}}"
+                    <message record-id="{{d.recordId}}"
                              style='max-width:80%;font-size: {{d.fontSize}}px;color:{{d.fontColor}};'>{{d.message}}
                     </message>
 
@@ -354,10 +348,10 @@
 	描述：聊天消息长按选项菜单
 -->
 <script type="text/html" id="chatMessageMenuHtml">
-    <a style="color: white;cursor: pointer">收藏 </a>|
+    <a style="color: white;cursor: pointer" onclick="addCollectionMenuBtn({{d.recordId}})">收藏 </a>|
     <a style="color: white;cursor: pointer">撤回</a>|
-    <a style="color: white;cursor: pointer" onclick="deleteChatMessageBox({{d.recordId}})">删除</a>|
-    <a style="color: white;cursor: pointer">气泡设置</a>
+    <a style="color: white;cursor: pointer" onclick="deleteChatMessageBox({{d.recordId}})">删除</a>
+    <!--<a style="color: white;cursor: pointer">气泡设置</a>-->
 </script>
 
 <!-- 切换房间列表的渲染 -->
