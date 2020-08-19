@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../resource/lib/jquery.min.js"></script>
     <script type="text/javascript" src="../resource/lib/xadmin.js"></script>
     <script type="text/javascript" src="../resource/js/index.js"></script>
+    <script type="text/javascript" src="../resource/js/iframe/constant.js"></script>
 
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -67,7 +68,7 @@
                     <a onclick="xadmin.open('个人信息 ','member/myMemberInfoUpdate.html ')">个人信息</a>
                 </dd>
                 <dd>
-                    <a href="#" onclick="quitLogin();">退出</a>
+                    <a href="#" onclick="userQuit();">退出</a>
                 </dd>
             </dl>
         </li>
@@ -88,13 +89,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('创建房间 ','room/roomCreate.html ')">
+                        <a onclick="xadmin.add_tab('创建房间 ','room/roomCreate.html','create')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>创建房间</cite></a>
                     </li>
 
                     <li>
-                        <a onclick="xadmin.add_tab('房间管理 ','room/roomList.html ')">
+                        <a onclick="xadmin.add_tab('房间管理 ','room/roomList.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>房间管理</cite>
                         </a>

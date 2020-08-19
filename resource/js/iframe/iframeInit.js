@@ -9,7 +9,6 @@
         database.dataBaseInit();
 
 
-
         //console.log(RequestData.getUserState([1, 30, 33]));
     });
 
@@ -40,7 +39,7 @@
 
             //关闭事件
             socket.onclose = function () {
-                $("#loadTipsMessageBox").html("信号中断(可能原因为：1.服务器异常 2.重复连接 3.尚未登录)<\\br>稍后跳转到登录页面");
+                //layer.msg("信号中断(可能原因为：1.服务器异常 2.重复连接 3.尚未登录)<\\br>稍后跳转到登录页面");
                 socket = null;
                 location.href = "../login.html";
 
@@ -48,7 +47,7 @@
 
             //发生了错误事件
             socket.onerror = function () {
-                console.log("通讯过程中发生了错误，请重新连接");
+                layer.msg("通讯过程中发生了错误，请重新连接");
                 socket = null;
             }
         }
