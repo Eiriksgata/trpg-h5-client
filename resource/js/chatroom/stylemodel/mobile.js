@@ -19,6 +19,9 @@
         //重新绑定消息计数清除事件
         MessageCount.selectButtonEvent();
 
+        //重新绑定音乐进度条点击事件
+        pointPlayByPhone();
+
         //重新加载下方的图片上传
         loadUploadButton();
     });

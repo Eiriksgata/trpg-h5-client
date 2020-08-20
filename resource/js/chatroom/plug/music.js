@@ -53,7 +53,7 @@
     /***
      * 点击进度条播放 手机端
      */
-    function pointPlayByPhone() {
+    let pointPlayByPhone = function () {
         if (!audio.paused || audio.currentTime !== 0) {
             let oriLeft = dot.offsetLeft;
             let mouseX = e.originalEvent.targetTouches[0].pageX;
@@ -94,7 +94,7 @@
                 document.onmouseup = null;
             });
         }
-    }
+    };
 
 
     /**
@@ -104,7 +104,7 @@
 
         audio = document.getElementById("roomPlayer");
         // 点击播放/暂停图片时，控制音乐的播放与暂停
-        $('#audioPlayButton').click(function () {
+        $("body").on("click", "#audioPlayButton", function () {
             playMusic();
         });
 
@@ -366,6 +366,6 @@
         sendMusicMessageButton(src);
     });
 
-
+    window.pointPlayByPhone = pointPlayByPhone;
     window.RoomMusicPlay = RoomMusicPlay;
 })();
