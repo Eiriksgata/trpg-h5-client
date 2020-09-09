@@ -27,7 +27,7 @@
         }
 
         let content = {
-            "initTime": (new Date()).getTime() ,
+            "initTime": (new Date()).getTime() - 1000 * 60 * 3 ,
             "expirationTime": (new Date()).getTime() + 1000 * 60 * 3,
             "key": decode.key
         };
