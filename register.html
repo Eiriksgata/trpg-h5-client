@@ -48,4 +48,20 @@
 </body>
 <script type="text/javascript" src="resource/js/iframe/constant.js"></script>
 <script type="text/javascript" src="resource/js/register.js"></script>
+<script>
+
+    layui.use('layer', function () {
+        let layer = layui.layer;
+        //页面层
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            //area: ['420px', '240px'], //宽高
+            content: '<div style="padding: 5px;font-size: 20px">过多的使用邮箱验证码会导致服务器邮件被拉入到垃圾邮箱中，所以请不要过多的使用验证码。如果中途发现验证码出现错误，那么先不要进行再次获取，应该联系开发人员。QQ:2353686862</div>'
+        });
+    });
+
+
+</script>
+
 </html>
