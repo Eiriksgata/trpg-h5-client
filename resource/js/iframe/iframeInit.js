@@ -19,8 +19,8 @@
         } else {
             //let token = encryption.tokenCreate();
             //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-            let socketUrl = REQUESTHEAD + "/linkSocket";
-            socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
+            let socketUrl =  "ws://" + window.location.host + REQUESTHEAD + "/linkSocket";
+            //socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
             socket = new WebSocket(socketUrl);
 
             //打开事件
