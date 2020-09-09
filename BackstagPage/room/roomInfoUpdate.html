@@ -81,7 +81,8 @@
                     <label class="layui-form-label">房间骰子面数</label>
 
                     <div class="layui-input-block">
-                        <input type="text" name="diceFace" required="" class="layui-input" value="100">
+                        <input type="number" name="diceFace" required="" lay-verify="required" class="layui-input"
+                               value="100">
 
                         <div class="layui-form-mid layui-word-aux">
                             <p>影响骰子丢出的最大数值效果，类似于默认为100面骰=1D100</p>
@@ -93,7 +94,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房规</label>
                     <div class="layui-input-block">
-                        <input type="text" name="houseRules" required="" class="layui-input" value="1">
+                        <input type="number" name="houseRules" required="" lay-verify="required" class="layui-input"
+                               value="1">
 
                         <div class="layui-form-mid layui-word-aux">
                             <p>房规影响骰子丢出的数值成功类型，默认为1，那么大成功规定为 1 大失败为 100.</p>
@@ -181,6 +183,8 @@
 
 </body>
 
+<script type="text/javascript" src="../../resource/js/iframe/constant.js"></script>
+
 <script>
     let findRoomId;
     $(location).ready(function () {
@@ -195,7 +199,7 @@
 
             $.ajax({
                 type: "delete",
-                url: "http://localhost/deleteRoom?roomId=" + findRoomId.substring(8),
+                url: REQUESTHEAD + "/deleteRoom?roomId=" + findRoomId.substring(8),
                 xhrFields: {
                     withCredentials: true
                 },
@@ -222,7 +226,7 @@
         form.on('submit(roomAttirubteUpdate)', function (data) {
             $.ajax({
                 type: "put",
-                url: "http://localhost/updateRoomInfo" + findRoomId,
+                url: REQUESTHEAD + "/updateRoomInfo" + findRoomId,
                 xhrFields: {
                     withCredentials: true
                 },
