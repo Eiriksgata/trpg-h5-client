@@ -12,7 +12,7 @@
 
 **相关项目**
 
-*[跑团系统后台服务](https://gitee.com/Keith404/trpg-java-service)
+* [跑团系统后台服务](https://gitee.com/Keith404/trpg-java-service)
 
 
 **技术说明**
